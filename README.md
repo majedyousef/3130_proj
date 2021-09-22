@@ -4,7 +4,6 @@
 Initial repo for the CSCI3130 group project.
 We will be working on the "Online Barter Trader" proposal;
 ```
-
 # Authors
 - **Benjamin Chui** (B00812875)
 - **Vincent Ordinelli** ()
