@@ -6,9 +6,9 @@ We will be working on the "Online Barter Trader" proposal;
 ```
 # Authors
 - **Benjamin Chui** (B00812875)
-- **Vincent Ordinelli** ()
-- **Majed Yousef** ()
-- **Hesham Elokdah** ()
-- **Abu Sabi Ubada** ()
-- **Nour Ali** ()
-- **Erin Schultz** ()
+- **Vincent Ordinelli** (B00846647)
+- **Majed Yousef** (B00800967)
+- **Erin Schultz** (B00846114)
+- **Abu Sabi Ubada** (B00812077)
+- **Nour Ali** (B00841206)
+- **Hesham Elokdah** (B00843961)
