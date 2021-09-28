@@ -1,4 +1,4 @@
-package com.example.csci3130project.ui.slideshow;
+package com.example.csci3130project.ui.login;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,24 +10,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.csci3130project.R;
-import com.example.csci3130project.databinding.FragmentSlideshowBinding;
 
-public class SlideshowFragment extends Fragment {
+import com.example.csci3130project.databinding.FragmentLoginBinding;
 
-    private SlideshowViewModel slideshowViewModel;
-private FragmentSlideshowBinding binding;
+public class LoginFragment extends Fragment {
+
+    private LoginViewModel loginViewModel;
+private FragmentLoginBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        loginViewModel =
+                new ViewModelProvider(this).get(LoginViewModel.class);
 
-    binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+    binding = FragmentLoginBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textLogin;
+        loginViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

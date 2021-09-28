@@ -1,4 +1,4 @@
-package com.example.csci3130project.ui.home;
+package com.example.csci3130project.ui.register;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,24 +10,24 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.csci3130project.R;
-import com.example.csci3130project.databinding.FragmentHomeBinding;
 
-public class HomeFragment extends Fragment {
+import com.example.csci3130project.databinding.FragmentRegBinding;
 
-    private HomeViewModel homeViewModel;
-private FragmentHomeBinding binding;
+public class RegFragment extends Fragment {
+
+    private RegViewModel regViewModel;
+private FragmentRegBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        regViewModel =
+                new ViewModelProvider(this).get(RegViewModel.class);
 
-    binding = FragmentHomeBinding.inflate(inflater, container, false);
+    binding = FragmentRegBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textReg;
+        regViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
