@@ -65,6 +65,8 @@ lintDebug:
   stage: build
   script:
     - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
+  tags:
+    - ugrad
 
 # Make Project
 assembleDebug:
