@@ -15,25 +15,8 @@ public class UserClassUnitTests {
 
     @Test
     public void getFirstName() {
+        String expected = "firstName";
+        assertEquals(expected, testUser.getFirstName());
     }
 
-    @Test
-    public void getLastName() {
-    }
-
-    @Test
-    public void getUsername() {
-    }
-
-    @Test
-    public void getEmail() {
-    }
-
-    @Test
-    public void getPassword() {
-    }
-
-    @Test
-    public void Reputation() {
-    }
 }
