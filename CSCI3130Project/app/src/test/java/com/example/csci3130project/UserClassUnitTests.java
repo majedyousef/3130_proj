@@ -19,4 +19,10 @@ public class UserClassUnitTests {
         assertEquals(expected, testUser.getFirstName());
     }
 
+    @Test
+    public void getLastName() {
+        String expected = "lastName";
+        assertEquals(expected, testUser.getLastName());
+    }
+
 }
