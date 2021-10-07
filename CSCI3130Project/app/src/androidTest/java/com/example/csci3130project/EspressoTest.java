@@ -31,12 +31,6 @@ public class EspressoTest {
     public ActivityScenarioRule<BaseActivity> myRule = new ActivityScenarioRule<>(BaseActivity.class);
     public IntentsTestRule<BaseActivity> myIntentRule = new IntentsTestRule<>(BaseActivity.class);
 
-    @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("ca.dal.cs.csci3130.a2", appContext.getPackageName());
-    }
 
     @BeforeClass
     public static void setup() {
