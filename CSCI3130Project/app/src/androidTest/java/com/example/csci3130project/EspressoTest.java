@@ -39,12 +39,20 @@ public class EspressoTest {
 
     @Test
     public void checkIfReturnedToLogin() {
-
         onView(withId(R.id.loginBtn)).perform(click());
         intended(hasComponent(Logout.class.getName()));
         onView(withId(R.id.logoutButton)).perform(click());
         onView(withId(android.R.id.button1)).perform(click());
         intended(hasComponent(BaseActivity.class.getName()));
+    }
+
+    @Test
+    public void checkIfLogoutCancelled() {
+        onView(withId(R.id.loginBtn)).perform(click());
+        intended(hasComponent(Logout.class.getName()));
+        onView(withId(R.id.logoutButton)).perform(click());
+        onView(withId(android.R.id.button2)).perform(click());
+        intended(hasComponent(Logout.class.getName()));
     }
 
 
