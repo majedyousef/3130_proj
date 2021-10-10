@@ -71,4 +71,11 @@ public class UserClassUnitTests {
         assertEquals(expected, testUser.getPassword());
     }
 
+    @Test
+    public void setPassword() {
+        String newData = "Pass_Word123";
+        testUser.setPassword(newData);
+        assertEquals(newData, testUser.getPassword());
+    }
+
 }

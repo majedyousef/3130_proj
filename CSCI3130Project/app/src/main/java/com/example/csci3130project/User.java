@@ -94,4 +94,11 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    /**
+     * A method for updating the user's username
+     * @param password - String containing new username
+     */
+    public void setPassword(String password) {
+    }
 }
