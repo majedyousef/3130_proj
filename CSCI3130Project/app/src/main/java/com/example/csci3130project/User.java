@@ -68,5 +68,6 @@ public class User {
      * @param fName - String containing new first name
      */
     public void setFirstName(String fName) {
+        firstName = fName;
     }
 }
