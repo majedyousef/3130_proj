@@ -85,6 +85,13 @@ public class User {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * A method for updating the user's username
+     * @param username - String containing new username
+     */
+    public void setUsername(String username) {
 
     }
 }
