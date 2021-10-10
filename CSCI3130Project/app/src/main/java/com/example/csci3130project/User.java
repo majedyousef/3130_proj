@@ -84,6 +84,7 @@ public class User {
      * @param email - String containing new email
      */
     public void setEmail(String email) {
+        this.email = email;
 
     }
 }
