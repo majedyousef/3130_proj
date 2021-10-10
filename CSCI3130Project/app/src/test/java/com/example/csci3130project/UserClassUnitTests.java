@@ -40,7 +40,7 @@ public class UserClassUnitTests {
     @Test
     public void getPassword() {
         String expected = "password1234";
-        assertEquals(expected, testUser.getUsername());
+        assertEquals(expected, testUser.getPassword());
     }
 
 }
