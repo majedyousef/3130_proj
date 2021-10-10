@@ -62,4 +62,11 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    /**
+     * A method for updating the user's first name
+     * @param fName - String containing new first name
+     */
+    public void setFirstName(String fName) {
+    }
 }
