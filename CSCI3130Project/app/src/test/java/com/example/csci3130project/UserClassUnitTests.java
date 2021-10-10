@@ -46,6 +46,13 @@ public class UserClassUnitTests {
     }
 
     @Test
+    public void setEmail() {
+        String newData = "user@outlook.com";
+        testUser.setEmail(newData);
+        assertEquals(newData, testUser.getEmail());
+    }
+
+    @Test
     public void getUsername() {
         String expected = "user123456";
         assertEquals(expected, testUser.getUsername());

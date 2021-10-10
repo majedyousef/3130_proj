@@ -78,4 +78,12 @@ public class User {
     public void setLastName(String lName) {
         lastName = lName;
     }
+
+    /**
+     * A method for updating the user's email
+     * @param email - String containing new email
+     */
+    public void setEmail(String email) {
+
+    }
 }
