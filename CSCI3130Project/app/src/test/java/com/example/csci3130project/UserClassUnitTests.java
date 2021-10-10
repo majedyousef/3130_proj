@@ -33,6 +33,13 @@ public class UserClassUnitTests {
     }
 
     @Test
+    public void setLastName() {
+        String newData = "newName";
+        testUser.setLastName(newData);
+        assertEquals(newData, testUser.getLastName());
+    }
+
+    @Test
     public void getEmail() {
         String expected = "user@gmail.com";
         assertEquals(expected, testUser.getEmail());

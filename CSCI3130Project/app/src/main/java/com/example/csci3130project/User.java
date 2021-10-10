@@ -70,4 +70,11 @@ public class User {
     public void setFirstName(String fName) {
         firstName = fName;
     }
+
+    /**
+     * A method for updating the user's first name
+     * @param lName - String containing new first name
+     */
+    public void setLastName(String lName) {
+    }
 }
