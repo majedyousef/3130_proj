@@ -72,9 +72,10 @@ public class User {
     }
 
     /**
-     * A method for updating the user's first name
-     * @param lName - String containing new first name
+     * A method for updating the user's last name
+     * @param lName - String containing new last name
      */
     public void setLastName(String lName) {
+        lastName = lName;
     }
 }
