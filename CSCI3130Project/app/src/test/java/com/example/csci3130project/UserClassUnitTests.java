@@ -25,4 +25,10 @@ public class UserClassUnitTests {
         assertEquals(expected, testUser.getLastName());
     }
 
+    @Test
+    public void getEmail() {
+        String expected = "user@gmail.com";
+        assertEquals(expected, testUser.getEmail());
+    }
+
 }
