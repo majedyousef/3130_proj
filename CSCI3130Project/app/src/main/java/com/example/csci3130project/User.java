@@ -6,11 +6,13 @@ public class User {
     private String lastName;
     private String email;
     private String username;
+    private String password;
 
     public User() {
         firstName = "firstName";
         lastName = "lastName";
         email = "user@gmail.com";
+        username = "user123456";
     }
 
     public String getFirstName() {
@@ -27,5 +29,9 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

@@ -37,4 +37,10 @@ public class UserClassUnitTests {
         assertEquals(expected, testUser.getUsername());
     }
 
+    @Test
+    public void getPassword() {
+        String expected = "password1234";
+        assertEquals(expected, testUser.getUsername());
+    }
+
 }
