@@ -100,5 +100,6 @@ public class User {
      * @param password - String containing new username
      */
     public void setPassword(String password) {
+        this.password = password;
     }
 }
