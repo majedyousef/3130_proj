@@ -92,6 +92,6 @@ public class User {
      * @param username - String containing new username
      */
     public void setUsername(String username) {
-
+        this.username = username;
     }
 }
