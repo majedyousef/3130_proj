@@ -5,10 +5,12 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String username;
 
     public User() {
         firstName = "firstName";
         lastName = "lastName";
+        email = "user@gmail.com";
     }
 
     public String getFirstName() {
@@ -21,5 +23,9 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }
