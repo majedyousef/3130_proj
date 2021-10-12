@@ -22,10 +22,8 @@ public class UserClassUnitTests {
 
     @Test
     public void getFirstName() {
-        String expected = "firstName";
-        assertEquals(expected, testUser.getFirstName());
-        String expected2 = "John";
-        assertEquals(expected2, testUser2.getFirstName());
+        assertEquals("firstName", testUser.getFirstName());
+        assertEquals("John", testUser2.getFirstName());
     }
 
     @Test
@@ -37,8 +35,8 @@ public class UserClassUnitTests {
 
     @Test
     public void getLastName() {
-        String expected = "lastName";
-        assertEquals(expected, testUser.getLastName());
+        assertEquals("lastName", testUser.getLastName());
+        assertEquals("Doe", testUser.getLastName());
     }
 
     @Test
