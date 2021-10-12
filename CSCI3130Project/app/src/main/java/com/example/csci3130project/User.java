@@ -16,11 +16,11 @@ public class User {
     private String password;
     private int userID;
 
-    public User(String fname, String lname, String email) {
+    public User(String fname, String lname, String email, String username) {
         firstName = fname;
         lastName = lname;
         this.email = email;
-        username = "user123456";
+        this.username = username;
         password = "password1234";
         userID = 1;
     }
