@@ -16,10 +16,10 @@ public class User {
     private String password;
     private int userID;
 
-    public User(String fname, String lname) {
+    public User(String fname, String lname, String email) {
         firstName = fname;
         lastName = lname;
-        email = "user@gmail.com";
+        this.email = email;
         username = "user123456";
         password = "password1234";
         userID = 1;

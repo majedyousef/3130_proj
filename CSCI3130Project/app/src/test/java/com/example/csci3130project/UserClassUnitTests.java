@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
  */
 public class UserClassUnitTests {
 
-    User testUser = new User("firstName", "lastName");
-    User testUser2 = new User("John", "Doe");
+    User testUser = new User("firstName", "lastName", "user@gmail.com");
+    User testUser2 = new User("John", "Doe", "user_124@outlook.ca");
 
     @Test
     public void getUserID() {
