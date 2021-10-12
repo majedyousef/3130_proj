@@ -16,8 +16,8 @@ public class UserClassUnitTests {
 
     @Test
     public void getUserID() {
-        int expected = 1;
-        assertEquals(expected, testUser.getUserID());
+        assertEquals(1, testUser.getUserID());
+        assertEquals(2, testUser2.getUserID());
     }
 
     @Test
