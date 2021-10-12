@@ -48,8 +48,8 @@ public class UserClassUnitTests {
 
     @Test
     public void getEmail() {
-        String expected = "user@gmail.com";
-        assertEquals(expected, testUser.getEmail());
+        assertEquals("user@gmail.com", testUser.getEmail());
+        assertEquals("user_124@outlook.ca", testUser2.getEmail());
     }
 
     @Test
