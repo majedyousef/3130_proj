@@ -28,9 +28,8 @@ public class UserClassUnitTests {
 
     @Test
     public void setFirstName() {
-        String newData = "newName";
-        testUser.setFirstName(newData);
-        assertEquals(newData, testUser.getFirstName());
+        testUser.setFirstName("newName");
+        assertEquals("newName", testUser.getFirstName());
     }
 
     @Test
@@ -41,9 +40,8 @@ public class UserClassUnitTests {
 
     @Test
     public void setLastName() {
-        String newData = "newName";
-        testUser.setLastName(newData);
-        assertEquals(newData, testUser.getLastName());
+        testUser.setLastName("newName");
+        assertEquals("newName", testUser.getLastName());
     }
 
     @Test
@@ -54,22 +52,20 @@ public class UserClassUnitTests {
 
     @Test
     public void setEmail() {
-        String newData = "user@outlook.com";
-        testUser.setEmail(newData);
-        assertEquals(newData, testUser.getEmail());
+        testUser.setEmail("user@outlook.com");
+        assertEquals("user@outlook.com", testUser.getEmail());
     }
 
     @Test
     public void getUsername() {
-        String expected = "user123456";
-        assertEquals(expected, testUser.getUsername());
+        assertEquals("user123456", testUser.getUsername());
+        assertEquals("special_user500", testUser2.getUsername());
     }
 
     @Test
     public void setUsername() {
-        String newData = "123456User";
-        testUser.setUsername(newData);
-        assertEquals(newData, testUser.getUsername());
+        testUser.setUsername("123456User");
+        assertEquals("123456User", testUser.getUsername());
     }
 
     @Test
@@ -80,9 +76,8 @@ public class UserClassUnitTests {
 
     @Test
     public void setPassword() {
-        String newData = "Pass_Word123";
-        testUser.setPassword(newData);
-        assertEquals(newData, testUser.getPassword());
+        testUser.setPassword("Pass_Word123");
+        assertEquals("Pass_Word123", testUser.getPassword());
     }
 
 }
