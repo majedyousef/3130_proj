@@ -22,6 +22,7 @@ public class User {
         email = "user@gmail.com";
         username = "user123456";
         password = "password1234";
+        userID = 1;
     }
 
     public int getUserID() {
