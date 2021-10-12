@@ -70,8 +70,8 @@ public class UserClassUnitTests {
 
     @Test
     public void getPassword() {
-        String expected = "password1234";
-        assertEquals(expected, testUser.getPassword());
+        assertEquals("password1234", testUser.getPassword());
+        assertEquals("878456_pass_!", testUser2.getPassword());
     }
 
     @Test
