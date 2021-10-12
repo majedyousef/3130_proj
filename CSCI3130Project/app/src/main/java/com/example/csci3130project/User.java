@@ -14,6 +14,7 @@ public class User {
     private String email;
     private String username;
     private String password;
+    private int userID;
 
     public User() {
         firstName = "firstName";
@@ -21,6 +22,10 @@ public class User {
         email = "user@gmail.com";
         username = "user123456";
         password = "password1234";
+    }
+
+    public int getUserID() {
+        return userID;
     }
 
     /**

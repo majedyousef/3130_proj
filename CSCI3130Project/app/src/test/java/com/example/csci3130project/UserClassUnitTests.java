@@ -14,6 +14,12 @@ public class UserClassUnitTests {
     User testUser = new User();
 
     @Test
+    public void getUserID() {
+        int expected = 1;
+        assertEquals(expected, testUser.getUserID());
+    }
+
+    @Test
     public void getFirstName() {
         String expected = "firstName";
         assertEquals(expected, testUser.getFirstName());
