@@ -16,9 +16,9 @@ public class User {
     private String password;
     private int userID;
 
-    public User(String fname) {
+    public User(String fname, String lname) {
         firstName = fname;
-        lastName = "lastName";
+        lastName = lname;
         email = "user@gmail.com";
         username = "user123456";
         password = "password1234";

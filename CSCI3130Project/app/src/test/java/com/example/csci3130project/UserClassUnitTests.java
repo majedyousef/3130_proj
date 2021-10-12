@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
  */
 public class UserClassUnitTests {
 
-    User testUser = new User("firstName");
-    User testUser2 = new User("John");
+    User testUser = new User("firstName", "lastName");
+    User testUser2 = new User("John", "Doe");
 
     @Test
     public void getUserID() {
@@ -36,7 +36,7 @@ public class UserClassUnitTests {
     @Test
     public void getLastName() {
         assertEquals("lastName", testUser.getLastName());
-        assertEquals("Doe", testUser.getLastName());
+        assertEquals("Doe", testUser2.getLastName());
     }
 
     @Test
