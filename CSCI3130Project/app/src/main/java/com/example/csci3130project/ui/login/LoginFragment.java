@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +18,8 @@ import com.example.csci3130project.databinding.FragmentLoginBinding;
 public class LoginFragment extends Fragment {
 
     private LoginViewModel loginViewModel;
-private FragmentLoginBinding binding;
+    private FragmentLoginBinding binding;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
