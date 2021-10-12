@@ -16,12 +16,12 @@ public class User {
     private String password;
     private int userID;
 
-    public User(String fname, String lname, String email, String username) {
+    public User(String fname, String lname, String email, String username, String password) {
         firstName = fname;
         lastName = lname;
         this.email = email;
         this.username = username;
-        password = "password1234";
+        this.password = password;
         userID = 1;
     }
 
