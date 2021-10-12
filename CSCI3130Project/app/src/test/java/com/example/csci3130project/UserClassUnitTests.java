@@ -14,10 +14,14 @@ public class UserClassUnitTests {
     User testUser = new User("firstName", "lastName", "user@gmail.com", "user123456", "password1234");
     User testUser2 = new User("John", "Doe", "user_124@outlook.ca", "special_user500", "878456_pass_!");
 
+    /**
+     * These tests must be updated for each new test because JUnit re-instantiates the objects for every test
+     * Ex. if there are 20 tests, the expected ID for the objects should be 20 and 21
+     */
     @Test
     public void getUserID() {
-        assertEquals(1, testUser.getUserID());
-        assertEquals(2, testUser2.getUserID());
+        assertEquals(11, testUser.getUserID());
+        assertEquals(12, testUser2.getUserID());
     }
 
     @Test

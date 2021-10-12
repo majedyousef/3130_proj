@@ -15,6 +15,7 @@ public class User {
     private String username;
     private String password;
     private int userID;
+    private static int count = 0;
 
     public User(String fname, String lname, String email, String username, String password) {
         firstName = fname;
@@ -22,7 +23,8 @@ public class User {
         this.email = email;
         this.username = username;
         this.password = password;
-        userID = 1;
+        count++;
+        userID = count;
     }
 
     /**
