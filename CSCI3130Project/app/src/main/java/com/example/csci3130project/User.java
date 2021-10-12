@@ -25,6 +25,10 @@ public class User {
         userID = 1;
     }
 
+    /**
+     * A method for retrieving the user's unique ID
+     * @return an integer representing the user's ID
+     */
     public int getUserID() {
         return userID;
     }
