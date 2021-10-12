@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 public class UserClassUnitTests {
 
     User testUser = new User();
+    User testUser2 = new User();
 
     @Test
     public void getUserID() {
@@ -23,6 +24,8 @@ public class UserClassUnitTests {
     public void getFirstName() {
         String expected = "firstName";
         assertEquals(expected, testUser.getFirstName());
+        String expected2 = "John";
+        assertEquals(expected2, testUser2.getFirstName());
     }
 
     @Test
