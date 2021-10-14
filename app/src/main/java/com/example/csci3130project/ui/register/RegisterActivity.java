@@ -6,6 +6,7 @@ import com.example.csci3130project.R;
 import com.example.csci3130project.ui.register.RegFragment;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
@@ -45,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
             if (pass.equals(pass2)) {
                 db.add(user).addOnSuccessListener(suc -> {
                     Toast.makeText(RegisterActivity.this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }).addOnFailureListener(fal -> {
                     Toast.makeText(RegisterActivity.this, "Data Insertion failed", Toast.LENGTH_SHORT).show();
                 });
