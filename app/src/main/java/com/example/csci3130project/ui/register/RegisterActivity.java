@@ -48,13 +48,12 @@ public class RegisterActivity extends AppCompatActivity {
                 }).addOnFailureListener(fal -> {
                     Toast.makeText(RegisterActivity.this, "Data Insertion failed", Toast.LENGTH_SHORT).show();
                 });
-
-                db.add(user).addOnSuccessListener(suc -> {
-                    Toast.makeText(RegisterActivity.this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
-                }).addOnFailureListener(fal -> {
-                    Toast.makeText(RegisterActivity.this, "Data Insertion failed", Toast.LENGTH_SHORT).show();
-                });
             }
+            db.add(user).addOnSuccessListener(suc -> {
+                Toast.makeText(RegisterActivity.this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(fal -> {
+                Toast.makeText(RegisterActivity.this, "Data Insertion failed", Toast.LENGTH_SHORT).show();
+            });
         });
     }
 }
