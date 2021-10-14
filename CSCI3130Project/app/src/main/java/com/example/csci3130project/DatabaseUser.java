@@ -1,5 +1,6 @@
 package com.example.csci3130project;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -16,6 +17,10 @@ public class DatabaseUser {
 
     public DatabaseUser() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference();
+        databaseReference = database.getReference(User.class.getSimpleName());
+    }
+
+    public Task<Void> addUser(User user) {
+        return databaseReference.child(String.valueOf(user.getUserID())).setValue(user);
     }
 }
