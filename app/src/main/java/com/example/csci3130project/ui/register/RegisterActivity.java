@@ -20,7 +20,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText fname, lname, editEmail, password, password2;
     private Button regBtn;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +27,12 @@ public class RegisterActivity extends AppCompatActivity {
 
         fname = findViewById(R.id.editRegFname);
         lname = findViewById(R.id.editRegLName);
-        regBtn = findViewById(R.id.loginBtn);
+        regBtn = findViewById(R.id.regBtn);
         editEmail = findViewById(R.id.editRegEmail);
         password = findViewById(R.id.editRegPass);
         password2 = findViewById(R.id.editRegPassConfirm);
+
+        Toast.makeText(RegisterActivity.this, "hi",Toast.LENGTH_SHORT);
 
         regBtn.setOnClickListener(v -> {
 
@@ -51,11 +52,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Data Insertion failed", Toast.LENGTH_SHORT).show();
                 });
             }
-            db.add(user).addOnSuccessListener(suc -> {
-                Toast.makeText(RegisterActivity.this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
-            }).addOnFailureListener(fal -> {
-                Toast.makeText(RegisterActivity.this, "Data Insertion failed", Toast.LENGTH_SHORT).show();
-            });
         });
     }
 }

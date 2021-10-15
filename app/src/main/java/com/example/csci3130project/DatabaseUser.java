@@ -19,20 +19,10 @@ public class DatabaseUser {
 
     public DatabaseUser() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference();
+        databaseReference = database.getReference(User.class.getSimpleName());
     }
 
-    public Task<Void> add(User user){
+    public Task<Void> add(User user) {
         return databaseReference.push().setValue(user);
     }
-
-    public Task<Void> update(String key, HashMap<String,Object> hashMap){
-        return databaseReference.child(key).updateChildren(hashMap);
-    }
-
-    public Task<Void> remove(String key){
-        return databaseReference.child(key).removeValue();
-    }
-
-
 }
