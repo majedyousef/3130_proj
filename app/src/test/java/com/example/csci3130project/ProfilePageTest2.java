@@ -8,6 +8,8 @@ import static org.junit.Assert.*;
 
 import android.app.Activity;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class ProfilePageTest2 {
     static MainActivity mainActivity;
 
@@ -21,14 +23,43 @@ public class ProfilePageTest2 {
         System.gc();
     }
 
-    @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
-    }
 
     @Test
     public void checkPasswordChange(){
-        assertTrue(!newPassword.equals(oldPassword));
-        assertFalse(newPassword.equals(oldPassword));
+
     }
+
+    //Checks if users name appears on the top of the screen
+    @Test
+    public void checkIfNameIsVisible() {
+
+    }
+
+    @Test
+    public void checkIfBioIsVisible() {
+
+    }
+
+    //check if password change pop up appears on screen
+    @Test
+    public void checkIfChangePasswordAppears() {
+
+    }
+
+    @Test
+    public void checkIfPasswordisValid() {
+
+    }
+
+    @Test
+    public void checkIfPasswordisInvalid() {
+
+    }
+
+    //Checks if change profile image pops up on the current screen
+    @Test
+    public void checkIfChangeProfileImageAppears() {
+
+    }
+
 }

@@ -3,7 +3,7 @@ package com.example.csci3130project;
 import android.content.Context;
 
 //import androidx.test.espresso.intent.Intents;
-import androidx.test.espresso.intent.rule.IntentsTestRule;
+//import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -31,10 +31,11 @@ import static org.junit.Assert.assertEquals;
 public class ProfilePageTest1 {
     public ActivityScenarioRule<MainActivity> myRule = new ActivityScenarioRule<>(MainActivity.class);
 
+    /*
     @BeforeClass
     public static void setup() {
         Intents.init();
-    }
+    }*/
 
     @Test
     public void useAppContext() {
@@ -42,20 +43,49 @@ public class ProfilePageTest1 {
         assertEquals("com.example.csci3130project", appContext.getPackageName());
     }
 
-
     @Test
     public void checkIfProfilePageIsVisible() {
-        onView(withId(R.id.name)).check(matches(withText(R.string.EMPTY_STRING)));
-        onView(withId(R.id.email)).check(matches(withText(R.string.EMPTY_STRING)));
+
     }
 
     @Test
     public void checkPasswordChange(){
-        onView(withId(R.id.newPassword)).perform(typeText("B00123456"));
-        onView(withId(R.id.registerButton)).perform(click());
-        onView(withId(R.id.statusLabel)).check(matches(withText(R.string.oldPassword)));
+
     }
 
+    //Checks if users name appears on the top of the screen
+    @Test
+    public void checkIfNameIsVisible() {
+
+    }
+
+    //Checks if bio is visible on page
+    @Test
+    public void checkIfBioIsVisible() {
+
+    }
+
+    //check if password change pop up appears on screen
+    @Test
+    public void checkIfChangePasswordAppears() {
+
+    }
+
+    @Test
+    public void checkIfPasswordisValid() {
+
+    }
+
+    @Test
+    public void checkIfPasswordisInvalid() {
+
+    }
+
+    //Checks if change profile image pops up on the current screen
+    @Test
+    public void checkIfChangeProfileImageAppears() {
+
+    }
 
     @AfterClass
     public static void tearDown() {
