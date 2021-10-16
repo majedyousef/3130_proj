@@ -12,5 +12,3 @@ We will be working on the "Online Barter Trader" proposal;
 - **Abu Sabi Ubada** (B00812077)
 - **Nour Ali** (B00841206)
 - **Hesham Elokdah** (B00843961)
-
-# Test Edit
