@@ -20,6 +20,10 @@ public class DatabaseUser {
         databaseReference = database.getReference(User.class.getSimpleName());
     }
 
+    /**
+     * A method for adding a user to the database with a unique ID
+     * @return a void task after adding the user
+     */
     public Task<Void> addUser(User user) {
         return databaseReference.child(String.valueOf(user.getUserID())).setValue(user);
     }
