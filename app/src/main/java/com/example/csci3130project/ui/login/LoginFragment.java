@@ -1,6 +1,5 @@
 package com.example.csci3130project.ui.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +16,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.csci3130project.R;
-import com.example.csci3130project.User;
 //import com.example.csci3130project.databinding.FragmentLoginBinding;
 import com.example.csci3130project.databinding.FragmentLoginBinding;
-import com.example.csci3130project.ui.profile.ProfileFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,6 +54,14 @@ public class LoginFragment extends Fragment {
             String password = mPassword.getText().toString().trim();
             FirebaseDatabase databaseInstance = FirebaseDatabase.getInstance();
             DatabaseReference userNode = databaseInstance.getReference("User");
+            if(emailIsEmpty(email)){
+                Toast.makeText(getActivity(),"Email field is empty",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (passwordIsEmpty(password)){
+                Toast.makeText(getActivity(),"Password field is empty",Toast.LENGTH_SHORT).show();
+                return;
+            }
 
 
             userNode.addValueEventListener(new ValueEventListener() {
@@ -113,6 +118,7 @@ public class LoginFragment extends Fragment {
 
 
 
+
         final TextView textView = binding.textLogin;
         loginViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
@@ -128,4 +134,12 @@ public class LoginFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+    protected boolean emailIsEmpty(String email){
+        return email.toString().isEmpty();
+    }
+    protected boolean passwordIsEmpty(String password){
+        return password.toString().isEmpty();
+    }
+
+
 }
