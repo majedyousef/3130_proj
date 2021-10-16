@@ -1,8 +1,6 @@
 package com.example.csci3130project.ui.register;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +16,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.csci3130project.DatabaseUser;
-import com.example.csci3130project.MainActivity;
 import com.example.csci3130project.R;
 import com.example.csci3130project.User;
 import com.example.csci3130project.databinding.FragmentRegBinding;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class RegFragment extends Fragment {
 
@@ -30,6 +31,34 @@ public class RegFragment extends Fragment {
     private Button regBtn;
     EditText fname, lname, editEmail, password, password2, username;
 
+    //returns true if the input is empty
+    boolean isEmpty(String s){
+        return (s == null || s.equals(""));
+    }
+
+    //returns true if any form input field is empty
+    boolean isNotComplete(String uname, String email, String pass, String pass2, String fname, String lname){
+        return (isEmpty(uname)||isEmpty(email)||isEmpty(pass)||
+                isEmpty(pass2)||isEmpty(fname)||isEmpty(lname));
+    }
+
+    //returns true uif the email has a valid format
+    protected boolean isValidEmailAddress(String emailAddress) {
+        Pattern pattern = Pattern.compile("^(.+)@(.+)$");
+        Matcher matcher = pattern.matcher(emailAddress);
+        return matcher.matches();
+    }
+
+    //Minimum password length is 8
+    protected boolean validatePasswordLength(String password){
+        return password.length()>=8;
+    }
+
+    //returns true if passwords match
+    protected boolean passwordsMatch(String pass1, String pass2){
+        return pass1.equals(pass2);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
         regViewModel = new ViewModelProvider(this).get(RegViewModel.class);
@@ -37,6 +66,7 @@ public class RegFragment extends Fragment {
     binding = FragmentRegBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
+        //storing input values
         regBtn = root.findViewById(R.id.regBtn);
         fname = root.findViewById(R.id.editRegFname);
         lname = root.findViewById(R.id.editRegLName);
@@ -45,6 +75,7 @@ public class RegFragment extends Fragment {
         password2 = root.findViewById(R.id.editRegPassConfirm);
         username = root.findViewById(R.id.editUserName);
 
+        //button click event handling
         regBtn.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -58,18 +89,24 @@ public class RegFragment extends Fragment {
                 User user = new User(firstName, lastName, email, uName, pass);
                 DatabaseUser db = new DatabaseUser();
 
-                if (pass.equals(pass2)) {
+                //validates input and updates database
+
+                if (isNotComplete(uName, email, pass, pass2, firstName, lastName)){
+                    Toast.makeText(getActivity(), "All fields are required", Toast.LENGTH_SHORT).show();
+                } else if(!isValidEmailAddress(email)){
+                    Toast.makeText(getActivity(), "Invalid email assress", Toast.LENGTH_SHORT).show();
+                } else if(!validatePasswordLength(pass)){
+                    Toast.makeText(getActivity(), "Minimum password length is 8", Toast.LENGTH_SHORT).show();
+                } else if (!passwordsMatch(pass,pass2)){
+                    Toast.makeText(getActivity(), "Passwords do not match", Toast.LENGTH_SHORT).show();
+                } else {
                     db.addUser(user).addOnSuccessListener(suc -> {
                         Toast.makeText(getActivity(), "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
                     }).addOnFailureListener(fal -> {
                         Toast.makeText(getActivity(), "Data Insertion failed", Toast.LENGTH_SHORT).show();
                     });
                 }
-
-
             }
-
-
         });
 
         final TextView textView = binding.textReg;
