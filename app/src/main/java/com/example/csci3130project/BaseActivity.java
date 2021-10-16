@@ -30,9 +30,8 @@ private ActivityBaseBinding binding;
         super.onCreate(savedInstanceState);
 
 
-
-     binding = ActivityBaseBinding.inflate(getLayoutInflater());
-     setContentView(binding.getRoot());
+        binding = ActivityBaseBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         //Test code for the logout activity will change the start activity to the logout activity.
         /*if(!Logout.loggedout) {
@@ -64,10 +63,7 @@ private ActivityBaseBinding binding;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_reg, R.id.nav_profile, R.id.nav_login)
-                .setOpenableLayout(drawer)
-                .build();
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_reg, R.id.nav_profile, R.id.nav_login).setOpenableLayout(drawer).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_base);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);

@@ -17,15 +17,13 @@ import com.example.csci3130project.databinding.FragmentProfileBinding;
 public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
-private FragmentProfileBinding binding;
+    private FragmentProfileBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
-        profileViewModel =
-                new ViewModelProvider(this).get(ProfileViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
-    binding = FragmentProfileBinding.inflate(inflater, container, false);
-    View root = binding.getRoot();
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
         final TextView textView = binding.textProfile;
         profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -37,7 +35,7 @@ private FragmentProfileBinding binding;
         return root;
     }
 
-@Override
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
