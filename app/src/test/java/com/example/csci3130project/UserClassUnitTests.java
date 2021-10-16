@@ -1,5 +1,7 @@
 package com.example.csci3130project;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,75 +13,91 @@ import static org.junit.Assert.*;
  */
 public class UserClassUnitTests {
 
-    User testUser = new User();
-    User testUser2 = new User();
+    User testUser;
+    User testUser2;
+
+    @Before
+    public void initialize() {
+        testUser = new User();
+        testUser.setFirstName("firstName");
+        testUser.setLastName("lastName");
+        testUser.setEmail("user@gmail.com");
+        testUser.setUsername("user123456");
+        testUser.setPassword("password1234");
+
+        testUser2 = new User();
+        testUser2.setFirstName("John");
+        testUser2.setLastName("Doe");
+        testUser2.setEmail("user_124@outlook.ca");
+        testUser2.setUsername("special_user500");
+        testUser2.setPassword("878456_pass_!");
+    }
 
     /**
-     * These tests must be updated for each new test because JUnit re-instantiates the objects for every test
-     * Ex. if there are 20 tests, the expected ID for the objects should be 20 and 21
+     * 9 and 10 chosen because @Before instantiates 5 times before testing
      */
     @Test
-    public void getUserID() {
-        assertEquals(11, testUser.getUserID());
-        assertEquals(12, testUser2.getUserID());
+    public void getUserID_Test() {
+        assertEquals(9, testUser.getUserID());
+        assertEquals(10, testUser2.getUserID());
     }
 
     @Test
-    public void getFirstName() {
+    public void getFirstName_Test() {
         assertEquals("firstName", testUser.getFirstName());
         assertEquals("John", testUser2.getFirstName());
     }
 
     @Test
-    public void setFirstName() {
+    public void setFirstName_Test() {
         testUser.setFirstName("newName");
         assertEquals("newName", testUser.getFirstName());
     }
 
     @Test
-    public void getLastName() {
+    public void getLastName_Test() {
         assertEquals("lastName", testUser.getLastName());
         assertEquals("Doe", testUser2.getLastName());
     }
 
     @Test
-    public void setLastName() {
+    public void setLastName_Test() {
         testUser.setLastName("newName");
         assertEquals("newName", testUser.getLastName());
     }
 
     @Test
-    public void getEmail() {
+    public void getEmail_Test() {
         assertEquals("user@gmail.com", testUser.getEmail());
         assertEquals("user_124@outlook.ca", testUser2.getEmail());
     }
 
     @Test
-    public void setEmail() {
+    public void setEmail_Test() {
         testUser.setEmail("user@outlook.com");
         assertEquals("user@outlook.com", testUser.getEmail());
     }
 
     @Test
-    public void getUsername() {
+    public void getUsername_Test() {
         assertEquals("user123456", testUser.getUsername());
         assertEquals("special_user500", testUser2.getUsername());
     }
 
     @Test
-    public void setUsername() {
+    public void setUsername_Test() {
         testUser.setUsername("123456User");
         assertEquals("123456User", testUser.getUsername());
     }
 
     @Test
-    public void getPassword() {
+    public void getPassword_Test() {
         assertEquals("password1234", testUser.getPassword());
         assertEquals("878456_pass_!", testUser2.getPassword());
     }
 
     @Test
-    public void setPassword() {
+    public void setPassword_Test() {
         testUser.setPassword("Pass_Word123");
         assertEquals("Pass_Word123", testUser.getPassword());
     }
