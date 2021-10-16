@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class ProfilePageTest2 {
     static MainActivity mainActivity;
 
+	/*
     @BeforeClass
     public static void setup() {
         mainActivity = new MainActivity();
@@ -22,7 +23,7 @@ public class ProfilePageTest2 {
     public static void tearDown() {
         System.gc();
     }
-
+	*/
 
     @Test
     public void checkPasswordChange(){
