@@ -1,10 +1,17 @@
 package com.example.csci3130project;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,8 +29,26 @@ private ActivityBaseBinding binding;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
      binding = ActivityBaseBinding.inflate(getLayoutInflater());
      setContentView(binding.getRoot());
+
+        //Test code for the logout activity will change the start activity to the logout activity.
+        /*if(!Logout.loggedout) {
+            Intent i = new Intent(getApplicationContext(), Logout.class);
+            startActivity(i);
+        }*/
+
+        //Creating an onclick listener for the login button to test a login and take the user to logout page.
+        Button login = (Button) findViewById(R.id.loginBtn);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), Logout.class);
+                startActivity(i);
+            }
+        });
 
         setSupportActionBar(binding.appBarBase.mainToolbar);
         binding.appBarBase.fab.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +58,8 @@ private ActivityBaseBinding binding;
                         .setAction("Action", null).show();
             }
         });
+
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -59,4 +86,5 @@ private ActivityBaseBinding binding;
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }
