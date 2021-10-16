@@ -10,11 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSCI3130Project.NoActionBar">
         <activity
-            android:name=".ui.register.RegisterActivity"
+            android:name=".Logout"
             android:exported="true" />
-        <activity
-            android:name=".ui.RegActivity"
-            android:exported="true" /> <!-- <activity -->
+        <!-- <activity -->
         <!-- android:name=".BaseActivity" -->
         <!-- android:exported="true" -->
         <!-- android:label="@string/title_activity_base" -->
