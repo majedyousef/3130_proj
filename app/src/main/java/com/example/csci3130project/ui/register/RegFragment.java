@@ -86,7 +86,12 @@ public class RegFragment extends Fragment {
                 String firstName = fname.getText().toString().trim();
                 String lastName = lname.getText().toString().trim();
                 String uName = username.getText().toString().trim();
-                User user = new User(firstName, lastName, email, uName, pass);
+                User user = new User();
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setEmail(email);
+                user.setUsername(uName);
+                user.setPassword(pass);
                 DatabaseUser db = new DatabaseUser();
 
                 //validates input and updates database

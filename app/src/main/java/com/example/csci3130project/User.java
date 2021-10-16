@@ -17,12 +17,7 @@ public class User {
     private int userID;
     private static int count = 0;
 
-    public User(String fname, String lname, String email, String username, String password) {
-        firstName = fname;
-        lastName = lname;
-        this.email = email;
-        this.username = username;
-        this.password = password;
+    public User() {
         count++;
         userID = count;
     }

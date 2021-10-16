@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
  */
 public class UserClassUnitTests {
 
-    User testUser = new User("firstName", "lastName", "user@gmail.com", "user123456", "password1234");
-    User testUser2 = new User("John", "Doe", "user_124@outlook.ca", "special_user500", "878456_pass_!");
+    User testUser = new User();
+    User testUser2 = new User();
 
     /**
      * These tests must be updated for each new test because JUnit re-instantiates the objects for every test
