@@ -23,4 +23,10 @@ public class RegistrationValidationTests {
         assertFalse(regFragment.isEmpty("Hello"));
     }
 
+    @Test
+    public void isNotCompleteTest() {
+        assertTrue(regFragment.isNotComplete("ABC", "", "123", "123", "A", "B"));
+        assertFalse(regFragment.isNotComplete("ABC", "email", "123", "123", "A", "B"));
+    }
+
 }

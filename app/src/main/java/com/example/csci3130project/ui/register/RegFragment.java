@@ -37,7 +37,7 @@ public class RegFragment extends Fragment {
     }
 
     //returns true if any form input field is empty
-    boolean isNotComplete(String uname, String email, String pass, String pass2, String fname, String lname){
+    public boolean isNotComplete(String uname, String email, String pass, String pass2, String fname, String lname){
         return (isEmpty(uname)||isEmpty(email)||isEmpty(pass)||
                 isEmpty(pass2)||isEmpty(fname)||isEmpty(lname));
     }
