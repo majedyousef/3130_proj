@@ -22,4 +22,10 @@ public class LoginValidationTests {
         assertTrue(logFragment.isEmailEmpty(""));
         assertFalse(logFragment.isEmailEmpty("123"));
     }
+
+    @Test
+    public void isPasswordEmptyTest() {
+        assertTrue(logFragment.isPasswordEmpty(""));
+        assertFalse(logFragment.isPasswordEmpty("5645123"));
+    }
 }

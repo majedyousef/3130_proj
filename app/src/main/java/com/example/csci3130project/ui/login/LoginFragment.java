@@ -132,6 +132,15 @@ public class LoginFragment extends Fragment {
         return email == null || email.equals("");
     }
 
+    /**
+     * Check if the user is trying to login without entering password
+     * @param password the password to check
+     * @return true if empty, false if not
+     */
+    public boolean isPasswordEmpty(String password){
+        return true;
+    }
+
 
     @Override
     public void onDestroyView() {
