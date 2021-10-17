@@ -60,15 +60,6 @@ public class RegFragment extends Fragment {
                 String lastName = lname.getText().toString().trim();
                 String uName = username.getText().toString().trim();
 
-                User user = new User();
-                user.setFirstName(firstName);
-                user.setLastName(lastName);
-                user.setEmail(email);
-                user.setUsername(uName);
-                user.setPassword(pass);
-
-                DatabaseUser db = new DatabaseUser();
-
                 //validates input and updates database
                 if (isNotComplete(uName, email, pass, pass2, firstName, lastName)){
                     Toast.makeText(getActivity(), "All fields are required", Toast.LENGTH_SHORT).show();
@@ -79,7 +70,9 @@ public class RegFragment extends Fragment {
                 } else if (!passwordsMatch(pass,pass2)){
                     Toast.makeText(getActivity(), "Passwords do not match", Toast.LENGTH_SHORT).show();
                 } else {
-                    db.addUser(user).addOnSuccessListener(suc -> {
+                    DatabaseUser db = new DatabaseUser();
+                    User newUser = createNewUser(firstName, lastName, email, uName, pass);
+                    db.addUser(newUser).addOnSuccessListener(suc -> {
                         Toast.makeText(getActivity(), "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
                     }).addOnFailureListener(fal -> {
                         Toast.makeText(getActivity(), "Data Insertion failed", Toast.LENGTH_SHORT).show();
@@ -96,6 +89,25 @@ public class RegFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    /**
+     * A method for creating a new User to register
+     * @param fname The first name of the user
+     * @param lname The last name of the user
+     * @param email The email of the user
+     * @param uname The username of the user
+     * @param pass The password of the user
+     * @return the new User to be added to the database
+     */
+    public User createNewUser(String fname, String lname, String email, String uname, String pass) {
+        User user = new User();
+        user.setFirstName(fname);
+        user.setLastName(lname);
+        user.setEmail(email);
+        user.setUsername(uname);
+        user.setPassword(pass);
+        return user;
     }
 
     //returns true if the input is empty
