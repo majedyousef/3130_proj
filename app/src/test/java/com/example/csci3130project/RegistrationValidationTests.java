@@ -34,4 +34,11 @@ public class RegistrationValidationTests {
         assertFalse(regFragment.isValidEmailAddress("Hello"));
     }
 
+    @Test
+    public void validatePasswordLengthTest() {
+        assertTrue(regFragment.validatePasswordLength("12345678"));
+        assertTrue(regFragment.validatePasswordLength("123456789_abc"));
+        assertFalse(regFragment.validatePasswordLength("xyz?"));
+    }
+
 }

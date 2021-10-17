@@ -117,7 +117,7 @@ public class RegFragment extends Fragment {
     }
 
     //Minimum password length is 8
-    protected boolean validatePasswordLength(String password){
+    public boolean validatePasswordLength(String password){
         return password.length()>=8;
     }
 
