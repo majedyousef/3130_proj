@@ -122,7 +122,7 @@ public class RegFragment extends Fragment {
     }
 
     //returns true if passwords match
-    protected boolean passwordsMatch(String pass1, String pass2){
+    public boolean passwordsMatch(String pass1, String pass2){
         return pass1.equals(pass2);
     }
 

@@ -41,4 +41,10 @@ public class RegistrationValidationTests {
         assertFalse(regFragment.validatePasswordLength("xyz?"));
     }
 
+    @Test
+    public void passwordMatchTest() {
+        assertTrue(regFragment.passwordsMatch("pass_word", "pass_word"));
+        assertFalse(regFragment.passwordsMatch("pass_word", "qwerty7"));
+    }
+
 }
