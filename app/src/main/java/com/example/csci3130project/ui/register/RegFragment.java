@@ -23,6 +23,11 @@ import com.example.csci3130project.databinding.FragmentRegBinding;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class will be used for registering a user in the database with the UI
+ *
+ * @author Group 6, CSCI3130 F21
+ */
 
 public class RegFragment extends Fragment {
 
@@ -60,7 +65,7 @@ public class RegFragment extends Fragment {
                 String lastName = lname.getText().toString().trim();
                 String uName = username.getText().toString().trim();
 
-                //validates input and updates database
+                // Validate user input and inform user of errors
                 if (isNotComplete(uName, email, pass, pass2, firstName, lastName)){
                     Toast.makeText(getActivity(), "All fields are required", Toast.LENGTH_SHORT).show();
                 } else if(!isValidEmailAddress(email)){
@@ -70,6 +75,7 @@ public class RegFragment extends Fragment {
                 } else if (!passwordsMatch(pass,pass2)){
                     Toast.makeText(getActivity(), "Passwords do not match", Toast.LENGTH_SHORT).show();
                 } else {
+                    // Otherwise, create a new user and add them to the database
                     DatabaseUser db = new DatabaseUser();
                     User newUser = createNewUser(firstName, lastName, email, uName, pass);
                     db.addUser(newUser).addOnSuccessListener(suc -> {
@@ -110,30 +116,55 @@ public class RegFragment extends Fragment {
         return user;
     }
 
-    //returns true if the input is empty
+    /**
+     * Checks if the current input string is empty
+     * @param s the String the check
+     * @return true if empty, false if not
+     */
     public boolean isEmpty(String s){
         return (s == null || s.equals(""));
     }
 
-    //returns true if any form input field is empty
+    /**
+     * Checks if any of the input fields are unfilled
+     * @param fname The first name of the user
+     * @param lname The last name of the user
+     * @param email The email of the user
+     * @param uname The username of the user
+     * @param pass The password of the user
+     * @return true if input is incomplete, false if they are all filled
+     */
     public boolean isNotComplete(String uname, String email, String pass, String pass2, String fname, String lname){
         boolean empty = isEmpty(uname) || isEmpty(email) || isEmpty(pass) || isEmpty(pass2) || isEmpty(fname) || isEmpty(lname);
         return empty;
     }
 
-    //returns true uif the email has a valid format
+    /**
+     * Use regex to check that the user email is a valid email
+     * @param emailAddress the email to check
+     * @return true if the email is valid, false if not
+     */
     public boolean isValidEmailAddress(String emailAddress) {
         Pattern pattern = Pattern.compile("^(.+)@(.+)$");
         Matcher matcher = pattern.matcher(emailAddress);
         return matcher.matches();
     }
 
-    //Minimum password length is 8
+    /**
+     * Check that the user's password is long enough
+     * @param password the proposed password
+     * @return true if it's logn enough, false otherwise
+     */
     public boolean validatePasswordLength(String password){
         return password.length()>=8;
     }
 
-    //returns true if passwords match
+    /**
+     * Check if the user's password confirmation matches
+     * @param pass1 the first password input
+     * @param pass2 the confirmation password input
+     * @return true if the passwords match, false if they do not
+     */
     public boolean passwordsMatch(String pass1, String pass2){
         return pass1.equals(pass2);
     }

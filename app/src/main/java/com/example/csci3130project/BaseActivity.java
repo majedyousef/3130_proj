@@ -23,12 +23,11 @@ import com.example.csci3130project.databinding.ActivityBaseBinding;
 public class BaseActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-private ActivityBaseBinding binding;
+    private ActivityBaseBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         binding = ActivityBaseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -49,6 +48,7 @@ private ActivityBaseBinding binding;
             }
         });
 
+        // Action bar
         setSupportActionBar(binding.appBarBase.mainToolbar);
         binding.appBarBase.fab.setOnClickListener(new View.OnClickListener() {
             @Override

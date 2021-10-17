@@ -9,9 +9,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-/* This class will be used for the logout functionality.
-   The plan is to have methods that can be called within the main activity activity as needed
-   To log out a user */
+/**
+ * This class will be used for the logout functionality.
+ * The plan is to have methods that can be called within the main activity
+ * as needed to log out a user
+ *
+ * @author Group 6, CSCI3130 F21
+ */
 
 public class Logout extends AppCompatActivity {
 
@@ -23,9 +27,7 @@ public class Logout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logout);
 
-
         logoutButton = (Button) findViewById(R.id.logoutButton);
-
         Intent in = getIntent();
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +52,7 @@ public class Logout extends AppCompatActivity {
                     dialog.cancel();
                     }
                 });
+
                 //Creating the alert and showing it to the user on the click.
                 AlertDialog logoutalertDialogue = logoutAlert.create();
                 logoutalertDialogue.show();

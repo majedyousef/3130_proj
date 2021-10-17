@@ -29,6 +29,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * This class will be used for logging registered users into the app.
+ *
+ * @author Group 6, CSCI3130 F21
+ */
+
 public class LoginFragment extends Fragment {
 
     private LoginViewModel loginViewModel;
@@ -36,7 +42,6 @@ public class LoginFragment extends Fragment {
     EditText mEmail,mPassword;
     TextView notRegistered;
     Button loginBtn;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
@@ -53,12 +58,12 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
+
                 FirebaseDatabase databaseInstance = FirebaseDatabase.getInstance();
                 DatabaseReference userNode = databaseInstance.getReference("User");
 
                 //A reference to the user node is created and email,password values are retrieved.
                 //Those values are the stored in 2 different arraylists.
-
                 userNode.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -67,7 +72,7 @@ public class LoginFragment extends Fragment {
                         ArrayList<String > passwordList = new ArrayList<String>();
                         ArrayList<String> emailList = new ArrayList<String>();
                         for(DataSnapshot adSnapshot: snapshot.getChildren()){
-                            emailFromDb= adSnapshot.child("email").getValue(String.class);
+                            emailFromDb = adSnapshot.child("email").getValue(String.class);
                             passFromDb = adSnapshot.child("password").getValue(String.class);
                             passwordList.add(passFromDb);
                             emailList.add(emailFromDb);
@@ -76,7 +81,7 @@ public class LoginFragment extends Fragment {
 
                         }
 
-                        //The email from the user is checked with the email from the db
+                        // The email from the user is checked with the email from the db
                         // if the email exists the password is checked and the appropriate message is shown as a toast.
                         String successPass;
                         int indexOfUser = emailList.indexOf(email);
@@ -112,6 +117,16 @@ public class LoginFragment extends Fragment {
         });
         return root;
     }
+
+    /**
+     * Check if the user is trying to login without entering email
+     * @param email the email to check
+     * @return true if empty, false if not
+     */
+    public boolean isEmailEmpty(String email){
+        return true;
+    }
+
 
     @Override
     public void onDestroyView() {

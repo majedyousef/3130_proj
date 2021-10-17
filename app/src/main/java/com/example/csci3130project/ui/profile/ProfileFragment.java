@@ -13,6 +13,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.csci3130project.databinding.FragmentProfileBinding;
 
+/**
+ * This class will be used for showing the user's profile
+ *
+ * @author Group 6, CSCI3130 F21
+ */
 
 public class ProfileFragment extends Fragment {
 
