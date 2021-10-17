@@ -28,4 +28,10 @@ public class RegistrationValidationTests {
         assertFalse(regFragment.isNotComplete("ABC", "email", "123", "123", "A", "B"));
     }
 
+    @Test
+    public void isValidEmailAddressTest() {
+        assertTrue(regFragment.isValidEmailAddress("email123@email.com"));
+        assertFalse(regFragment.isValidEmailAddress("Hello"));
+    }
+
 }

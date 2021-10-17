@@ -31,36 +31,9 @@ public class RegFragment extends Fragment {
     private Button regBtn;
     EditText fname, lname, editEmail, password, password2, username;
 
-    //returns true if the input is empty
-    public boolean isEmpty(String s){
-        return (s == null || s.equals(""));
-    }
-
-    //returns true if any form input field is empty
-    public boolean isNotComplete(String uname, String email, String pass, String pass2, String fname, String lname){
-        boolean empty = isEmpty(uname) || isEmpty(email) || isEmpty(pass) || isEmpty(pass2) || isEmpty(fname) || isEmpty(lname);
-        return empty;
-    }
-
-    //returns true uif the email has a valid format
-    protected boolean isValidEmailAddress(String emailAddress) {
-        Pattern pattern = Pattern.compile("^(.+)@(.+)$");
-        Matcher matcher = pattern.matcher(emailAddress);
-        return matcher.matches();
-    }
-
-    //Minimum password length is 8
-    protected boolean validatePasswordLength(String password){
-        return password.length()>=8;
-    }
-
-    //returns true if passwords match
-    protected boolean passwordsMatch(String pass1, String pass2){
-        return pass1.equals(pass2);
-    }
-
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+           ViewGroup container, Bundle savedInstanceState) {
+
         regViewModel = new ViewModelProvider(this).get(RegViewModel.class);
 
         binding = FragmentRegBinding.inflate(inflater, container, false);
@@ -123,6 +96,34 @@ public class RegFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    //returns true if the input is empty
+    public boolean isEmpty(String s){
+        return (s == null || s.equals(""));
+    }
+
+    //returns true if any form input field is empty
+    public boolean isNotComplete(String uname, String email, String pass, String pass2, String fname, String lname){
+        boolean empty = isEmpty(uname) || isEmpty(email) || isEmpty(pass) || isEmpty(pass2) || isEmpty(fname) || isEmpty(lname);
+        return empty;
+    }
+
+    //returns true uif the email has a valid format
+    public boolean isValidEmailAddress(String emailAddress) {
+        Pattern pattern = Pattern.compile("^(.+)@(.+)$");
+        Matcher matcher = pattern.matcher(emailAddress);
+        return matcher.matches();
+    }
+
+    //Minimum password length is 8
+    protected boolean validatePasswordLength(String password){
+        return password.length()>=8;
+    }
+
+    //returns true if passwords match
+    protected boolean passwordsMatch(String pass1, String pass2){
+        return pass1.equals(pass2);
     }
 
     @Override
