@@ -59,10 +59,15 @@ public class LoginFragment extends Fragment {
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
 
+                // Check if input fields empty
                 if(isEmailEmpty(email)){
                     Toast.makeText(getActivity(),"Email field is empty",Toast.LENGTH_SHORT).show();
                     return;
+                } else if (isPasswordEmpty(password)){
+                    Toast.makeText(getActivity(),"Password field is empty",Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
 
                 FirebaseDatabase databaseInstance = FirebaseDatabase.getInstance();
                 DatabaseReference userNode = databaseInstance.getReference("User");
@@ -138,7 +143,7 @@ public class LoginFragment extends Fragment {
      * @return true if empty, false if not
      */
     public boolean isPasswordEmpty(String password){
-        return true;
+        return password == null || password.equals("");
     }
 
 
