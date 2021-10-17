@@ -56,6 +56,9 @@ public class LoginFragment extends Fragment {
                 FirebaseDatabase databaseInstance = FirebaseDatabase.getInstance();
                 DatabaseReference userNode = databaseInstance.getReference("User");
 
+                //A reference to the user node is created and email,password values are retrieved.
+                //Those values are the stored in 2 different arraylists.
+
                 userNode.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -72,10 +75,11 @@ public class LoginFragment extends Fragment {
                             System.out.println(passFromDb);
 
                         }
+
+                        //The email from the user is checked with the email from the db
+                        // if the email exists the password is checked and the appropriate message is shown as a toast.
                         String successPass;
                         int indexOfUser = emailList.indexOf(email);
-                        System.out.println("From ArrayList "+emailList.get(0));
-                        System.out.println("From pass list: "+ passwordList.get(0));
 
                         if(indexOfUser==-1){
                             Toast.makeText(getActivity(),"No such user found. Please check email or password",Toast.LENGTH_SHORT).show();
