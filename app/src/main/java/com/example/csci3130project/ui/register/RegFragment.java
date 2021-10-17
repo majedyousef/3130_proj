@@ -32,7 +32,7 @@ public class RegFragment extends Fragment {
     EditText fname, lname, editEmail, password, password2, username;
 
     //returns true if the input is empty
-    boolean isEmpty(String s){
+    public boolean isEmpty(String s){
         return (s == null || s.equals(""));
     }
 
