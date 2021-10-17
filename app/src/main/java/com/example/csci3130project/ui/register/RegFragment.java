@@ -38,8 +38,8 @@ public class RegFragment extends Fragment {
 
     //returns true if any form input field is empty
     public boolean isNotComplete(String uname, String email, String pass, String pass2, String fname, String lname){
-        return (isEmpty(uname)||isEmpty(email)||isEmpty(pass)||
-                isEmpty(pass2)||isEmpty(fname)||isEmpty(lname));
+        boolean empty = isEmpty(uname) || isEmpty(email) || isEmpty(pass) || isEmpty(pass2) || isEmpty(fname) || isEmpty(lname);
+        return empty;
     }
 
     //returns true uif the email has a valid format
@@ -63,8 +63,8 @@ public class RegFragment extends Fragment {
             ViewGroup container, Bundle savedInstanceState) {
         regViewModel = new ViewModelProvider(this).get(RegViewModel.class);
 
-    binding = FragmentRegBinding.inflate(inflater, container, false);
-    View root = binding.getRoot();
+        binding = FragmentRegBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
         //storing input values
         regBtn = root.findViewById(R.id.regBtn);
@@ -86,16 +86,17 @@ public class RegFragment extends Fragment {
                 String firstName = fname.getText().toString().trim();
                 String lastName = lname.getText().toString().trim();
                 String uName = username.getText().toString().trim();
+
                 User user = new User();
                 user.setFirstName(firstName);
                 user.setLastName(lastName);
                 user.setEmail(email);
                 user.setUsername(uName);
                 user.setPassword(pass);
+
                 DatabaseUser db = new DatabaseUser();
 
                 //validates input and updates database
-
                 if (isNotComplete(uName, email, pass, pass2, firstName, lastName)){
                     Toast.makeText(getActivity(), "All fields are required", Toast.LENGTH_SHORT).show();
                 } else if(!isValidEmailAddress(email)){
@@ -124,7 +125,7 @@ public class RegFragment extends Fragment {
         return root;
     }
 
-@Override
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
