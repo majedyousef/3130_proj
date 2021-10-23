@@ -10,7 +10,7 @@ public class ProfileViewModel extends ViewModel {
 
     public ProfileViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is the Profile Page");
+        //mText.setValue("This is the Profile Page");
     }
 
     public LiveData<String> getText() {
