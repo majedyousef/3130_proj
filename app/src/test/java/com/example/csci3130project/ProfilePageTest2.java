@@ -5,15 +5,19 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
 import android.app.Activity;
+import android.widget.TextView;
 
+import com.example.csci3130project.ui.profile.ProfileActivity;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfilePageTest2 {
     static MainActivity mainActivity;
 
-	/*
+    String fullNameHolder = "Jane Doe";
+    String emailHolder = "janeDoe@outlook.com";
+    String userNameHolder ="janeDoe123";
+
     @BeforeClass
     public static void setup() {
         mainActivity = new MainActivity();
@@ -23,44 +27,28 @@ public class ProfilePageTest2 {
     public static void tearDown() {
         System.gc();
     }
-	*/
-
-    @Test
-    public void checkPasswordChange(){
-
-    }
 
     //Checks if users name appears on the top of the screen
     @Test
-    public void checkIfNameIsVisible() {
+    public void checkIfFullNameIsVisible() {
+        String fullName = "";
 
     }
 
+    //Checks if email appears on the screen
     @Test
-    public void checkIfBioIsVisible() {
+    public void checkEmailIsVisible() {
+        String email = "";
 
     }
 
-    //check if password change pop up appears on screen
+    //Checks if User name appears on the screen
     @Test
-    public void checkIfChangePasswordAppears() {
+    public void checkUserNameIsVisible() {
+        String userName = "";
 
     }
 
-    @Test
-    public void checkIfPasswordisValid() {
 
-    }
-
-    @Test
-    public void checkIfPasswordisInvalid() {
-
-    }
-
-    //Checks if change profile image pops up on the current screen
-    @Test
-    public void checkIfChangeProfileImageAppears() {
-
-    }
 
 }

@@ -89,7 +89,7 @@
         app:layout_constraintVertical_bias="0.758" />
 
     <Button
-        android:id="@+id/profileImageBtn"
+        android:id="@+id/transactionHistoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Transaction History"
