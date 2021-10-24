@@ -8,11 +8,12 @@ import static org.junit.Assert.*;
 import android.app.Activity;
 import android.widget.TextView;
 
-import com.example.csci3130project.ui.profile.ProfileActivity;
+import com.example.csci3130project.ui.profile.ProfileFragment;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfilePageTest2 {
     static MainActivity mainActivity;
+    static ProfileFragment profileFragment;
 
     String fullNameHolder = "Jane Doe";
     String emailHolder = "janeDoe@outlook.com";
@@ -21,6 +22,7 @@ public class ProfilePageTest2 {
     @BeforeClass
     public static void setup() {
         mainActivity = new MainActivity();
+        profileFragment = new ProfileFragment();
     }
 
     @AfterClass
@@ -31,24 +33,18 @@ public class ProfilePageTest2 {
     //Checks if users name appears on the top of the screen
     @Test
     public void checkIfFullNameIsVisible() {
-        String fullName = "";
 
     }
 
     //Checks if email appears on the screen
     @Test
     public void checkEmailIsVisible() {
-        String email = "";
 
     }
 
     //Checks if User name appears on the screen
     @Test
     public void checkUserNameIsVisible() {
-        String userName = "";
 
     }
-
-
-
 }
