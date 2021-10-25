@@ -21,27 +21,27 @@ public class MainActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) findViewById(R.id.searchfield);
         searchView.setQueryHint("Search for an item!");
 
-
-        /*SearchFunctionality searchBar = new SearchFunctionality();
-        searchBar.createNewSearch(searchView);*/
-
         CharSequence query = "No query inputted";
         query = searchView.getQuery();
 
         //Simple Test Textview that is in the activity. Will display the users search keyword
-        TextView TextView = (TextView)findViewById(R.id.userSearchKeyword);
-        TextView.setText(query);
+        TextView SearchKeyword = (TextView)findViewById(R.id.userSearchKeyword);
+
+        SearchKeyword.setText("Enter your search keyword!");
+        TextView SearchKeyword2 = (TextView)findViewById(R.id.queryResult);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextChange(String newText) {
-                TextView.setText("Enter your search keyword!");
+                SearchKeyword.setText("Enter your search keyword!");
+                SearchKeyword2.setText("No Keyword Entered");
                 return false;
             }
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                TextView.setText(query);
+                SearchKeyword.setText("You searched for: " + query);
+                SearchKeyword2.setText("User Query Keyword: " + query);
                 return false;
             }
         });
