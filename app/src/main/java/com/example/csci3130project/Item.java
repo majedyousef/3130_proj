@@ -9,7 +9,17 @@ package com.example.csci3130project;
 
 public class Item {
 
+    private String name;
+
     public Item() {
 
+    }
+
+    /**
+     * A method for retrieving the name of an item
+     * @return a String containing the name of this item
+     */
+    public String getName() {
+        return name;
     }
 }
