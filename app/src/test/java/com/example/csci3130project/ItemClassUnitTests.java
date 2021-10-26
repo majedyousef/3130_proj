@@ -22,4 +22,10 @@ public class ItemClassUnitTests {
     public void getItemCategory_Test() {
         assertEquals("Clothing", testItem.getCategory());
     }
+
+    @Test
+    public void setItemName_Test() {
+        testItem.setName("newName");
+        assertEquals("newName", testItem.getName());
+    }
 }

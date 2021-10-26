@@ -42,4 +42,12 @@ public class Item {
     public String getCategory() {
         return category;
     }
+
+    /**
+     * A method for updating the item's name
+     * @param name - String containing new item
+     */
+    public void setName(String name) {
+
+    }
 }
