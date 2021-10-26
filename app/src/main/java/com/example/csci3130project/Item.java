@@ -48,6 +48,6 @@ public class Item {
      * @param name - String containing new item
      */
     public void setName(String name) {
-
+        this.name = name;
     }
 }
