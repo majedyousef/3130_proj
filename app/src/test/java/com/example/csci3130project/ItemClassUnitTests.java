@@ -12,4 +12,9 @@ public class ItemClassUnitTests {
     public void getItemName_Test() {
         assertEquals("itemName", testItem.getName());
     }
+
+    @Test
+    public void getItemDescription_Test() {
+        assertEquals("This item is clothing. It is a red shirt size XL", testItem.getDescription());
+    }
 }

@@ -10,6 +10,7 @@ package com.example.csci3130project;
 public class Item {
 
     private String name;
+    private String description;
 
     public Item() {
         name = "itemName";
@@ -21,5 +22,13 @@ public class Item {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * A method for retrieving the description of an item
+     * @return a String containing the description of this item
+     */
+    public String getDescription() {
+        return description;
     }
 }
