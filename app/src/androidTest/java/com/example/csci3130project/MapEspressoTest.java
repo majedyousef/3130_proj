@@ -46,13 +46,6 @@ public class MapEspressoTest {
         intended(hasComponent(MapsActivity.class.getName()));
     }
 
-    // This test checks to see if we have moved to the map by clicking the mapFab
-//    @Test
-//    public void checkIfMovedToMap() {
-//        onView(withId(R.id.)).perform(click());
-//        intended(hasComponent(MapsActivity.class.getName()));
-//    }
-
     @After
     public void tearDown() throws Exception {
     }
