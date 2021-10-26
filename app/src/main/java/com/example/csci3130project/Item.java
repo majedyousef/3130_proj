@@ -14,6 +14,7 @@ public class Item {
 
     public Item() {
         name = "itemName";
+        description = "This item is clothing. It is a red shirt size XL";
     }
 
     /**
