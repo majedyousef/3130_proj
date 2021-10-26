@@ -28,4 +28,10 @@ public class ItemClassUnitTests {
         testItem.setName("newName");
         assertEquals("newName", testItem.getName());
     }
+
+    @Test
+    public void setItemDescription_Test() {
+        testItem.setDescription("This item is technology. It's a used iPhone 7.");
+        assertEquals("This item is technology. It's a used iPhone 7.", testItem.getDescription());
+    }
 }

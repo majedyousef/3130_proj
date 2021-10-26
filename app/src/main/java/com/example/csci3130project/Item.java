@@ -45,9 +45,17 @@ public class Item {
 
     /**
      * A method for updating the item's name
-     * @param name - String containing new item
+     * @param name - String containing new item name
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * A method for updating the item's description
+     * @param description - String containing new item description
+     */
+    public void setDescription(String description) {
+
     }
 }
