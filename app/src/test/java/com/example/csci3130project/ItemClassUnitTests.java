@@ -17,4 +17,9 @@ public class ItemClassUnitTests {
     public void getItemDescription_Test() {
         assertEquals("This item is clothing. It is a red shirt size XL", testItem.getDescription());
     }
+
+    @Test
+    public void getItemCategory_Test() {
+        assertEquals("Clothing", testItem.getCategory());
+    }
 }

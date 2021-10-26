@@ -11,6 +11,7 @@ public class Item {
 
     private String name;
     private String description;
+    private String category;
 
     public Item() {
         name = "itemName";
@@ -31,5 +32,13 @@ public class Item {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * A method for retrieving the category of an item (ex. clothing, furniture)
+     * @return a String containing the category of this item
+     */
+    public String getCategory() {
+        return category;
     }
 }
