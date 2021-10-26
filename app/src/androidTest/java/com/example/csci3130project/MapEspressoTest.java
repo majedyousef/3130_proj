@@ -30,36 +30,23 @@ public class MapEspressoTest {
     @Rule
     public ActivityScenarioRule<BaseActivity> myRule = new ActivityScenarioRule<>(BaseActivity.class);
 
+    @BeforeClass
+    public static void setup() {
+        Intents.init();
+    }
+
     @Before
     public void setUp() throws Exception {
     }
-    @Test
-    public void userInputScenarioTest(){
-//        // input some text in the edit Text
-//        Espresso.onView(withId(R.id.etTextToUpdate)).perform(typeText(text));
-//        // Close the soft Keyboard
-//        Espresso.closeSoftKeyboard();
-//        // perform Button Click
-//        Espresso.onView(withId(R.id.btn)).perform(click());
-//        Espresso.onView(withId(R.id.tvChangedText)).check(matches(withText(text)));
-//        // Checking the text in the textView
 
+    // This test checks to see if we have moved to the map by clicking the mapFab
+    @Test
+    public void checkIfMovedToMap() {
+        onView(withId(R.id.mapFab)).perform(click());
+        intended(hasComponent(MapsActivity.class.getName()));
     }
+
     @After
     public void tearDown() throws Exception {
     }
-
-
-    @Test
-    public void checkIfReturnedToLogin() {
-        onView(withId(R.id.loginBtn)).perform(click());
-        intended(hasComponent(Logout.class.getName()));
-        onView(withId(R.id.logoutButton)).perform(click());
-        onView(withId(android.R.id.button1)).perform(click());
-        intended(hasComponent(BaseActivity.class.getName()));
-    }
-
-
-
-
 }
