@@ -34,4 +34,10 @@ public class ItemClassUnitTests {
         testItem.setDescription("This item is technology. It's a used iPhone 7.");
         assertEquals("This item is technology. It's a used iPhone 7.", testItem.getDescription());
     }
+
+    @Test
+    public void setItemCategory_Test() {
+        testItem.setCategory("Technology");
+        assertEquals("Technology", testItem.getCategory());
+    }
 }

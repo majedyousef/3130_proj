@@ -58,4 +58,12 @@ public class Item {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    /**
+     * A method for updating the item's category
+     * @param category - String containing new item category
+     */
+    public void setCategory(String category) {
+
+    }
 }
