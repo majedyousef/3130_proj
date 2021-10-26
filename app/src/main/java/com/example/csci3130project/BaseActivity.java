@@ -50,7 +50,7 @@ public class BaseActivity extends AppCompatActivity {
 
         // Action bar
         setSupportActionBar(binding.appBarBase.mainToolbar);
-        binding.appBarBase.fab.setOnClickListener(new View.OnClickListener() {
+        binding.appBarBase.mapFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), MapsActivity.class);
