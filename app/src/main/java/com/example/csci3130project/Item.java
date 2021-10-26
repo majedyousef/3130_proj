@@ -64,6 +64,6 @@ public class Item {
      * @param category - String containing new item category
      */
     public void setCategory(String category) {
-
+        this.category = category;
     }
 }
