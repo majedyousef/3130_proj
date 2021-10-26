@@ -56,6 +56,6 @@ public class Item {
      * @param description - String containing new item description
      */
     public void setDescription(String description) {
-
+        this.description = description;
     }
 }
