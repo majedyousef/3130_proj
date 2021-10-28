@@ -7,35 +7,20 @@
     tools:context=".MainActivity">
 
 
-<!--This is the layout for the search bar, this can be moved to any other xml file if needed depending on where the search bar has to go.-->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.example.test.searchview.MainActivity">
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/lv1"
-            android:divider="#ad5"
-            android:dividerHeight="2dp"
-            android:layout_below="@+id/searchView"/>
+<!--    Button for the search activity.-->
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="194dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="118dp"
+        android:text="Search For Items"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <!--Don't know why this gives a red error, but works.-->
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:queryHint="Search Here"
-            android:iconifiedByDefault="false"
-            android:layout_alignParentTop="true"
-            />
-
-    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
