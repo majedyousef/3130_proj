@@ -38,12 +38,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        //This is just a simple method that can be commented in or out based on if the search data and stuff needs to be there.
-        //Just for my testing so it isnt all piled here in the main onCreate method. The method can be moved around later
-        //createSearchBar();
-
-        Button login = (Button) findViewById(R.id.searchButton);
-        login.setOnClickListener(new View.OnClickListener() {
+        //The button in the activity that when clicked sends the user to the search activity.
+        Button itemSearch = (Button) findViewById(R.id.searchButton);
+        itemSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent openMainAct = new Intent(MainActivity.this, SearchActivity.class);
