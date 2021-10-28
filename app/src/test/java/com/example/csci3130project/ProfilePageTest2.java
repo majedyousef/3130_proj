@@ -7,13 +7,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import android.app.Activity;
 import android.widget.TextView;
+import org.junit.runner.RunWith;
 
 import com.example.csci3130project.ui.profile.ProfileFragment;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfilePageTest2 {
-    static MainActivity mainActivity;
-    static ProfileFragment profileFragment;
+    static ProfileFragment profileFragment = null;
 
     String fullNameHolder = "Jane Doe";
     String emailHolder = "janeDoe@outlook.com";
@@ -21,7 +21,6 @@ public class ProfilePageTest2 {
 
     @BeforeClass
     public static void setup() {
-        mainActivity = new MainActivity();
         profileFragment = new ProfileFragment();
     }
 

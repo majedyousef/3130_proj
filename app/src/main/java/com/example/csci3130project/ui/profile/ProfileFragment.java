@@ -33,9 +33,6 @@ public class ProfileFragment extends Fragment {
     private Button changePassword,transactionHistory,settings,logoutProfile;
     private TextView profileEmail,profileUserName,profileFullName;
 
-    FirebaseDatabase databaseInstance = FirebaseDatabase.getInstance();
-    DatabaseReference userNode = databaseInstance.getReference("User");
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
@@ -51,7 +48,6 @@ public class ProfileFragment extends Fragment {
         settings = root.findViewById(R.id.logOutButtonProfile);
 
         return root;
-
 
     }
 
