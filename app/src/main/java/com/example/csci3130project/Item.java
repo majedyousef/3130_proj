@@ -13,10 +13,10 @@ public class Item {
     private String description;
     private String category;
 
-    public Item() {
-        name = "itemName";
-        description = "This item is clothing. It is a red shirt size XL";
-        category = "Clothing";
+    public Item(String name, String description, String category) {
+        this.name = name;
+        this.description = description;
+        this.category = category;
     }
 
     /**

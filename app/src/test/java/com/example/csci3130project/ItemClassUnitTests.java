@@ -6,21 +6,28 @@ import static org.junit.Assert.*;
 
 public class ItemClassUnitTests {
 
-    Item testItem = new Item();
+    String description = "This item is clothing. It is a red shirt size XL";
+    Item testItem = new Item("itemName", description, "Clothing");
+
+    String description2 = "This item is furniture. It is a used couch";
+    Item testItem2 = new Item("itemName2", description2, "Furniture");
 
     @Test
     public void getItemName_Test() {
         assertEquals("itemName", testItem.getName());
+        assertEquals("itemName2", testItem2.getName());
     }
 
     @Test
     public void getItemDescription_Test() {
         assertEquals("This item is clothing. It is a red shirt size XL", testItem.getDescription());
+        assertEquals("This item is furniture. It is a used couch", testItem2.getDescription());
     }
 
     @Test
     public void getItemCategory_Test() {
         assertEquals("Clothing", testItem.getCategory());
+        assertEquals("Furniture", testItem2.getCategory());
     }
 
     @Test
