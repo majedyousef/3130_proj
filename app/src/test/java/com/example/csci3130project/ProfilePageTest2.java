@@ -1,27 +1,28 @@
 package com.example.csci3130project;
 
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import android.app.Activity;
-import android.widget.TextView;
-import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 
 import com.example.csci3130project.ui.profile.ProfileFragment;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfilePageTest2 {
+
     static ProfileFragment profileFragment = null;
 
-    String fullNameHolder = "Jane Doe";
-    String emailHolder = "janeDoe@outlook.com";
-    String userNameHolder ="janeDoe123";
 
     @BeforeClass
     public static void setup() {
-        profileFragment = new ProfileFragment();
+        profileFragment = Mockito.mock(ProfileFragment.class);
+        Mockito.when(profileFragment.getProfileEmail()).thenReturn("jndoe123@gmail.com");
+        Mockito.when(profileFragment.getProfileFullName()).thenReturn("Jane Doe");
+        Mockito.when(profileFragment.getProfileUserName()).thenReturn("jndoe111");
     }
 
     @AfterClass
@@ -31,19 +32,24 @@ public class ProfilePageTest2 {
 
     //Checks if users name appears on the top of the screen
     @Test
-    public void checkIfFullNameIsVisible() {
+    public void checkIfFullNameAppears() {
 
     }
 
-    //Checks if email appears on the screen
     @Test
-    public void checkEmailIsVisible() {
-
+    public void testGetProfileEmail() {
+        assertEquals("jndoe123@gmail.com",profileFragment.getProfileEmail());
     }
 
-    //Checks if User name appears on the screen
     @Test
-    public void checkUserNameIsVisible() {
-
+    public void testGetProfileFullName() {
+        assertEquals("Jane Doe",profileFragment.getProfileFullName());
     }
+
+    @Test
+    public void testGetProfileUserName() {
+        assertEquals("jndoe111",profileFragment.getProfileUserName());
+    }
+
+
 }

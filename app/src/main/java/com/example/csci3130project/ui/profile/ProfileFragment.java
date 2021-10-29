@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -30,8 +32,8 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
     private FragmentProfileBinding binding;
-    private Button changePassword,transactionHistory,settings,logoutProfile;
-    private TextView profileEmail,profileUserName,profileFullName;
+    TextView profileEmail,profileFullName,profileUserName;
+    Button changePassword,transactionHistory,settings;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
@@ -40,21 +42,44 @@ public class ProfileFragment extends Fragment {
         View root = binding.getRoot();
 
         profileEmail = root.findViewById(R.id.EmailText);
-        profileUserName = root.findViewById(R.id.UserNameText);
         profileFullName = root.findViewById(R.id.FullNameText);
+        profileUserName = root.findViewById(R.id.UserNameText);
         changePassword = root.findViewById(R.id.changePassBtn);
-        transactionHistory = root.findViewById(R.id.transactionHistoryButton);
-        logoutProfile = root.findViewById((R.id.logOutButtonProfile));
-        settings = root.findViewById(R.id.logOutButtonProfile);
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+        transactionHistory = root.findViewById(R.id.transactionHistoryButton);
+        transactionHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        Button settings = root.findViewById(R.id.logOutButtonProfile);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         return root;
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public String getProfileEmail() {
+        return profileEmail.getText().toString().trim();
+    }
+
+    public String getProfileFullName() {
+        return profileFullName.getText().toString().trim();
+    }
+
+    public String getProfileUserName() {
+        return profileUserName.getText().toString().trim();
     }
 
     public void updateProfileEmail(String email){
@@ -69,16 +94,9 @@ public class ProfileFragment extends Fragment {
         profileUserName.setText(userName);
     }
 
-    public String getProfileFullName(){
-        return profileFullName.toString();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
-
-    public String getProfileEmail(){
-        return profileEmail.toString();
-    }
-
-    public String getProfileUserName(){
-        return profileUserName.toString();
-    }
-
 }
