@@ -12,6 +12,8 @@ public class Item {
     private String name;
     private String description;
     private String category;
+    private int itemID;
+    private int userID;
 
     public Item(String name, String description, String category) {
         this.name = name;
