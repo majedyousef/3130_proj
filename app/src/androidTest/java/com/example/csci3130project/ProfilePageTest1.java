@@ -5,6 +5,7 @@ import android.content.Context;
 //import androidx.test.espresso.intent.Intents;
 //import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.espresso.intent.Intents;
+import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -25,6 +26,8 @@ import static org.junit.Assert.assertEquals;
 
 import com.example.csci3130project.ui.profile.ProfileFragment;
 
+import kotlin.jvm.JvmField;
+
 /**
  * Instrumented test, which will execute on an Android device.
  *
@@ -33,32 +36,20 @@ import com.example.csci3130project.ui.profile.ProfileFragment;
 @RunWith(AndroidJUnit4.class)
 public class ProfilePageTest1 {
 
+    @Rule
+    public ActivityScenarioRule myRule = new ActivityScenarioRule(ProfileFragment.class);
+    public IntentsTestRule myIntentRule = new IntentsTestRule(ProfileFragment.class);
+
     @BeforeClass
     public static void setup() {
         Intents.init();
     }
 
     @Test
-    public void useAppContext() {
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.csci3130project", appContext.getPackageName());
-    }
-
-    @Test
     public void checkIfProfilePageIsVisible() {
-
-    }
-
-    //Checks if users name appears on the top of the screen
-    @Test
-    public void checkIfNameIsVisible() {
-
-    }
-
-    //check if password change pop up appears on screen
-    @Test
-    public void checkIfChangePasswordAppears() {
-
+        onView(withId(R.id.EmailText)).check(matches(withText("Email")));
+        onView(withId(R.id.FullNameText)).check(matches(withText("Full Name")));
+        onView(withId(R.id.UserNameText)).check(matches(withText("User Name")));
     }
 
     @AfterClass
