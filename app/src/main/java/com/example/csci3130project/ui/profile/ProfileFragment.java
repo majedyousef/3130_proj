@@ -1,10 +1,13 @@
 package com.example.csci3130project.ui.profile;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +38,15 @@ public class ProfileFragment extends Fragment {
 
     private ProfileViewModel profileViewModel;
     private FragmentProfileBinding binding;
+
+    //initializing buttons and text views for the profile page
     TextView profileEmail,profileFullName,profileUserName;
     Button changePassword,transactionHistory,settings;
     String finalEmailHolder = "";
+
+    //initializing edit text and buttons for reseting the password
+    EditText passEmailEditText;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);

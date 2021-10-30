@@ -30,11 +30,6 @@ public class ProfilePageTest2 {
         System.gc();
     }
 
-    //Checks if users name appears on the top of the screen
-    @Test
-    public void checkIfFullNameAppears() {
-
-    }
 
     @Test
     public void testGetProfileEmail() {
