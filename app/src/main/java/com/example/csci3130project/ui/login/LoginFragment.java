@@ -68,7 +68,6 @@ public class LoginFragment extends Fragment {
                     return;
                 }
 
-
                 FirebaseDatabase databaseInstance = FirebaseDatabase.getInstance();
                 DatabaseReference userNode = databaseInstance.getReference("User");
 
@@ -103,6 +102,9 @@ public class LoginFragment extends Fragment {
                             successPass = passwordList.get(indexOfUser);
                             if(successPass.equals(password)){
                                 Toast.makeText(getActivity(),"Login Successful",Toast.LENGTH_SHORT).show();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("email",email);
+                                getFragmentManager().setFragmentResult("emailKey",bundle);
                             }
                             else{
                                 Toast.makeText(getActivity(),"Login Unsuccessful!! Please check email or password",Toast.LENGTH_SHORT).show();
