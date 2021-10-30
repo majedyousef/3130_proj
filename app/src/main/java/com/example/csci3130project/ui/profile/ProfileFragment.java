@@ -2,6 +2,7 @@ package com.example.csci3130project.ui.profile;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.csci3130project.Logout;
 import com.example.csci3130project.R;
 import com.example.csci3130project.databinding.FragmentProfileBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -41,12 +43,8 @@ public class ProfileFragment extends Fragment {
 
     //initializing buttons and text views for the profile page
     TextView profileEmail,profileFullName,profileUserName;
-    Button changePassword,transactionHistory,settings;
+    Button changePassword,transactionHistory,settings,logOutButton;
     String finalEmailHolder = "";
-
-    //initializing edit text and buttons for reseting the password
-    EditText passEmailEditText;
-
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
@@ -117,6 +115,13 @@ public class ProfileFragment extends Fragment {
         profileEmail = root.findViewById(R.id.EmailText);
         profileFullName = root.findViewById(R.id.FullNameText);
         profileUserName = root.findViewById(R.id.UserNameText);
+        logOutButton = root.findViewById(R.id.logOutButtonProfile);
+        logOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),Logout.class));
+            }
+        });
         changePassword = root.findViewById(R.id.changePassBtn);
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +137,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        Button settings = root.findViewById(R.id.logOutButtonProfile);
+        settings = root.findViewById(R.id.settingsButton);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

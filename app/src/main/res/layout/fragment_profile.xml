@@ -7,7 +7,7 @@
     tools:context=".ui.profile.ProfileFragment">
 
     <Button
-        android:id="@+id/settingsButton2"
+        android:id="@+id/settingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Settings"
@@ -34,6 +34,7 @@
         android:layout_height="47dp"
         android:text="Email"
         android:textSize="20sp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
@@ -116,6 +117,7 @@
         android:layout_height="47dp"
         android:text="User Name"
         android:textSize="20sp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
