@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.csci3130project.ChangePassword;
 import com.example.csci3130project.Logout;
 import com.example.csci3130project.R;
 import com.example.csci3130project.databinding.FragmentProfileBinding;
@@ -126,7 +127,7 @@ public class ProfileFragment extends Fragment {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(getActivity(), ChangePassword.class));
             }
         });
         transactionHistory = root.findViewById(R.id.transactionHistoryButton);
