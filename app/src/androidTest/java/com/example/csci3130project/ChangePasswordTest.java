@@ -51,7 +51,7 @@ public class ChangePasswordTest {
     @Test
     public void checkIfEmailAndPasswordsAreValid() {
         onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail.com"),ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.oldPasswordText)).perform(typeText("123456787"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.oldPasswordText)).perform(typeText("1234567890"),ViewActions.closeSoftKeyboard());
         onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"),ViewActions.closeSoftKeyboard());
         onView(withId(R.id.resetPassButton)).perform(click());
         onView(withId(R.id.displayTextView)).check(matches(withText("")));

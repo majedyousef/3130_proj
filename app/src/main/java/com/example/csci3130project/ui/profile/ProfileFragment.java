@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.csci3130project.ChangePassword;
 import com.example.csci3130project.Logout;
+import com.example.csci3130project.MainActivity;
 import com.example.csci3130project.R;
 import com.example.csci3130project.databinding.FragmentProfileBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -46,6 +47,9 @@ public class ProfileFragment extends Fragment {
     TextView profileEmail,profileFullName,profileUserName;
     Button changePassword,transactionHistory,settings,logOutButton;
     String finalEmailHolder = "";
+    String passwordOfUser = "";
+    String userIdOfUser = "";
+    String emailOfUser = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
@@ -74,20 +78,20 @@ public class ProfileFragment extends Fragment {
                String userNameFromDb;
                String firstNameFromDb;
                String lastNameFromDb;
-               String userIdFromDb;
+               Integer userIdFromDb;
                ArrayList<String > passwordList = new ArrayList<String>();
                ArrayList<String> emailList = new ArrayList<String>();
                ArrayList<String> userNameList = new ArrayList<String>();
                ArrayList<String> firstNameList = new ArrayList<String>();
                ArrayList<String> lastNameList = new ArrayList<String>();
-               ArrayList<String> userIdList = new ArrayList<String>();
+               ArrayList<Integer> userIdList = new ArrayList<Integer>();
                for(DataSnapshot adSnapshot: snapshot.getChildren()){
                    emailFromDb = adSnapshot.child("email").getValue(String.class);
                    passFromDb = adSnapshot.child("password").getValue(String.class);
                    userNameFromDb = adSnapshot.child("username").getValue(String.class);
                    firstNameFromDb = adSnapshot.child("firstName").getValue(String.class);
                    lastNameFromDb = adSnapshot.child("lastName").getValue(String.class);
-                   userIdFromDb = adSnapshot.child("userID").getValue(String.class);
+                   userIdFromDb = adSnapshot.child("userID").getValue(Integer.class);
                    passwordList.add(passFromDb);
                    emailList.add(emailFromDb);
                    userNameList.add(userNameFromDb);
@@ -107,8 +111,9 @@ public class ProfileFragment extends Fragment {
                updateProfileFullName(firstNameList.get(indexOfUser),lastNameList.get(indexOfUser));
 
                //Storing the users password to update it
-               String passwordOfUser = passwordList.get(indexOfUser);
-               String userIdOfUser = userIdList.get(indexOfUser);
+               passwordOfUser = passwordList.get(indexOfUser);
+               userIdOfUser = String.valueOf(userIdList.get(indexOfUser));
+               emailOfUser = emailList.get(indexOfUser);
 
            }
 
@@ -121,6 +126,7 @@ public class ProfileFragment extends Fragment {
         profileEmail = root.findViewById(R.id.EmailText);
         profileFullName = root.findViewById(R.id.FullNameText);
         profileUserName = root.findViewById(R.id.UserNameText);
+
         logOutButton = root.findViewById(R.id.logOutButtonProfile);
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +138,11 @@ public class ProfileFragment extends Fragment {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ChangePassword.class));
+                Intent intent = new Intent(getActivity(),ChangePassword.class);
+                intent.putExtra("passwordKey",passwordOfUser);
+                intent.putExtra("userIdKey",userIdOfUser);
+                intent.putExtra("emailKey",emailOfUser);
+                startActivity(intent);
             }
         });
         transactionHistory = root.findViewById(R.id.transactionHistoryButton);
