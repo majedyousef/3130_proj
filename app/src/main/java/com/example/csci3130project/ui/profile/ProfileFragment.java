@@ -74,22 +74,26 @@ public class ProfileFragment extends Fragment {
                String userNameFromDb;
                String firstNameFromDb;
                String lastNameFromDb;
+               String userIdFromDb;
                ArrayList<String > passwordList = new ArrayList<String>();
                ArrayList<String> emailList = new ArrayList<String>();
                ArrayList<String> userNameList = new ArrayList<String>();
                ArrayList<String> firstNameList = new ArrayList<String>();
                ArrayList<String> lastNameList = new ArrayList<String>();
+               ArrayList<String> userIdList = new ArrayList<String>();
                for(DataSnapshot adSnapshot: snapshot.getChildren()){
                    emailFromDb = adSnapshot.child("email").getValue(String.class);
                    passFromDb = adSnapshot.child("password").getValue(String.class);
                    userNameFromDb = adSnapshot.child("username").getValue(String.class);
                    firstNameFromDb = adSnapshot.child("firstName").getValue(String.class);
                    lastNameFromDb = adSnapshot.child("lastName").getValue(String.class);
+                   userIdFromDb = adSnapshot.child("userID").getValue(String.class);
                    passwordList.add(passFromDb);
                    emailList.add(emailFromDb);
                    userNameList.add(userNameFromDb);
                    firstNameList.add(firstNameFromDb);
                    lastNameList.add(lastNameFromDb);
+                   userIdList.add(userIdFromDb);
                }
                int indexOfUser = 0;
                for (int i = 0; i < emailList.size(); i++){
@@ -104,6 +108,7 @@ public class ProfileFragment extends Fragment {
 
                //Storing the users password to update it
                String passwordOfUser = passwordList.get(indexOfUser);
+               String userIdOfUser = userIdList.get(indexOfUser);
 
            }
 

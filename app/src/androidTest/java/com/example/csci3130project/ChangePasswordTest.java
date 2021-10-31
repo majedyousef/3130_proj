@@ -1,5 +1,6 @@
 package com.example.csci3130project;
 
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import android.content.Context;
@@ -48,57 +49,39 @@ public class ChangePasswordTest {
     }
 
     @Test
-    public void checkIfEmailIsValid() {
-        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail.com"));
-        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"));
-        onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"));
-        onView(withId(R.id.resetPassButton)).perform(click());
-        onView(withId(R.id.displayTextView)).check(matches(withText("")));
-    }
-
-    @Test
-    public void checkIfOldPasswordIsValid() {
-        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail.com"));
-        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"));
-        onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"));
-        onView(withId(R.id.resetPassButton)).perform(click());
-        onView(withId(R.id.displayTextView)).check(matches(withText("")));
-    }
-
-    @Test
-    public void checkIfNewPasswordIsValid() {
-        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail.com"));
-        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"));
-        onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"));
+    public void checkIfEmailAndPasswordsAreValid() {
+        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail.com"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.oldPasswordText)).perform(typeText("123456787"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"),ViewActions.closeSoftKeyboard());
         onView(withId(R.id.resetPassButton)).perform(click());
         onView(withId(R.id.displayTextView)).check(matches(withText("")));
     }
 
     @Test
     public void checkIfEmailIsInvalid() {
-        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123gmail.com"));
-        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"));
-        onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"));
+        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123gmail.com"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"),ViewActions.closeSoftKeyboard());
         onView(withId(R.id.resetPassButton)).perform(click());
         onView(withId(R.id.displayTextView)).check(matches(withText("Email is Invalid!")));
     }
 
     @Test
     public void checkIfOldPassIsInvalid() {
-        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail.com"));
-        onView(withId(R.id.oldPasswordText)).perform(typeText("1234"));
-        onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"));
+        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail.com"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.oldPasswordText)).perform(typeText("1234"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"),ViewActions.closeSoftKeyboard());
         onView(withId(R.id.resetPassButton)).perform(click());
-        onView(withId(R.id.displayTextView)).check(matches(withText("Old password is invalid!")));
+        onView(withId(R.id.displayTextView)).check(matches(withText("Old Password is invalid!")));
     }
 
     @Test
     public void checkIfNewPassIsInvalid() {
-        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail"));
-        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"));
-        onView(withId(R.id.newPasswordText)).perform(typeText("lo"));
+        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail.com"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.newPasswordText)).perform(typeText("lo"),ViewActions.closeSoftKeyboard());
         onView(withId(R.id.resetPassButton)).perform(click());
-        onView(withId(R.id.displayTextView)).check(matches(withText("New password is Invalid!")));
+        onView(withId(R.id.displayTextView)).check(matches(withText("New Password is invalid!")));
     }
 
 
