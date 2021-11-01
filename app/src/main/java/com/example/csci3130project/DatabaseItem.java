@@ -25,6 +25,6 @@ public class DatabaseItem {
      * @return a void task after adding the item
      */
     public Task<Void> addItem(Item item) {
-        return databaseReference.push().setValue(item);
+        return databaseReference.child(String.valueOf(item.getItemID())).setValue(item);
     }
 }
