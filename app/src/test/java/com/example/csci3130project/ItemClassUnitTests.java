@@ -47,4 +47,10 @@ public class ItemClassUnitTests {
         testItem.setCategory("Technology");
         assertEquals("Technology", testItem.getCategory());
     }
+
+    @Test
+    public void getItemID_Test() {
+        assertEquals(0, testItem.getItemID());
+        assertEquals(1, testItem.getItemID());
+    }
 }
