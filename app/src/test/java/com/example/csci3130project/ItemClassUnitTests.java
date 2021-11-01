@@ -48,9 +48,10 @@ public class ItemClassUnitTests {
         assertEquals("Technology", testItem.getCategory());
     }
 
+    // Expected IDs must be updated because test items instantiate multiple times
     @Test
     public void getItemID_Test() {
-        assertEquals(0, testItem.getItemID());
-        assertEquals(1, testItem.getItemID());
+        assertEquals(7, testItem.getItemID());
+        assertEquals(8, testItem2.getItemID());
     }
 }

@@ -14,11 +14,22 @@ public class Item {
     private String category;
     private int itemID;
     private int userID;
+    private static int count = 0;
 
     public Item(String name, String description, String category) {
         this.name = name;
         this.description = description;
         this.category = category;
+        count++;
+        itemID = count;
+    }
+
+    /**
+     * A method for retrieving the item's unique ID
+     * @return an integer representing the item's ID
+     */
+    public int getItemID() {
+        return itemID;
     }
 
     /**
