@@ -110,7 +110,7 @@ public class ProfileFragment extends Fragment {
                updateProfileUserName(userNameList.get(indexOfUser));
                updateProfileFullName(firstNameList.get(indexOfUser),lastNameList.get(indexOfUser));
 
-               //Storing the users password to update it
+               //Storing the users information to transfer to other pages
                passwordOfUser = passwordList.get(indexOfUser);
                userIdOfUser = String.valueOf(userIdList.get(indexOfUser));
                emailOfUser = emailList.get(indexOfUser);
@@ -127,6 +127,7 @@ public class ProfileFragment extends Fragment {
         profileFullName = root.findViewById(R.id.FullNameText);
         profileUserName = root.findViewById(R.id.UserNameText);
 
+        //Users can log out of their account from the profile page
         logOutButton = root.findViewById(R.id.logOutButtonProfile);
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +135,8 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(getActivity(),Logout.class));
             }
         });
+
+        //Users can change passwords from their profile page
         changePassword = root.findViewById(R.id.changePassBtn);
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override

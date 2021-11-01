@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ChangePassword extends AppCompatActivity {
-    EditText emailText,oldPassText,newPassText;
+    EditText oldPassText,newPassText;
     Button resetPasswordButton;
     TextView display;
     DatabaseReference ref;
@@ -34,7 +34,6 @@ public class ChangePassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        emailText = findViewById(R.id.editTextEmailAddress);
         oldPassText = findViewById(R.id.oldPasswordText);
         newPassText = findViewById(R.id.newPasswordText);
         resetPasswordButton = findViewById(R.id.resetPassButton);
@@ -49,7 +48,6 @@ public class ChangePassword extends AppCompatActivity {
         resetPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = emailText.getText().toString().trim();
                 String oldPass = oldPassText.getText().toString().trim();
                 String newPass = newPassText.getText().toString().trim();
 
@@ -57,44 +55,35 @@ public class ChangePassword extends AppCompatActivity {
                 * Conditions that evaluate if the information entered is correct or not
                 * If the conditions are all correct, then the password is updated
                 * */
-
-                if (email.isEmpty()){
-                    emailText.setError("Email is Empty!");
-                    emailText.requestFocus();
-                    display.setText("Email is Invalid!");
-                    return;
-                }
-                if ((!Patterns.EMAIL_ADDRESS.matcher(email).matches())){
-                    emailText.setError("Email is Invalid!");
-                    emailText.requestFocus();
-                    display.setText("Email is Invalid!");
-                    return;
-                }
-                if (!email.equals(retrievedEmail)){
-                    emailText.setError("Email is Invalid!");
-                    emailText.requestFocus();
-                    display.setText("Email is Invalid!");
-                    return;
-                }
-                if (oldPass.length() < 8){
+                if (oldPass.isEmpty()){
                     oldPassText.setError("Old Password is invalid!");
-                    oldPassText.requestFocus();
-                    display.setText("Old Password is invalid!");
-                    return;
-                }
-                if (!oldPass.equals(retrievedPassword)){
-                    oldPassText.setError("Old Password is Invalid!");
                     oldPassText.requestFocus();
                     display.setText("Old Password is Invalid!");
                     return;
                 }
-                if (newPass.length() < 8){
-                    newPassText.setError("New Password is invalid!");
-                    newPassText.requestFocus();
-                    display.setText("New Password is invalid!");
+                else if ((oldPass.length() < 8) && (!oldPass.equals(retrievedPassword))){
+                    oldPassText.setError("Old Password is invalid!");
+                    oldPassText.requestFocus();
+                    display.setText("Old Password is Invalid!");
                     return;
                 }
-                if ((newPass.length() >= 8) && (oldPass.length() >= 8) && (Patterns.EMAIL_ADDRESS.matcher(email).matches())){
+                else if (newPass.isEmpty()) {
+                    newPassText.setError("New Password is invalid!");
+                    newPassText.requestFocus();
+                    display.setText("New Password is Invalid!");
+                    return;
+                }
+                else if (newPass.length() < 8){
+                    newPassText.setError("New Password is invalid!");
+                    newPassText.requestFocus();
+                    display.setText("New Password is Invalid!");
+                    return;
+                }
+                else if (newPass.equals(oldPass)){
+                    display.setText("Passwords Cannot be the Same!");
+                    return;
+                }
+                else if ((newPass.length() >= 8) && (oldPass.equals(retrievedPassword)) && (!oldPass.equals(newPass))){
                     display.setText("");
                     //Creating a database reference using the user ID
                     ref = FirebaseDatabase.getInstance().getReference("User").child(retrievedUserID);
@@ -106,4 +95,5 @@ public class ChangePassword extends AppCompatActivity {
             }
         });
     }
+
 }

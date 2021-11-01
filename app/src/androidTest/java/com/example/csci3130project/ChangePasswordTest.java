@@ -27,6 +27,8 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 
+import com.example.csci3130project.ui.profile.ProfileFragment;
+
 import org.junit.Rule;
 
 @RunWith(AndroidJUnit4.class)
@@ -43,47 +45,43 @@ public class ChangePasswordTest {
 
     @Test
     public void checkIfChangePasswordIsVisible() {
-        onView(withId(R.id.editTextEmailAddress)).check(matches(withText("")));
         onView(withId(R.id.oldPasswordText)).check(matches(withText("")));
         onView(withId(R.id.newPasswordText)).check(matches(withText("")));
     }
 
+    //Checks if the old password is invalid
     @Test
-    public void checkIfEmailAndPasswordsAreValid() {
-        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail.com"),ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.oldPasswordText)).perform(typeText("1234567890"),ViewActions.closeSoftKeyboard());
+    public void checkIfOldPasswordIsInvalid() {
+        onView(withId(R.id.oldPasswordText)).perform(typeText("1234567"),ViewActions.closeSoftKeyboard());
         onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.resetPassButton)).perform(click());
+        onView(withId(R.id.displayTextView)).check(matches(withText("Old Password is Invalid!")));
+    }
+
+    //Checks if the new password is invalid
+    @Test
+    public void checkIfNewPasswordIsInvalid() {
+        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.newPasswordText)).perform(typeText("lol"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.resetPassButton)).perform(click());
+        onView(withId(R.id.displayTextView)).check(matches(withText("New Password is Invalid!")));
+    }
+
+    //test that checks if passwords are the same
+    @Test
+    public void checkIfPasswordsSame() {
+        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.newPasswordText)).perform(typeText("12345678"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.resetPassButton)).perform(click());
+        onView(withId(R.id.displayTextView)).check(matches(withText("Passwords Cannot be the Same!")));
+    }
+
+    //test that checks if password updates
+    @Test
+    public void checkIfPasswordUpdates() {
+        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"),ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.newPasswordText)).perform(typeText("123456789"),ViewActions.closeSoftKeyboard());
         onView(withId(R.id.resetPassButton)).perform(click());
         onView(withId(R.id.displayTextView)).check(matches(withText("")));
     }
-
-    @Test
-    public void checkIfEmailIsInvalid() {
-        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123gmail.com"),ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"),ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"),ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.resetPassButton)).perform(click());
-        onView(withId(R.id.displayTextView)).check(matches(withText("Email is Invalid!")));
-    }
-
-    @Test
-    public void checkIfOldPassIsInvalid() {
-        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail.com"),ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.oldPasswordText)).perform(typeText("1234"),ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.newPasswordText)).perform(typeText("lol12345678"),ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.resetPassButton)).perform(click());
-        onView(withId(R.id.displayTextView)).check(matches(withText("Old Password is invalid!")));
-    }
-
-    @Test
-    public void checkIfNewPassIsInvalid() {
-        onView(withId(R.id.editTextEmailAddress)).perform(typeText("jndoe123@gmail.com"),ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.oldPasswordText)).perform(typeText("12345678"),ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.newPasswordText)).perform(typeText("lo"),ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.resetPassButton)).perform(click());
-        onView(withId(R.id.displayTextView)).check(matches(withText("New Password is invalid!")));
-    }
-
-
-
 }
