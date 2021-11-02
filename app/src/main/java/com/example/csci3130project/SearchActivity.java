@@ -66,7 +66,7 @@ public class SearchActivity extends AppCompatActivity {
         searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.lv1);
 
-        //creating an array to store the name of items that are available (in the future maybe database title reference etc?) and adding some dummy data
+        //creating an array to store the name of items that are available
         list = new ArrayList<>();
 
         ArrayList<Item> itemList = new ArrayList<Item>();
@@ -77,24 +77,11 @@ public class SearchActivity extends AppCompatActivity {
         itemList.add(testitem2);
         Item testitem3 = new Item("New Kitchenware", "Trading some new kitchenware I got for christmas that I'm not using.", "Kitchenware");
         itemList.add(testitem3);
-        Item testitem4 = new Item("Used Chair", "Selling a used chair, sweated in once", "Furniture");
-        Item testitem5 = new Item("Used Chair", "Selling a used chair, sweated in once", "Furniture");
-        /*list.add("Used Office Chair for trade");
-        list.add("New Set of Kitchenware");
-        list.add("Like New Airpods");
-        list.add("Used Gaming PC");
-        list.add("Yard Equipment");
-        list.add("School Supplies");
-        list.add("Non Perishable Foods");
-        list.add("Books");
-        list.add("Used Kids Clothes");
-        list.add("Test 1");
-        list.add("Test 2");
-        list.add("Test 3");
-        list.add("Test 4");
-        list.add("Test 5");
-        list.add("Test 6");*/
-
+        Item testitem4 = new Item("Hockey Sticks", "Got a bunch of hockey sticks I don't need.", "Sports");
+        itemList.add(testitem4);
+        Item testitem5 = new Item("Unwanted food/nonperishables", "I have a variety of cans of food for exchange, not looking for anything specific", "Food");
+        itemList.add(testitem5);
+        //This loop goes throug the itemList array (contains the items from the database, right now dummy data) and adds the info to a string list (list)
         for(int i = 0; i < itemList.toArray().length ; i++){
             String item = "Item Name: " + itemList.get(i).getName() + "\n" + "Item Description: " + itemList.get(i).getDescription() + "\n" + "Item Category: " + itemList.get(i).getCategory();
             list.add(item);
