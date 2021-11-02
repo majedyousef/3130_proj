@@ -28,8 +28,8 @@ import static org.junit.Assert.assertEquals;
 public class SearchTestEspresso {
 
     @Rule
-    public ActivityScenarioRule<MainActivity> myRule = new ActivityScenarioRule<>(MainActivity.class);
-    public IntentsTestRule<MainActivity> myIntentRule = new IntentsTestRule<>(MainActivity.class);
+    public ActivityScenarioRule<Search> myRule = new ActivityScenarioRule<>(Search.class);
+    public IntentsTestRule<Search> myIntentRule = new IntentsTestRule<>(Search.class);
 
 
     @BeforeClass
@@ -39,9 +39,8 @@ public class SearchTestEspresso {
 
     @Test
     public void checkIfSearchBarVisible() {
-        onView(withId(R.id.searchfield)).perform(click());
+        onView(withId(R.id.searchView)).perform(click());
     }
-
 
 
 }

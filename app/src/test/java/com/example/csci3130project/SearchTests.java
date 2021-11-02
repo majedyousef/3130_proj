@@ -3,17 +3,9 @@ package com.example.csci3130project;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.csci3130project.ui.login.LoginFragment;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 public class SearchTests extends AppCompatActivity {
 
@@ -21,7 +13,7 @@ public class SearchTests extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.searchactivity);
+        setContentView(R.layout.searchpage);
 
 
 

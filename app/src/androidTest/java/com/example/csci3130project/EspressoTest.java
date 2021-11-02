@@ -67,10 +67,10 @@ public class EspressoTest {
     public void checkSearchKeyword() {
         onView(withId(R.id.loginBtn)).perform(click());
         intended(hasComponent(MainActivity.class.getName()));
-        onView(withId(R.id.searchfield)).perform(click());
+        onView(withId(R.id.searchView)).perform(click());
         String searchKeyword = "Furniture";
-        onView(withId(R.id.searchfield)).perform(typeText(searchKeyword));
-        onView(withId(R.id.searchfield)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.searchView)).perform(typeText(searchKeyword));
+        onView(withId(R.id.searchView)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
         intended(hasComponent(MainActivity.class.getName()));
 
         //Add logic to verify the text fields compared to the keyword to see if valid.

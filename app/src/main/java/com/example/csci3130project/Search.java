@@ -1,49 +1,18 @@
 package com.example.csci3130project;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.SearchView;
-import android.widget.TextView;
-
-import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import android.app.Activity;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.csci3130project.databinding.ActivityBaseBinding;
-
-import java.util.ArrayList;
-
-public class SearchActivity extends AppCompatActivity {
+public class Search extends AppCompatActivity {
 
     SearchView searchView;
     ListView listView;
@@ -55,7 +24,10 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.searchactivity);
+        setContentView(R.layout.searchpage);
+
+
+        //Method for creating the search bar.
         createSearchBar();
 
 
@@ -70,7 +42,6 @@ public class SearchActivity extends AppCompatActivity {
         list = new ArrayList<>();
 
         ArrayList<Item> itemList = new ArrayList<Item>();
-
         Item testitem1 = new Item("Used Chair", "Trading a used chair, sweated in once", "Furniture");
         itemList.add(testitem1);
         Item testitem2 = new Item("Xbox 360 Console", "Looking to Trade my old xbox 360", "Electronics");
@@ -81,7 +52,7 @@ public class SearchActivity extends AppCompatActivity {
         itemList.add(testitem4);
         Item testitem5 = new Item("Unwanted food/nonperishables", "I have a variety of cans of food for exchange, not looking for anything specific", "Food");
         itemList.add(testitem5);
-        //This loop goes throug the itemList array (contains the items from the database, right now dummy data) and adds the info to a string list (list)
+        //This loop goes through the itemList array (contains the items from the database, right now dummy data) and adds the info to a string list (list)
         for(int i = 0; i < itemList.toArray().length ; i++){
             String item = "Item Name: " + itemList.get(i).getName() + "\n" + "Item Description: " + itemList.get(i).getDescription() + "\n" + "Item Category: " + itemList.get(i).getCategory();
             list.add(item);
@@ -95,11 +66,10 @@ public class SearchActivity extends AppCompatActivity {
             //This method is performed when the user clicks the enter button and "submits" the text. this can be modified to do other things
             @Override
             public boolean onQueryTextSubmit(String query) {
-
                 if (list.contains(query)) {
                     adapter.getFilter().filter(query);
                 } else {
-                    Toast.makeText(SearchActivity.this, "No Match found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Search.this, "No Match found", Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
