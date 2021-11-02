@@ -65,9 +65,21 @@ public class SearchActivity extends AppCompatActivity {
         // Creating the searchview and listeview object by finding the searchview and listview from the uI.
         searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.lv1);
+
         //creating an array to store the name of items that are available (in the future maybe database title reference etc?) and adding some dummy data
         list = new ArrayList<>();
-        list.add("Used Office Chair for trade");
+
+        ArrayList<Item> itemList = new ArrayList<Item>();
+
+        Item testitem1 = new Item("Used Chair", "Trading a used chair, sweated in once", "Furniture");
+        itemList.add(testitem1);
+        Item testitem2 = new Item("Xbox 360 Console", "Looking to Trade my old xbox 360", "Electronics");
+        itemList.add(testitem2);
+        Item testitem3 = new Item("New Kitchenware", "Trading some new kitchenware I got for christmas that I'm not using.", "Kitchenware");
+        itemList.add(testitem3);
+        Item testitem4 = new Item("Used Chair", "Selling a used chair, sweated in once", "Furniture");
+        Item testitem5 = new Item("Used Chair", "Selling a used chair, sweated in once", "Furniture");
+        /*list.add("Used Office Chair for trade");
         list.add("New Set of Kitchenware");
         list.add("Like New Airpods");
         list.add("Used Gaming PC");
@@ -81,8 +93,12 @@ public class SearchActivity extends AppCompatActivity {
         list.add("Test 3");
         list.add("Test 4");
         list.add("Test 5");
-        list.add("Test 6");
+        list.add("Test 6");*/
 
+        for(int i = 0; i < itemList.toArray().length ; i++){
+            String item = "Item Name: " + itemList.get(i).getName() + "\n" + "Item Description: " + itemList.get(i).getDescription() + "\n" + "Item Category: " + itemList.get(i).getCategory();
+            list.add(item);
+        }
 
         //Creating a adapter for the listview and a on query text listener that will listen to the changes in the text view
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);
