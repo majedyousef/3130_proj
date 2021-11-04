@@ -44,42 +44,45 @@
         app:layout_constraintVertical_bias="0.406"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <Button
+        android:id="@+id/uploadBtn"
+        android:layout_width="241dp"
+        android:layout_height="76dp"
+        android:text="Upload"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
+
     <EditText
-        android:id="@+id/uploadLocation"
-        android:layout_width="226dp"
-        android:layout_height="60dp"
+        android:id="@+id/uploadItemdesc"
+        android:layout_width="295dp"
+        android:layout_height="83dp"
         android:ems="10"
-        android:hint="Location"
+        android:hint="Item Description"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.534"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.564" />
+        app:layout_constraintVertical_bias="0.612" />
 
     <EditText
-        android:id="@+id/uploadPostal"
+        android:id="@+id/uploadItemValue"
         android:layout_width="226dp"
         android:layout_height="60dp"
         android:ems="10"
-        android:hint="Postal Code"
-        android:inputType="textPostalAddress"
+        android:hint="Item Value"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
-
-    <EditText
-        android:id="@+id/uploadValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="81dp"
-        tools:layout_editor_absoluteY="586dp" />
+        app:layout_constraintVertical_bias="0.78" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
