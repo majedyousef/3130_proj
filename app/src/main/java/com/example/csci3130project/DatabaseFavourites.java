@@ -26,7 +26,7 @@ public class DatabaseFavourites {
      * A method for adding the user's favourite categories to the database
      * @return a void task after adding the favourites
      */
-    public Task<Void> addUser(ArrayList<String> faves) {
+    public Task<Void> addFaves(ArrayList<String> faves) {
         return databaseReference.push().setValue(faves);
     }
 

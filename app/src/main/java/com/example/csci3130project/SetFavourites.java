@@ -55,6 +55,10 @@ public class SetFavourites extends AppCompatActivity {
                     favourites.add(category5.getText().toString());
                 }
 
+                // Add selections to database
+                DatabaseFavourites submitFaves = new DatabaseFavourites();
+                submitFaves.addFaves(favourites);
+
                 // Confirm favourite category selections
                 String savedMessage = "Favourites have been saved.";
                 statusLabel.setText(savedMessage);
