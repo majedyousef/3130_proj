@@ -118,8 +118,9 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
                                 String itemDescription = mItemDescription.getText().toString().trim();
                                 int itemValue = Integer.parseInt(mItemValue.getText().toString().trim());
                                 String itemCategory = mItemCat.getSelectedItem().toString().trim();
-                                Double lat = currentLocation.getLatitude();
-                                Double longi = currentLocation.getLongitude();
+                                double lat = currentLocation.getLatitude();
+                                double longi = currentLocation.getLongitude();
+
                                 Item item = new Item(itemName, itemDescription, itemCategory, itemValue, lat, longi);
                                 DatabaseItem db = new DatabaseItem();
                                 db.addItem(item).addOnSuccessListener(success -> {
@@ -127,6 +128,7 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
                                 }).addOnFailureListener(fail -> {
                                     Toast.makeText(getApplicationContext(), "Item upload unsuccessful", Toast.LENGTH_SHORT).show();
                                 });
+
                                 Log.d(TAG, "getDeviceLocation: currentLocation Latitude: " + currentLocation.getLatitude());
                                 Log.d(TAG, "getDeviceLocation: currentLocation Longitude: " + currentLocation.getLongitude());
                             }else

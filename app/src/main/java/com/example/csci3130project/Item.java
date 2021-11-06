@@ -62,13 +62,13 @@ public class Item {
         return category;
     }
 
-    public int getItemValue(){
+    public double getItemValue(){
         return this.itemValue;
     }
-    private double getLongitude(){
+    public double getLongitude(){
         return this.longitude;
     }
-    private double getLatitude(){
+    public double getLatitude(){
         return latitude;
     }
 
