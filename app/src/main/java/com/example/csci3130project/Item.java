@@ -19,14 +19,14 @@ public class Item {
     private double longitude;
     private double latitude;
 
-    public Item(String name, String description, String category,int itemValue, double longitude, double latitude) {
+    public Item(String name, String description, String category,int itemValue, double latitude, double longitude) {
         this.name = name;
         this.description = description;
         this.category = category;
         count++;
         itemID = count;
         this.itemValue = itemValue;
-        this.longitude =longitude;
+        this.longitude = longitude;
         this.latitude = latitude;
     }
 
