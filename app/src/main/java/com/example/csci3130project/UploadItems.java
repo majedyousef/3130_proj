@@ -118,8 +118,9 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
                                 String itemDescription = mItemDescription.getText().toString().trim();
                                 int itemValue = Integer.parseInt(mItemValue.getText().toString().trim());
                                 String itemCategory = mItemCat.getSelectedItem().toString().trim();
-
-                                Item item = new Item(itemName, itemDescription, itemCategory, itemValue, currentLocation.getLatitude(), currentLocation.getLongitude());
+                                Double lat = currentLocation.getLatitude();
+                                Double longi = currentLocation.getLongitude();
+                                Item item = new Item(itemName, itemDescription, itemCategory, itemValue, lat, longi);
                                 DatabaseItem db = new DatabaseItem();
                                 db.addItem(item).addOnSuccessListener(success -> {
                                     Toast.makeText(getApplicationContext(), "Item uploaded successfully", Toast.LENGTH_SHORT).show();
@@ -131,7 +132,7 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
                             }else
                                 Log.d(TAG, "getDeviceLocation: Current location is null");
                         }else {
-                            Log.d(TAG, "getDeviceLocation: Current location is null");
+                            Log.d(TAG, "getDeviceLocation: Task was not successful");
                         }
                     }
                 });
