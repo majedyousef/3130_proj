@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,19 +22,29 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.gms.location.LocationRequest;
 
 public class UploadItems extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     EditText mItemName, mItemDescription;
     EditText mItemValue;
     Spinner mItemCat;
     Button mButton;
-    Double longitudeHolder;
-    Double latitudeHolder;
+    private Double [] location;
+    private com.google.android.gms.location.LocationRequest locationRequest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +55,22 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
         mItemDescription = (EditText) findViewById(R.id.uploadItemdesc);
         mButton = (Button) findViewById(R.id.uploadBtn);
         mItemCat = (Spinner) findViewById(R.id.uploadItemCat);
+        locationRequest = com.google.android.gms.location.LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(2000);
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getCurrentLocation();
                 String itemName = mItemName.getText().toString().trim();
                 String itemDescription = mItemDescription.getText().toString().trim();
                 int itemValue = Integer.parseInt(mItemValue.getText().toString().trim());
                 String itemCategory = mItemCat.getSelectedItem().toString().trim();
-                getDeviceLocation();
-                Item item = new Item(itemName, itemDescription, itemCategory, itemValue,longitudeHolder,latitudeHolder);
+                Double [] longLat = getCurrentLocation();
+                System.out.println("Longitude: "+longLat[0]+" latitude: "+longLat[1]);
+                Item item = new Item(itemName, itemDescription, itemCategory, itemValue, longLat[0], longLat[1]);
                 DatabaseItem db = new DatabaseItem();
                 db.addItem(item).addOnSuccessListener(success -> {
                     Toast.makeText(getApplicationContext(), "Item uploaded successfully", Toast.LENGTH_SHORT).show();
@@ -57,6 +79,7 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
                 });
 
 
+    
             }
         });
 
@@ -72,6 +95,99 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
 
     }
 
+    private Double [] getCurrentLocation() {
+        Double location [] = new Double[2];
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(UploadItems.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                if (isGPSEnabled()) {
+
+                    LocationServices.getFusedLocationProviderClient(UploadItems.this)
+                            .requestLocationUpdates(locationRequest, new LocationCallback() {
+                                @Override
+                                public void onLocationResult(@NonNull LocationResult locationResult) {
+                                    super.onLocationResult(locationResult);
+
+                                    LocationServices.getFusedLocationProviderClient(UploadItems.this)
+                                            .removeLocationUpdates(this);
+
+                                    if (locationResult != null && locationResult.getLocations().size() >0){
+
+                                        int index = locationResult.getLocations().size() - 1;
+                                        double latitude = locationResult.getLocations().get(index).getLatitude();
+                                        double longitude = locationResult.getLocations().get(index).getLongitude();
+                                        System.out.println(locationResult);
+
+                                        location[0] = longitude;
+                                        location[1] = latitude;
+
+
+                                    }
+                                }
+                            }, Looper.getMainLooper());
+
+                } else {
+                    turnOnGPS();
+                }
+
+            } else {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+        }
+        return location;
+    }
+
+    private void turnOnGPS() {
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest);
+        builder.setAlwaysShow(true);
+
+        Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(getApplicationContext())
+                .checkLocationSettings(builder.build());
+
+        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+            @Override
+            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
+
+                try {
+                    LocationSettingsResponse response = task.getResult(ApiException.class);
+                    Toast.makeText(UploadItems.this, "GPS is already turned on", Toast.LENGTH_SHORT).show();
+
+                } catch (ApiException e) {
+
+                    switch (e.getStatusCode()) {
+                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+
+                            try {
+                                ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+                                resolvableApiException.startResolutionForResult(UploadItems.this, 2);
+                            } catch (IntentSender.SendIntentException ex) {
+                                ex.printStackTrace();
+                            }
+                            break;
+
+                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                            //Device does not have location
+                            break;
+                    }
+                }
+            }
+        });
+    }
+
+    private boolean isGPSEnabled() {
+        LocationManager locationManager = null;
+        boolean isEnabled = false;
+
+        if (locationManager == null) {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        }
+
+        isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return isEnabled;
+    }
+
+
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -82,50 +198,7 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
 
     }
 
-    public void getDeviceLocation() {
-        FusedLocationProviderClient mFusedLocationProviderClient;
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-
-        Task location = mFusedLocationProviderClient.getLastLocation();
-        location.addOnCompleteListener(new OnCompleteListener() {
-            @Override
-            public void onComplete(@NonNull Task task) {
-                if (task.isSuccessful()) {
-                    Log.d("upload", "getDeviceLocation: onComplete: found location");
-                    Location currentLocation = (Location) task.getResult();
-                    if (currentLocation != null) {
-                        // change these two lines to set the lat and long in the item object when you set it
-                        Log.d("upload", "getDeviceLocation: currentLocation Lattitude: " + currentLocation.getLatitude());
-                        Log.d("upload", "getDeviceLocation: currentLocation Longitude: " + currentLocation.getLongitude());
-                        longitudeHolder = currentLocation.getLongitude();
-                        latitudeHolder = currentLocation.getLatitude();
-                    }
-                    // if the location is null then do something
-                    else {
-                        Log.d("upload", "getDeviceLocation: Current location is null");
-                    }
-                }
-                // if we cant find the device location do somnething else, change to whatever you like
-                else {
-                    Log.d("upload", "getDeviceLocation: Current location is null");
-                    Toast.makeText(UploadItems.this, "Unable to get curent location", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        });
-
-    }
 
 
 }
