@@ -1,5 +1,7 @@
 package com.example.csci3130project;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -9,6 +11,7 @@ import android.content.Context;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +34,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -63,20 +67,21 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getCurrentLocation();
-                String itemName = mItemName.getText().toString().trim();
-                String itemDescription = mItemDescription.getText().toString().trim();
-                int itemValue = Integer.parseInt(mItemValue.getText().toString().trim());
-                String itemCategory = mItemCat.getSelectedItem().toString().trim();
-                Double [] longLat = getCurrentLocation();
-                System.out.println("Longitude: "+longLat[0]+" latitude: "+longLat[1]);
-                Item item = new Item(itemName, itemDescription, itemCategory, itemValue, longLat[0], longLat[1]);
-                DatabaseItem db = new DatabaseItem();
-                db.addItem(item).addOnSuccessListener(success -> {
-                    Toast.makeText(getApplicationContext(), "Item uploaded successfully", Toast.LENGTH_SHORT).show();
-                }).addOnFailureListener(fail -> {
-                    Toast.makeText(getApplicationContext(), "Item upload unsuccessful", Toast.LENGTH_SHORT).show();
-                });
+                getDeviceLocation();
+//                String itemName = mItemName.getText().toString().trim();
+//                String itemDescription = mItemDescription.getText().toString().trim();
+//                int itemValue = Integer.parseInt(mItemValue.getText().toString().trim());
+//
+//                String itemCategory = mItemCat.getSelectedItem().toString().trim();
+//                Double [] longLat = getCurrentLocation();
+//                System.out.println("Longitude: "+longLat[0]+" latitude: "+longLat[1]);
+//                Item item = new Item(itemName, itemDescription, itemCategory, itemValue, longLat[0], longLat[1]);
+//                DatabaseItem db = new DatabaseItem();
+//                db.addItem(item).addOnSuccessListener(success -> {
+//                    Toast.makeText(getApplicationContext(), "Item uploaded successfully", Toast.LENGTH_SHORT).show();
+//                }).addOnFailureListener(fail -> {
+//                    Toast.makeText(getApplicationContext(), "Item upload unsuccessful", Toast.LENGTH_SHORT).show();
+//                });
 
 
     
@@ -95,97 +100,140 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
 
     }
 
-    private Double [] getCurrentLocation() {
-        Double location [] = new Double[2];
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(UploadItems.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
-                if (isGPSEnabled()) {
+    public void getDeviceLocation(){
+        Log.d(TAG, "getDeviceLocation: starts");
+        FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        try{
 
-                    LocationServices.getFusedLocationProviderClient(UploadItems.this)
-                            .requestLocationUpdates(locationRequest, new LocationCallback() {
-                                @Override
-                                public void onLocationResult(@NonNull LocationResult locationResult) {
-                                    super.onLocationResult(locationResult);
+                Task location = mFusedLocationProviderClient.getLastLocation();
+                location.addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if(task.isSuccessful()){
+                            Log.d(TAG, "getDeviceLocation: onComplete: found location");
+                            Location currentLocation = (Location) task.getResult();
+                            if(currentLocation != null) {
+                                String itemName = mItemName.getText().toString().trim();
+                                String itemDescription = mItemDescription.getText().toString().trim();
+                                int itemValue = Integer.parseInt(mItemValue.getText().toString().trim());
+                                String itemCategory = mItemCat.getSelectedItem().toString().trim();
 
-                                    LocationServices.getFusedLocationProviderClient(UploadItems.this)
-                                            .removeLocationUpdates(this);
-
-                                    if (locationResult != null && locationResult.getLocations().size() >0){
-
-                                        int index = locationResult.getLocations().size() - 1;
-                                        double latitude = locationResult.getLocations().get(index).getLatitude();
-                                        double longitude = locationResult.getLocations().get(index).getLongitude();
-                                        System.out.println(locationResult);
-
-                                        location[0] = longitude;
-                                        location[1] = latitude;
-
-
-                                    }
-                                }
-                            }, Looper.getMainLooper());
-
-                } else {
-                    turnOnGPS();
-                }
-
-            } else {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }
-        }
-        return location;
-    }
-
-    private void turnOnGPS() {
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest);
-        builder.setAlwaysShow(true);
-
-        Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(getApplicationContext())
-                .checkLocationSettings(builder.build());
-
-        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
-            @Override
-            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
-
-                try {
-                    LocationSettingsResponse response = task.getResult(ApiException.class);
-                    Toast.makeText(UploadItems.this, "GPS is already turned on", Toast.LENGTH_SHORT).show();
-
-                } catch (ApiException e) {
-
-                    switch (e.getStatusCode()) {
-                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-
-                            try {
-                                ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                                resolvableApiException.startResolutionForResult(UploadItems.this, 2);
-                            } catch (IntentSender.SendIntentException ex) {
-                                ex.printStackTrace();
-                            }
-                            break;
-
-                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                            //Device does not have location
-                            break;
+                                Item item = new Item(itemName, itemDescription, itemCategory, itemValue, currentLocation.getLatitude(), currentLocation.getLongitude());
+                                DatabaseItem db = new DatabaseItem();
+                                db.addItem(item).addOnSuccessListener(success -> {
+                                    Toast.makeText(getApplicationContext(), "Item uploaded successfully", Toast.LENGTH_SHORT).show();
+                                }).addOnFailureListener(fail -> {
+                                    Toast.makeText(getApplicationContext(), "Item upload unsuccessful", Toast.LENGTH_SHORT).show();
+                                });
+                                Log.d(TAG, "getDeviceLocation: currentLocation Latitude: " + currentLocation.getLatitude());
+                                Log.d(TAG, "getDeviceLocation: currentLocation Longitude: " + currentLocation.getLongitude());
+                            }else
+                                Log.d(TAG, "getDeviceLocation: Current location is null");
+                        }else {
+                            Log.d(TAG, "getDeviceLocation: Current location is null");
+                        }
                     }
-                }
-            }
-        });
-    }
+                });
 
-    private boolean isGPSEnabled() {
-        LocationManager locationManager = null;
-        boolean isEnabled = false;
-
-        if (locationManager == null) {
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        }catch (SecurityException se){
+            Log.d(TAG, "getDeviceLocation: SecurityException: =" + se.getMessage());
         }
-
-        isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        return isEnabled;
+        Log.d(TAG, "getDeviceLocation: ends");
     }
+//    private Double [] getCurrentLocation() {
+//        Double location [] = new Double[2];
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (ActivityCompat.checkSelfPermission(UploadItems.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//
+//                if (isGPSEnabled()) {
+//
+//                    LocationServices.getFusedLocationProviderClient(UploadItems.this)
+//                            .requestLocationUpdates(locationRequest, new LocationCallback() {
+//
+//                                @Override
+//                                public void onLocationResult(@NonNull LocationResult locationResult) {
+//                                    super.onLocationResult(locationResult);
+//
+//                                    LocationServices.getFusedLocationProviderClient(UploadItems.this)
+//                                            .removeLocationUpdates(this);
+//
+//                                    if (locationResult != null && locationResult.getLocations().size() >0){
+//
+//                                        int index = locationResult.getLocations().size() - 1;
+//                                        Log.d(TAG, "getDeviceLocation: "+index);
+//                                        double latitude = locationResult.getLocations().get(index).getLatitude();
+//                                        double longitude = locationResult.getLocations().get(index).getLongitude();
+//                                        System.out.println(locationResult);
+//
+//                                        location[0] = longitude;
+//                                        location[1] = latitude;
+//
+//
+//                                    }
+//                                }
+//                            }, Looper.getMainLooper());
+//
+//                } else {
+//                    turnOnGPS();
+//                }
+//
+//            } else {
+//                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+//            }
+//        }
+//        return location;
+//    }
+//
+//    private void turnOnGPS() {
+//        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+//                .addLocationRequest(locationRequest);
+//        builder.setAlwaysShow(true);
+//
+//        Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(getApplicationContext())
+//                .checkLocationSettings(builder.build());
+//
+//        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+//            @Override
+//            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
+//
+//                try {
+//                    LocationSettingsResponse response = task.getResult(ApiException.class);
+//                    Toast.makeText(UploadItems.this, "GPS is already turned on", Toast.LENGTH_SHORT).show();
+//
+//                } catch (ApiException e) {
+//
+//                    switch (e.getStatusCode()) {
+//                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+//
+//                            try {
+//                                ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+//                                resolvableApiException.startResolutionForResult(UploadItems.this, 2);
+//                            } catch (IntentSender.SendIntentException ex) {
+//                                ex.printStackTrace();
+//                            }
+//                            break;
+//
+//                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+//                            //Device does not have location
+//                            break;
+//                    }
+//                }
+//            }
+//        });
+//    }
+//
+//    private boolean isGPSEnabled() {
+//        LocationManager locationManager = null;
+//        boolean isEnabled = false;
+//
+//        if (locationManager == null) {
+//            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        }
+//
+//        isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+//        return isEnabled;
+//    }
 
 
     @Override
