@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.csci3130project.BaseActivity;
 import com.example.csci3130project.R;
 import com.example.csci3130project.UploadItems;
 import com.example.csci3130project.User;
@@ -78,15 +79,20 @@ public class LoginFragment extends Fragment {
                 userNode.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Session session = new Session(getActivity().getApplication());
                         String emailFromDb;
                         String passFromDb;
+                        String userNameFromDb;
                         ArrayList<String > passwordList = new ArrayList<String>();
                         ArrayList<String> emailList = new ArrayList<String>();
+                        ArrayList<String> usernameList = new ArrayList<>();
                         for(DataSnapshot adSnapshot: snapshot.getChildren()){
                             emailFromDb = adSnapshot.child("email").getValue(String.class);
                             passFromDb = adSnapshot.child("password").getValue(String.class);
+                            userNameFromDb = adSnapshot.child("username").getValue(String.class);
                             passwordList.add(passFromDb);
                             emailList.add(emailFromDb);
+                            usernameList.add(userNameFromDb);
                             System.out.println(emailFromDb);
                             System.out.println(passFromDb);
 
@@ -104,6 +110,14 @@ public class LoginFragment extends Fragment {
                             successPass = passwordList.get(indexOfUser);
                             if(successPass.equals(password)){
                                 Toast.makeText(getActivity(),"Login Successful",Toast.LENGTH_SHORT).show();
+                                session.setUsername(usernameList.get(indexOfUser));
+                                Intent intent = new Intent(getActivity(), BaseActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+
+
+
+
                             }
                             else{
                                 Toast.makeText(getActivity(),"Login Unsuccessful!! Please check email or password",Toast.LENGTH_SHORT).show();
@@ -116,8 +130,13 @@ public class LoginFragment extends Fragment {
                         System.out.println("On Called: Something went wrong!! Error: "+ error.getMessage());
                     }
                 });
+
+
+
             }
+
         });
+
 
         final TextView textView = binding.textLogin;
         loginViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -146,6 +165,8 @@ public class LoginFragment extends Fragment {
     public boolean isPasswordEmpty(String password){
         return password == null || password.equals("");
     }
+
+
 
 
     @Override
