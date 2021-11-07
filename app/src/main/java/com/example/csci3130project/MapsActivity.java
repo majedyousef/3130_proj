@@ -25,9 +25,17 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /*
 The code below was originally created by Shakuntala Khatri
@@ -50,9 +58,46 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private Boolean mLocationPermissionGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    private static ArrayList<String> itemsList = new ArrayList<String>();
+
+    //code for retrieving items implemented by Hesham Elokdah
+    public boolean pinItems(GoogleMap googleMap) {
+
+        // calling add value event listener method
+        // for getting the values from database.
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference("Item");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot adSnapshot: snapshot.getChildren()){
+                    String name = adSnapshot.child("name").getValue(String.class);
+                    String type = adSnapshot.child("category").getValue(String.class);
+
+                    Double lat = adSnapshot.child("latitude").getValue(Double.class);
+                    Double lon = adSnapshot.child("longitude").getValue(Double.class);
+
+                    LatLng loc = new LatLng(lat, lon);
+                    Marker marker = googleMap.addMarker(new MarkerOptions().position(loc).title(name).snippet(type));
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         Log.d(TAG, "onCreate: Starts");
         super.onCreate(savedInstanceState);
 
@@ -133,6 +178,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
+            //adding markers for available items
+            pinItems(googleMap);
         }
     }
 

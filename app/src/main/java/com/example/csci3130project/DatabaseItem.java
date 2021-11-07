@@ -1,8 +1,15 @@
 package com.example.csci3130project;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * The DatabaseItem class is used to connect Item objects to the database.
@@ -22,9 +29,12 @@ public class DatabaseItem {
 
     /**
      * A method for adding an item to the database
+     *
      * @return a void task after adding the item
      */
     public Task<Void> addItem(Item item) {
         return databaseReference.child(String.valueOf(item.getItemID())).setValue(item);
     }
+
+
 }
