@@ -36,12 +36,9 @@
             android:exported="true"
             android:label="@string/title_activity_maps" />
         <activity
-<<<<<<< HEAD
             android:name=".SetFavourites"
             android:exported="true" />
         <activity
-=======
->>>>>>> main
             android:name=".Logout"
             android:exported="true" /> <!-- <activity -->
         <!-- android:name=".BaseActivity" -->
