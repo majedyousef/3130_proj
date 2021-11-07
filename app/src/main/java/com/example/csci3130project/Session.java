@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 public class Session {
     private SharedPreferences pref;
 
-
     public Session(Context cntx) {
         // TODO Auto-generated constructor stub
         pref = PreferenceManager.getDefaultSharedPreferences(cntx);

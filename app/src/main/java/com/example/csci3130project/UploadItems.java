@@ -41,6 +41,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.gms.location.LocationRequest;
 
+/*
+Some code below was originally created by Shakuntala Khatri
+It was further edited to this project by Benjamin Chui
+The original code is available at: https://git.cs.dal.ca/prof3130/google-map-advance-demo
+Date Accessed: 26th Oct. 2021
+*/
+
 public class UploadItems extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     EditText mItemName, mItemDescription;
     EditText mItemValue;
@@ -90,12 +97,12 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
 
 
         Spinner spinner = (Spinner) findViewById(R.id.uploadItemCat);
-// Create an ArrayAdapter using the string array and a default spinner layout
+        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.itemCatArray, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+        // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
     }
