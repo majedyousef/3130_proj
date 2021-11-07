@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.csci3130project.BaseActivity;
 import com.example.csci3130project.R;
 import com.example.csci3130project.Session;
+import com.example.csci3130project.UploadItems;
 import com.example.csci3130project.User;
 //import com.example.csci3130project.databinding.FragmentLoginBinding;
 import com.example.csci3130project.databinding.FragmentLoginBinding;
@@ -73,6 +74,7 @@ public class LoginFragment extends Fragment {
 
                 FirebaseDatabase databaseInstance = FirebaseDatabase.getInstance();
                 DatabaseReference userNode = databaseInstance.getReference("User");
+
 
                 //A reference to the user node is created and email,password values are retrieved.
                 //Those values are the stored in 2 different arraylists.

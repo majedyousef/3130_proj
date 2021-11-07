@@ -7,10 +7,10 @@ import static org.junit.Assert.*;
 public class ItemClassUnitTests {
 
     String description = "This item is clothing. It is a red shirt size XL";
-    Item testItem = new Item("itemName", description, "Clothing");
+    Item testItem = new Item("itemName", description, "Clothing",5,1.12345678,1.12345678);
 
     String description2 = "This item is furniture. It is a used couch";
-    Item testItem2 = new Item("itemName2", description2, "Furniture");
+    Item testItem2 = new Item("itemName2", description2, "Furniture",5,1.12345678,1.12345678);
 
     @Test
     public void getItemName_Test() {
