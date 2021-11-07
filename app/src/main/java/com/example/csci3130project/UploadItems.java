@@ -121,7 +121,13 @@ public class UploadItems extends AppCompatActivity implements AdapterView.OnItem
                                 double lat = currentLocation.getLatitude();
                                 double longi = currentLocation.getLongitude();
 
-                                Item item = new Item(itemName, itemDescription, itemCategory, itemValue, lat, longi);
+                                Item item = new Item();
+                                item.setName(itemName);
+                                item.setDescription(itemDescription);
+                                item.setCategory(itemCategory);
+                                item.setItemValue(itemValue);
+                                item.setLatitude(lat);
+                                item.setLongitude(longi);
                                 DatabaseItem db = new DatabaseItem();
                                 db.addItem(item).addOnSuccessListener(success -> {
                                     Toast.makeText(getApplicationContext(), "Item uploaded successfully", Toast.LENGTH_SHORT).show();
