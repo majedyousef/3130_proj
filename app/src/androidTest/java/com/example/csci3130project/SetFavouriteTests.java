@@ -38,6 +38,7 @@ public class SetFavouriteTests {
     @Test
     public void checkIfFavouritesConfirmed() {
         onView(withId(R.id.category1)).perform(click());
+        onView(withId(R.id.category3)).perform(click());
         onView(withId(R.id.confirmButton)).perform(click());
         onView(withId(R.id.statusLabel)).check(matches(withText("Favourites have been saved.")));
     }
