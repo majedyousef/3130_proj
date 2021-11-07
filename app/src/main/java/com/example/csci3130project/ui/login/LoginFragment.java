@@ -16,7 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.csci3130project.BaseActivity;
 import com.example.csci3130project.R;
+import com.example.csci3130project.Session;
 import com.example.csci3130project.User;
 //import com.example.csci3130project.databinding.FragmentLoginBinding;
 import com.example.csci3130project.databinding.FragmentLoginBinding;
@@ -76,15 +78,20 @@ public class LoginFragment extends Fragment {
                 userNode.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Session session = new Session(getActivity().getApplication());
                         String emailFromDb;
                         String passFromDb;
+                        String userNameFromDb;
                         ArrayList<String > passwordList = new ArrayList<String>();
                         ArrayList<String> emailList = new ArrayList<String>();
+                        ArrayList<String> usernameList = new ArrayList<>();
                         for(DataSnapshot adSnapshot: snapshot.getChildren()){
                             emailFromDb = adSnapshot.child("email").getValue(String.class);
                             passFromDb = adSnapshot.child("password").getValue(String.class);
+                            userNameFromDb = adSnapshot.child("username").getValue(String.class);
                             passwordList.add(passFromDb);
                             emailList.add(emailFromDb);
+                            usernameList.add(userNameFromDb);
                             System.out.println(emailFromDb);
                             System.out.println(passFromDb);
 
@@ -117,8 +124,13 @@ public class LoginFragment extends Fragment {
                         System.out.println("On Called: Something went wrong!! Error: "+ error.getMessage());
                     }
                 });
+
+
+
             }
+
         });
+
 
         final TextView textView = binding.textLogin;
         loginViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -147,6 +159,8 @@ public class LoginFragment extends Fragment {
     public boolean isPasswordEmpty(String password){
         return password == null || password.equals("");
     }
+
+
 
 
     @Override

@@ -1,0 +1,46 @@
+com/example/csci3130project/databinding/ActivityBaseBinding.java
+ com.example.csci3130project.databinding.ActivityBaseBinding
+com/example/csci3130project/BuildConfig.java
+ com.example.csci3130project.BuildConfig
+com/example/csci3130project/ui/login/LoginViewModel.java
+ com.example.csci3130project.ui.login.LoginViewModel
+com/example/csci3130project/ui/register/RegFragment.java
+ com.example.csci3130project.ui.register.RegFragment
+ com.example.csci3130project.ui.register.RegFragment$1
+com/example/csci3130project/databinding/FragmentProfileBinding.java
+ com.example.csci3130project.databinding.FragmentProfileBinding
+com/example/csci3130project/ui/login/LoginFragment.java
+ com.example.csci3130project.ui.login.LoginFragment
+ com.example.csci3130project.ui.login.LoginFragment$1
+com/example/csci3130project/databinding/ContentBaseBinding.java
+ com.example.csci3130project.databinding.ContentBaseBinding
+com/example/csci3130project/databinding/NavHeaderBaseBinding.java
+ com.example.csci3130project.databinding.NavHeaderBaseBinding
+com/example/csci3130project/databinding/AppBarBaseBinding.java
+ com.example.csci3130project.databinding.AppBarBaseBinding
+com/example/csci3130project/databinding/FragmentRegBinding.java
+ com.example.csci3130project.databinding.FragmentRegBinding
+com/example/csci3130project/databinding/ActivityLogoutBinding.java
+ com.example.csci3130project.databinding.ActivityLogoutBinding
+com/example/csci3130project/ui/profile/ProfileViewModel.java
+ com.example.csci3130project.ui.profile.ProfileViewModel
+com/example/csci3130project/ui/profile/ProfileFragment.java
+ com.example.csci3130project.ui.profile.ProfileFragment
+ com.example.csci3130project.ui.profile.ProfileFragment$1
+com/example/csci3130project/databinding/ActivityMainBinding.java
+ com.example.csci3130project.databinding.ActivityMainBinding
+com/example/csci3130project/ui/register/RegViewModel.java
+ com.example.csci3130project.ui.register.RegViewModel
+com/example/csci3130project/databinding/FragmentLoginBinding.java
+ com.example.csci3130project.databinding.FragmentLoginBinding
+com/example/csci3130project/Logout.java
+ com.example.csci3130project.Logout
+ com.example.csci3130project.Logout$1
+ com.example.csci3130project.Logout$1$1
+ com.example.csci3130project.Logout$1$2
+com/example/csci3130project/BaseActivity.java
+ com.example.csci3130project.BaseActivity
+ com.example.csci3130project.BaseActivity$1
+ com.example.csci3130project.BaseActivity$2
+com/example/csci3130project/MainActivity.java
+ com.example.csci3130project.MainActivity
