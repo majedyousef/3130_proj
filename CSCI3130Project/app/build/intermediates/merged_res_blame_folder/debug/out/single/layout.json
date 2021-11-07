@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\nav_header_base.xml",
+        "source": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\src\\main\\res\\layout\\nav_header_base.xml"
+    },
+    {
+        "merged": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_base.xml",
+        "source": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\src\\main\\res\\layout\\activity_base.xml"
+    },
+    {
+        "merged": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_login.xml",
+        "source": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\src\\main\\res\\layout\\fragment_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\content_base.xml",
+        "source": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\src\\main\\res\\layout\\content_base.xml"
+    },
+    {
+        "merged": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\app_bar_base.xml",
+        "source": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\src\\main\\res\\layout\\app_bar_base.xml"
+    },
+    {
+        "merged": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_logout.xml",
+        "source": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\src\\main\\res\\layout\\activity_logout.xml"
+    },
+    {
+        "merged": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_profile.xml",
+        "source": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\src\\main\\res\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_main.xml",
+        "source": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_reg.xml",
+        "source": "C:\\Users\\vinny\\git\\csci3130\\project\\csci-3130-project\\CSCI3130Project\\app\\src\\main\\res\\layout\\fragment_reg.xml"
+    }
+]
