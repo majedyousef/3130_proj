@@ -71,17 +71,38 @@ public class SearchActivity extends AppCompatActivity {
 
         ArrayList<Item> itemList = new ArrayList<Item>();
 
-        Item testitem1 = new Item("Used Chair", "Trading a used chair, sweated in once", "Furniture");
+        // Create test items for search
+        Item testitem1 = new Item();
+        testitem1.setName("Used Chair");
+        testitem1.setDescription("Trading a used chair, sweated in once");
+        testitem1.setDescription("Furniture");
         itemList.add(testitem1);
-        Item testitem2 = new Item("Xbox 360 Console", "Looking to Trade my old xbox 360", "Electronics");
+
+        Item testitem2 = new Item();
+        testitem2.setName("Xbox 360 Console");
+        testitem2.setDescription("Looking to Trade my old xbox 360");
+        testitem2.setDescription("Electronics");
         itemList.add(testitem2);
-        Item testitem3 = new Item("New Kitchenware", "Trading some new kitchenware I got for christmas that I'm not using.", "Kitchenware");
+
+        Item testitem3 = new Item();
+        testitem3.setName("New Kitchenware");
+        testitem3.setDescription("Trading some new kitchenware I got for christmas that I'm not using.");
+        testitem3.setDescription("Kitchenware");
         itemList.add(testitem3);
-        Item testitem4 = new Item("Hockey Sticks", "Got a bunch of hockey sticks I don't need.", "Sports");
+
+        Item testitem4 = new Item();
+        testitem4.setName("Hockey Sticks");
+        testitem4.setDescription("Got a bunch of hockey sticks I don't need");
+        testitem4.setDescription("Sports");
         itemList.add(testitem4);
-        Item testitem5 = new Item("Unwanted food/nonperishables", "I have a variety of cans of food for exchange, not looking for anything specific", "Food");
+
+        Item testitem5 = new Item();
+        testitem5.setName("Unwanted food/nonperishables");
+        testitem5.setDescription("Variety of food cans for exchange, not looking for anything specific");
+        testitem5.setDescription("Food");
         itemList.add(testitem5);
-        //This loop goes throug the itemList array (contains the items from the database, right now dummy data) and adds the info to a string list (list)
+
+        //This loop goes through the itemList array (contains the items from the database, right now dummy data) and adds the info to a string list (list)
         for(int i = 0; i < itemList.toArray().length ; i++){
             String item = "Item Name: " + itemList.get(i).getName() + "\n" + "Item Description: " + itemList.get(i).getDescription() + "\n" + "Item Category: " + itemList.get(i).getCategory();
             list.add(item);
