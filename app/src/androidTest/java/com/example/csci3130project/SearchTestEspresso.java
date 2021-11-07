@@ -39,7 +39,7 @@ public class SearchTestEspresso {
 
     @Test
     public void checkIfSearchBarVisible() {
-        onView(withId(R.id.searchfield)).perform(click());
+        onView(withId(R.id.searchView)).perform(click());
     }
 
 
