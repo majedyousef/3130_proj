@@ -40,6 +40,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.csci3130project.databinding.ActivityBaseBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -49,7 +54,7 @@ public class SearchActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> list;
     ArrayAdapter<String > adapter;
-
+    Integer test = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +86,48 @@ public class SearchActivity extends AppCompatActivity {
         itemList.add(testitem4);
         Item testitem5 = new Item("Unwanted food/nonperishables", "I have a variety of cans of food for exchange, not looking for anything specific", "Food");
         itemList.add(testitem5);
+
+
+
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference driversRef = rootRef.child("Item");
+        Item testitem10 = new Item();
+        String cardType;
+        String surname;
+
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String cardNumber = ds.child("category").getValue(String.class);
+                    String cardType = ds.child("description").getValue(String.class);
+                    Integer dateOfBirth = ds.child("itemID").getValue(Integer.class);
+                    Integer name = ds.child("itemValue").getValue(Integer.class);
+                    String surname = ds.child("name").getValue(String.class);
+
+                    testitem10.setName(cardNumber);
+                    testitem10.setDescription(cardType);
+                    testitem10.setCategory(surname);
+                    itemList.add(testitem10);
+                }
+
+            }
+
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        driversRef.addListenerForSingleValueEvent(eventListener);
+
+
         //This loop goes throug the itemList array (contains the items from the database, right now dummy data) and adds the info to a string list (list)
         for(int i = 0; i < itemList.toArray().length ; i++){
             String item = "Item Name: " + itemList.get(i).getName() + "\n" + "Item Description: " + itemList.get(i).getDescription() + "\n" + "Item Category: " + itemList.get(i).getCategory();
             list.add(item);
+
         }
+        test = list.size();
+
 
         //Creating a adapter for the listview and a on query text listener that will listen to the changes in the text view
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);
@@ -107,6 +149,11 @@ public class SearchActivity extends AppCompatActivity {
             //This is the method that takes in the text as the user is typing and calls the filter method to see if there are items available regarding what the user is typing.
             @Override
             public boolean onQueryTextChange(String newText) {
+                //This loop goes throug the itemList array (contains the items from the database, right now dummy data) and adds the info to a string list (list)
+                for(int i = test; i < itemList.toArray().length ; i++){
+                    String item = "Item Name: " + itemList.get(i).getName() + "\n" + "Item Description: " + itemList.get(i).getDescription() + "\n" + "Item Category: " + itemList.get(i).getCategory();
+                    list.add(item);
+                }
                 adapter.getFilter().filter(newText);
                 return false;
             }

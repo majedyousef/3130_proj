@@ -16,6 +16,10 @@ public class Item {
     private int userID;
     private static int count = 0;
 
+    public Item(){
+
+    }
+
     public Item(String name, String description, String category) {
         this.name = name;
         this.description = description;
