@@ -19,4 +19,9 @@ public class ReputationTests {
         reputation.addRating(3.6);
         assertEquals(4.05, reputation.getRating(), 0.01);
     }
+
+    @Test
+    public void getReview() {
+        assertEquals("Not too bad", reputation.getReview(0));
+    }
 }

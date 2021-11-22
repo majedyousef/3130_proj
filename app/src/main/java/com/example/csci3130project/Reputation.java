@@ -1,5 +1,7 @@
 package com.example.csci3130project;
 
+import java.util.ArrayList;
+
 /**
  * The Reputation class is used to create Reputation objects for the application.
  * These objects store ratings and reviews for a user.
@@ -11,8 +13,10 @@ public class Reputation {
 
     private double rating;
     private int ratingCount;
+    ArrayList<String> reviews;
 
     public Reputation() {
+        reviews = new ArrayList<String>();
     }
 
     /**
@@ -30,5 +34,14 @@ public class Reputation {
     public void addRating(double rating) {
         ratingCount++;
         this.rating = (this.rating + rating) / ratingCount;
+    }
+
+    /**
+     * A method for retrieving a single review
+     * @return a String containing a written review
+     * @param reviewNum - the index of the review to get
+     */
+    public String getReview(int reviewNum) {
+        return reviews.get(reviewNum);
     }
 }
