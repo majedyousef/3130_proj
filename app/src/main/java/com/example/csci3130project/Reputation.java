@@ -52,4 +52,12 @@ public class Reputation {
     public void addReview(String review) {
         reviews.add(review);
     }
+
+    /**
+     * A method for retrieving the total number of reviews
+     * @return an integer containing the total review number
+     */
+    public int getReviewCount() {
+        return 0;
+    }
 }
