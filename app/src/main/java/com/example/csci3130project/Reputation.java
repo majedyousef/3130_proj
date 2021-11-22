@@ -17,6 +17,7 @@ public class Reputation {
 
     public Reputation() {
         reviews = new ArrayList<String>();
+        reviews.add("Not too bad");
     }
 
     /**
