@@ -4,6 +4,7 @@ package com.example.csci3130project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -67,6 +68,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void createSearchBar() {
+
         // Creating the searchview and listeview object by finding the searchview and listview from the uI.
         searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.lv1);
@@ -103,17 +105,16 @@ public class SearchActivity extends AppCompatActivity {
                     String cardType = ds.child("description").getValue(String.class);
                     Integer dateOfBirth = ds.child("itemID").getValue(Integer.class);
                     Integer name = ds.child("itemValue").getValue(Integer.class);
-                    String surname = ds.child("name").getValue(String.class);
+                    String surname = ds.child("name").getValue(String.class)
+                            + "\nLocation: " + ds.child("latitude").getValue(Double.class)
+                            + " " + ds.child("longitude").getValue(Double.class);
 
                     testitem10.setName(cardNumber);
                     testitem10.setDescription(cardType);
                     testitem10.setCategory(surname);
                     itemList.add(testitem10);
                 }
-
             }
-
-
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         };
@@ -128,10 +129,21 @@ public class SearchActivity extends AppCompatActivity {
         }
         test = list.size();
 
-
         //Creating a adapter for the listview and a on query text listener that will listen to the changes in the text view
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);
         listView.setAdapter(adapter);
+
+
+        //Creating the onclick Listener for the listeview, what gets executed when the user clicks a item from search results.
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent openMainAct = new Intent(SearchActivity.this, MainActivity.class);
+                startActivity(openMainAct);
+            }
+        });
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             //This method is performed when the user clicks the enter button and "submits" the text. this can be modified to do other things
@@ -149,7 +161,7 @@ public class SearchActivity extends AppCompatActivity {
             //This is the method that takes in the text as the user is typing and calls the filter method to see if there are items available regarding what the user is typing.
             @Override
             public boolean onQueryTextChange(String newText) {
-                //This loop goes throug the itemList array (contains the items from the database, right now dummy data) and adds the info to a string list (list)
+                //The same loop as outside of ontext change, but for some reason this loop adds the database items.
                 for(int i = test; i < itemList.toArray().length ; i++){
                     String item = "Item Name: " + itemList.get(i).getName() + "\n" + "Item Description: " + itemList.get(i).getDescription() + "\n" + "Item Category: " + itemList.get(i).getCategory();
                     list.add(item);
