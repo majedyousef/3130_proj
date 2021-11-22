@@ -13,4 +13,8 @@ public class Reputation {
 
     public Reputation() {
     }
+
+    public double getRating(){
+        return rating;
+    }
 }
