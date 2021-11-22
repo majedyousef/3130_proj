@@ -50,6 +50,7 @@ public class Reputation {
      * @param review - a String containing the review
      */
     public void addReview(String review) {
+        ratingCount++;
         reviews.add(review);
     }
 
@@ -58,6 +59,6 @@ public class Reputation {
      * @return an integer containing the total review number
      */
     public int getReviewCount() {
-        return 0;
+        return ratingCount;
     }
 }

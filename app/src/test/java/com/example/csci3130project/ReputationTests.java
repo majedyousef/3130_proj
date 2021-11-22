@@ -36,6 +36,9 @@ public class ReputationTests {
 
     @Test
     public void getReviewCount() {
+        reputation.addReview("Great transaction!");
+        reputation.addReview("Thanks");
+        reputation.addReview("Item as described");
         assertEquals(3, reputation.getReviewCount());
     }
 }
