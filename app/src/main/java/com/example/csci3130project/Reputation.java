@@ -17,7 +17,6 @@ public class Reputation {
 
     public Reputation() {
         reviews = new ArrayList<String>();
-        reviews.add("Not too bad");
     }
 
     /**
@@ -51,5 +50,6 @@ public class Reputation {
      * @param review - a String containing the review
      */
     public void addReview(String review) {
+        reviews.add(review);
     }
 }

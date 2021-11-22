@@ -22,6 +22,7 @@ public class ReputationTests {
 
     @Test
     public void getReview() {
+        reputation.addReview("Not too bad");
         assertEquals("Not too bad", reputation.getReview(0));
     }
 
