@@ -15,7 +15,19 @@ public class Reputation {
         rating = 4.5;
     }
 
+    /**
+     * A method for retrieving the user's numerical rating
+     * @return an double representing the user's rating
+     */
     public double getRating(){
         return rating;
+    }
+
+    /**
+     * A method for updating the user's numerical rating
+     * @param rating - a double to update the rating with
+     */
+    public void calculateRating(double rating) {
+
     }
 }
