@@ -9,12 +9,14 @@ public class ReputationTests {
 
     @Test
     public void getRating() {
+        reputation.addRating(4.5);
         assertEquals(4.5, reputation.getRating(), 0.01);
     }
 
     @Test
-    public void calculateRating() {
-        reputation.calculateRating(3.6);
+    public void addRating() {
+        reputation.addRating(4.5);
+        reputation.addRating(3.6);
         assertEquals(4.05, reputation.getRating(), 0.01);
     }
 }

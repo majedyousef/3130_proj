@@ -10,9 +10,9 @@ package com.example.csci3130project;
 public class Reputation {
 
     private double rating;
+    private int ratingCount;
 
     public Reputation() {
-        rating = 4.5;
     }
 
     /**
@@ -27,7 +27,8 @@ public class Reputation {
      * A method for updating the user's numerical rating
      * @param rating - a double to update the rating with
      */
-    public void calculateRating(double rating) {
-
+    public void addRating(double rating) {
+        ratingCount++;
+        this.rating = (this.rating + rating) / ratingCount;
     }
 }
