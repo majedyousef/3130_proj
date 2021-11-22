@@ -24,4 +24,12 @@ public class ReputationTests {
     public void getReview() {
         assertEquals("Not too bad", reputation.getReview(0));
     }
+
+    @Test
+    public void addReview() {
+        reputation.addReview("Great transaction!");
+        reputation.addReview("Thanks");
+        reputation.addReview("Item as described");
+        assertEquals("Item as described", reputation.getReview(2));
+    }
 }

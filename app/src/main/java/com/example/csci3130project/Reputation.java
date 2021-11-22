@@ -45,4 +45,11 @@ public class Reputation {
     public String getReview(int reviewNum) {
         return reviews.get(reviewNum);
     }
+
+    /**
+     * A method for adding a review
+     * @param review - a String containing the review
+     */
+    public void addReview(String review) {
+    }
 }
