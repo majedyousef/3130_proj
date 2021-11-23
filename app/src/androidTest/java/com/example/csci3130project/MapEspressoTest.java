@@ -15,8 +15,6 @@ import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
-import com.example.csci3130project.BaseActivity;
-import com.example.csci3130project.Logout;
 import com.example.csci3130project.R;
 
 import org.junit.After;
@@ -28,7 +26,7 @@ import org.junit.Test;
 public class MapEspressoTest {
 
     @Rule
-    public ActivityScenarioRule<BaseActivity> myRule = new ActivityScenarioRule<>(BaseActivity.class);
+    public ActivityScenarioRule<MainActivity> myRule = new ActivityScenarioRule<>(MainActivity.class);
 
     @BeforeClass
     public static void setup() {
@@ -42,7 +40,7 @@ public class MapEspressoTest {
     // This test checks to see if we have moved to the map by clicking the mapFab
     @Test
     public void checkIfMovedToMap() {
-        onView(withId(R.id.mapFab)).perform(click());
+        onView(withId(R.id.mapBtn)).perform(click());
         intended(hasComponent(MapsActivity.class.getName()));
     }
 

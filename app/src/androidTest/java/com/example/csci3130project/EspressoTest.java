@@ -33,8 +33,8 @@ import static org.junit.Assert.assertEquals;
 public class EspressoTest {
 
     @Rule
-    public ActivityScenarioRule<BaseActivity> myRule = new ActivityScenarioRule<>(BaseActivity.class);
-    public IntentsTestRule<BaseActivity> myIntentRule = new IntentsTestRule<>(BaseActivity.class);
+    public ActivityScenarioRule<MainActivity> myRule = new ActivityScenarioRule<>(MainActivity.class);
+    public IntentsTestRule<MainActivity> myIntentRule = new IntentsTestRule<>(MainActivity.class);
 
 
     @BeforeClass
