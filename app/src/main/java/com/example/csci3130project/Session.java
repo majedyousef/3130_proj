@@ -12,27 +12,25 @@ import android.preference.PreferenceManager;
  */
 
 public class Session {
-    private SharedPreferences pref;
-
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    String SHARED_PREF_NAME = "session";
+    String SESSION_KEY = "session_user";
     public Session(Context cntx) {
-        pref = PreferenceManager.getDefaultSharedPreferences(cntx);
+        pref = cntx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+        editor = pref.edit();
+
     }
 
-    /**
-     * A method for adding a username to the session data
-     * @param username - String containing the username
-     */
-    public void setUsername(String username){
-        pref.edit().putString("username", username).commit();
-    }
+    public void saveSession(User user){
+        editor.putInt(SESSION_KEY,user.getUserID());
 
-    /**
-     * A method for retrieving the username for this session
-     * @return a String containing the username
-     */
-    public String getUserName(){
-        String username = pref.getString("username","");
-        return username;
+    }
+    public int getUser(){
+        return pref.getInt(SESSION_KEY,-1);
+    }
+    public void removeSession(){
+        editor.putInt(SESSION_KEY,-1).commit();
     }
     
 

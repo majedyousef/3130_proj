@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.csci3130project.BaseActivity;
+import com.example.csci3130project.MainActivity;
 import com.example.csci3130project.R;
 import com.example.csci3130project.Session;
 import com.example.csci3130project.UploadItems;
@@ -55,6 +56,9 @@ public class LoginFragment extends Fragment {
         mEmail = root.findViewById(R.id.loginEmail);
         mPassword = root.findViewById(R.id.loginPassword);
         loginBtn = root.findViewById(R.id.loginBtn);
+        onStart();
+
+
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,22 +85,25 @@ public class LoginFragment extends Fragment {
                 userNode.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Session session = new Session(getActivity().getApplication());
                         String emailFromDb;
                         String passFromDb;
                         String userNameFromDb;
+                        ArrayList<User> usersList = new ArrayList<User>();
                         ArrayList<String > passwordList = new ArrayList<String>();
                         ArrayList<String> emailList = new ArrayList<String>();
                         ArrayList<String> usernameList = new ArrayList<>();
                         for(DataSnapshot adSnapshot: snapshot.getChildren()){
+                            User u = adSnapshot.getValue(User.class);
+                            usersList.add(u);
+                            System.out.println("from user obj "+ u.getEmail());
                             emailFromDb = adSnapshot.child("email").getValue(String.class);
                             passFromDb = adSnapshot.child("password").getValue(String.class);
                             userNameFromDb = adSnapshot.child("username").getValue(String.class);
                             passwordList.add(passFromDb);
                             emailList.add(emailFromDb);
                             usernameList.add(userNameFromDb);
-                            System.out.println(emailFromDb);
-                            System.out.println(passFromDb);
+                            System.out.println("Directly from Db"+emailFromDb);
+
 
                         }
 
@@ -112,8 +119,9 @@ public class LoginFragment extends Fragment {
                             successPass = passwordList.get(indexOfUser);
                             if(successPass.equals(password)){
                                 Toast.makeText(getActivity(),"Login Successful",Toast.LENGTH_SHORT).show();
-                                session.setUsername(usernameList.get(indexOfUser));
-                                Intent intent = new Intent(getActivity(), BaseActivity.class);
+                                Session session = new Session(getActivity().getApplication());
+                                session.saveSession(usersList.get(indexOfUser));
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
                                 startActivity(intent);
                                 getActivity().finish();
 
@@ -148,6 +156,20 @@ public class LoginFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Session session = new Session(getActivity().getApplication());
+        int userID = session.getUser();
+        if(userID != -1){
+            //user id logged in and so move to mainActivity
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+        }
+        else{
+            //do nothing
+        }
     }
 
     /**
