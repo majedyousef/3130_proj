@@ -10,14 +10,23 @@ public class ReputationTests {
     @Test
     public void getRating() {
         reputation.addRating(4.5);
-        assertEquals(4.5, reputation.getRating(), 0.01);
+        assertEquals(4.5, reputation.getRating(0), 0.01);
+    }
+
+    @Test
+    public void calculateRating() {
+        reputation.addRating(4.5);
+        reputation.addRating(3.6);
+        reputation.calculateRating();
+        assertEquals(4.05, reputation.getTotalScore(), 0.01);
     }
 
     @Test
     public void addRating() {
         reputation.addRating(4.5);
         reputation.addRating(3.6);
-        assertEquals(4.05, reputation.getRating(), 0.01);
+        reputation.addRating(2.6);
+        assertEquals(3.6, reputation.getRating(1), 0.01);
     }
 
     @Test

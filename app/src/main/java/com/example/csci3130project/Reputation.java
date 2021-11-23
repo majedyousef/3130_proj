@@ -14,26 +14,45 @@ public class Reputation {
     private double rating;
     private int ratingCount;
     ArrayList<String> reviews;
+    ArrayList<Double> ratings;
 
     public Reputation() {
         reviews = new ArrayList<String>();
+        ratings = new ArrayList<Double>();
     }
 
     /**
-     * A method for retrieving the user's numerical rating
-     * @return an double representing the user's rating
+     * A method for retrieving a single numerical rating
+     * @return an double containng a numerical rating
+     * @param ratingNum - the index of the rating to get
      */
-    public double getRating(){
+    public double getRating(int ratingNum){
+        return ratings.get(ratingNum);
+    }
+
+    public double getTotalScore() {
         return rating;
     }
 
     /**
-     * A method for updating the user's numerical rating
-     * @param rating - a double to update the rating with
+     * A method for updating the user's overall numerical rating
+     * @return rating - a double to update the rating with
+     */
+    public void calculateRating() {
+        double sum = 0;
+        for (int i = 0; i < ratings.size(); i++) {
+            sum = sum + ratings.get(i);
+        }
+        this.rating = sum / ratingCount;
+    }
+
+    /**
+     * A method for adding a rating
+     * @param rating - a double containing the rating
      */
     public void addRating(double rating) {
         ratingCount++;
-        this.rating = (this.rating + rating) / ratingCount;
+        ratings.add(rating);
     }
 
     /**
