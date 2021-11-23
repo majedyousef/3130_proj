@@ -4,13 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_base.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_change_password.xml" value="0.3183876811594203" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_logout.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_maps.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_set_favourites.xml" value="0.28351449275362317" />
+        <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_upload_items.xml" value="0.28351449275362317" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/app_bar_base.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/content_base.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/fragment_profile.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/fragment_reg.xml" value="0.28351449275362317" />
+        <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/nav_header_base.xml" value="0.28351449275362317" />
+        <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/searchactivity.xml" value="0.28351449275362317" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/Project-New/csci-3130-project/CSCI3130Project/app/src/main/res/layout/activity_base.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/Project-New/csci-3130-project/CSCI3130Project/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/Project-New/csci-3130-project/CSCI3130Project/app/src/main/res/layout/app_bar_base.xml" value="0.36666666666666664" />
@@ -37,6 +43,10 @@
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/Project/csci-3130-project/CSCI3130Project/app/src/main/res/menu/activity_base_drawer.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/Project/csci-3130-project/CSCI3130Project/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/Project/csci-3130-project/CSCI3130Project/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3828125" />
+        <entry key="..\:/Users/bench/AndroidStudioProjects/csci-3130-project/app/src/main/res/layout/activity_maps.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/bench/AndroidStudioProjects/csci-3130-project/app/src/main/res/layout/app_bar_base.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/bench/AndroidStudioProjects/csci-3130-project/app/src/main/res/layout/content_base.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/bench/AndroidStudioProjects/csci-3130-project/app/src/main/res/menu/base.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/cedar/AndroidStudioProjects/Group Project/csci-3130-project/CSCI3130Project/app/src/main/res/layout/activity_base.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/cedar/AndroidStudioProjects/Group Project/csci-3130-project/CSCI3130Project/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/vinny/git/test/csci-3130-project/app/src/main/res/drawable/ic_login_foreground.xml" value="0.2046875" />
@@ -62,7 +72,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
