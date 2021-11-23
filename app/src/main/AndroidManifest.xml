@@ -20,7 +20,9 @@
         android:theme="@style/Theme.CSCI3130Project.NoActionBar"
         tools:ignore="ExtraText">
         <activity
-
+            android:name=".ReviewUser"
+            android:exported="true" />
+        <activity
             android:name=".UploadItems"
             android:exported="true" />
         <!--
@@ -42,7 +44,6 @@
         <activity
             android:name=".SetFavourites"
             android:exported="true" />
-
         <activity
             android:name=".Logout"
             android:exported="true" /> <!-- <activity -->
@@ -50,7 +51,6 @@
         <!-- android:exported="true" -->
         <!-- android:label="@string/title_activity_base" -->
         <!-- /> -->
-
         <activity
             android:name=".BaseActivity"
             android:exported="true">

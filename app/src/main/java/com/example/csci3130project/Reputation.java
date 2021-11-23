@@ -30,6 +30,10 @@ public class Reputation {
         return ratings.get(ratingNum);
     }
 
+    /**
+     * A method for getting the total numerical score
+     * @return a double containing the score
+     */
     public double getTotalScore() {
         return rating;
     }
@@ -69,7 +73,6 @@ public class Reputation {
      * @param review - a String containing the review
      */
     public void addReview(String review) {
-        ratingCount++;
         reviews.add(review);
     }
 
