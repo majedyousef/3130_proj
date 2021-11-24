@@ -21,9 +21,13 @@ public class ReviewUser extends AppCompatActivity {
         setContentView(R.layout.activity_review_user);
 
         RatingBar stars = (RatingBar) findViewById(R.id.userStars);
-        LayerDrawable starcolor = (LayerDrawable) stars.getProgressDrawable();
         EditText comment = (EditText) findViewById(R.id.commentText);
         Button submit = (Button) findViewById(R.id.submit);
+
+        // Used for setting colors for the rating bar
+        LayerDrawable starcolor = (LayerDrawable) stars.getProgressDrawable();
+        starcolor.getDrawable(1).setColorFilter(Color.parseColor("#e3e6e9"), PorterDuff.Mode.SRC_ATOP);
+        starcolor.getDrawable(0).setColorFilter(Color.parseColor("#e3e6e9"), PorterDuff.Mode.SRC_ATOP);
 
         // Dynamically change the color of the rating stars when it changes
         stars.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
