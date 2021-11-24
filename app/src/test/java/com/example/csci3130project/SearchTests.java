@@ -10,20 +10,20 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.csci3130project.ui.login.LoginFragment;
+
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class SearchTests extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.searchactivity);
-
-
-
-    }
-}
+//public class SearchTests extends AppCompatActivity {
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//        setContentView(R.layout.searchactivity);
+//
+//
+//
+//    }
+//}

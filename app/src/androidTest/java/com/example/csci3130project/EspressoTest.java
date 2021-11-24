@@ -30,52 +30,52 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 
-public class EspressoTest {
-
-    @Rule
-    public ActivityScenarioRule<MainActivity> myRule = new ActivityScenarioRule<>(MainActivity.class);
-    public IntentsTestRule<MainActivity> myIntentRule = new IntentsTestRule<>(MainActivity.class);
-
-
-    @BeforeClass
-    public static void setup() {
-        Intents.init();
-    }
-
-    @Test
-    public void checkIfReturnedToLogin() {
-        onView(withId(R.id.loginBtn)).perform(click());
-        intended(hasComponent(Logout.class.getName()));
-        onView(withId(R.id.logoutButton)).perform(click());
-        onView(withId(android.R.id.button1)).perform(click());
-        intended(hasComponent(BaseActivity.class.getName()));
-    }
-
-    @Test
-    public void checkIfLogoutCancelled() {
-        onView(withId(R.id.loginBtn)).perform(click());
-        intended(hasComponent(Logout.class.getName()));
-        onView(withId(R.id.logoutButton)).perform(click());
-        onView(withId(android.R.id.button2)).perform(click());
-        intended(hasComponent(Logout.class.getName()));
-    }
-
-
-
-    //Test for checking if the search bar is storing the correct keyword (Same as what the user entered)
-    @Test
-    public void checkSearchKeyword() {
-        onView(withId(R.id.loginBtn)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
-        onView(withId(R.id.searchView)).perform(click());
-        String searchKeyword = "Furniture";
-        onView(withId(R.id.searchView)).perform(typeText(searchKeyword));
-        onView(withId(R.id.searchView)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
-        intended(hasComponent(MainActivity.class.getName()));
-
-        //Add logic to verify the text fields compared to the keyword to see if valid.
-        
-    }
-
-
-}
+//public class EspressoTest {
+//
+//    @Rule
+//    public ActivityScenarioRule<MainActivity> myRule = new ActivityScenarioRule<>(MainActivity.class);
+//    public IntentsTestRule<MainActivity> myIntentRule = new IntentsTestRule<>(MainActivity.class);
+//
+//
+//    @BeforeClass
+//    public static void setup() {
+//        Intents.init();
+//    }
+//
+//    @Test
+//    public void checkIfReturnedToLogin() {
+//        onView(withId(R.id.loginBtn)).perform(click());
+//        intended(hasComponent(Logout.class.getName()));
+//        onView(withId(R.id.logoutButton)).perform(click());
+//        onView(withId(android.R.id.button1)).perform(click());
+//        intended(hasComponent(BaseActivity.class.getName()));
+//    }
+//
+//    @Test
+//    public void checkIfLogoutCancelled() {
+//        onView(withId(R.id.loginBtn)).perform(click());
+//        intended(hasComponent(Logout.class.getName()));
+//        onView(withId(R.id.logoutButton)).perform(click());
+//        onView(withId(android.R.id.button2)).perform(click());
+//        intended(hasComponent(Logout.class.getName()));
+//    }
+//
+//
+//
+//    //Test for checking if the search bar is storing the correct keyword (Same as what the user entered)
+//    @Test
+//    public void checkSearchKeyword() {
+//        onView(withId(R.id.loginBtn)).perform(click());
+//        intended(hasComponent(MainActivity.class.getName()));
+//        onView(withId(R.id.searchView)).perform(click());
+//        String searchKeyword = "Furniture";
+//        onView(withId(R.id.searchView)).perform(typeText(searchKeyword));
+//        onView(withId(R.id.searchView)).perform(pressKey(KeyEvent.KEYCODE_ENTER));
+//        intended(hasComponent(MainActivity.class.getName()));
+//
+//        //Add logic to verify the text fields compared to the keyword to see if valid.
+//
+//    }
+//
+//
+//}
