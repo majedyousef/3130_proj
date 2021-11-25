@@ -2,18 +2,20 @@ package com.example.csci3130project;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.csci3130project.databinding.ActivityMapsBinding;
 import com.google.android.gms.common.ConnectionResult;
@@ -25,9 +27,20 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /*
 The code below was originally created by Shakuntala Khatri
@@ -38,7 +51,8 @@ Date Accessed: 26th Oct. 2021
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private static final float DEFAULT_ZOOM = 17f;
+    private static final float DEFAULT_ZOOM = 17;
+    private static float currentZoom = DEFAULT_ZOOM;
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
@@ -50,6 +64,50 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private Boolean mLocationPermissionGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    private static ArrayList<String> itemsList = new ArrayList<String>();
+    Marker marker;
+
+    // code for retrieving items implemented by Hesham Elokdah and refactored by Benjamin Chui
+    public boolean pinItems(GoogleMap googleMap) {
+
+        // calling add value event listener method
+        // for getting the values from database.
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference("Items");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot adSnapshot: snapshot.getChildren()){
+
+                    String name = adSnapshot.child("name").getValue(String.class);
+                    String type = adSnapshot.child("category").getValue(String.class);
+                    String id = adSnapshot.getKey();
+                    String userID = adSnapshot.child("userID").getValue(String.class);
+
+                    Double lat = adSnapshot.child("latitude").getValue(Double.class);
+                    Double lon = adSnapshot.child("longitude").getValue(Double.class);
+
+                    LatLng loc = new LatLng(lat, lon);
+
+                    if (!userID.equals(user.getUid())){
+                        marker = googleMap.addMarker(new MarkerOptions().position(loc).title(name).snippet(id));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +119,41 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         getLocationPermission();
         Log.d(TAG, "onCreate: Ends");
+
+        // To Search
+        FloatingActionButton search = (FloatingActionButton) findViewById(R.id.mapToSearchBtn);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(i);
+            }
+        });
+
+        // To Zoom Out
+        FloatingActionButton zoomOut = (FloatingActionButton) findViewById(R.id.zoomOutBtn);
+        zoomOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentZoom -= 1;
+                getDeviceLocation(currentZoom);
+            }
+        });
+
+        // To Zoom In
+        FloatingActionButton zoomIn = (FloatingActionButton) findViewById(R.id.zoomInBtn);
+        zoomIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentZoom += 1;
+                getDeviceLocation(currentZoom);
+            }
+        });
+
+
     }
+
+
 
     private void getLocationPermission() {
         Log.d(TAG, "getLocationPermission : starts");
@@ -127,16 +219,31 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toast.makeText(this, "Location Services Are Active", Toast.LENGTH_SHORT).show();
         if (mLocationPermissionGranted) {
             Log.d(TAG, "onMapReady: getting Device current location!!");
-            getDeviceLocation();
+            getDeviceLocation(DEFAULT_ZOOM);
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            pinItems(mMap);
+
+            // https://www.youtube.com/watch?v=m6zcM6Q2qZU&ab_channel=GadgetsandTechnicalfieldAndroidTech
+            // https://developers.google.com/maps/documentation/android-sdk/infowindows
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    String itemID = marker.getSnippet();
+
+                    Intent i = new Intent(getApplicationContext(), ItemDetailsActivity.class);
+                    i.putExtra("snippet", itemID);
+                    startActivity(i);
+                }
+            });
+
         }
     }
 
-    public void getDeviceLocation(){
+    public void getDeviceLocation(float zoomLevel){
         Log.d(TAG, "getDeviceLocation: starts");
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         try{
@@ -152,7 +259,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 Log.d(TAG, "getDeviceLocation: currentLocation Lattitude: " + currentLocation.getLatitude());
                                 Log.d(TAG, "getDeviceLocation: currentLocation Longitude: " + currentLocation.getLongitude());
                                 moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                        DEFAULT_ZOOM,"current location");
+                                        zoomLevel,"current location");
                             }else
                                 Log.d(TAG, "getDeviceLocation: Current location is null");
                         }else {
@@ -171,10 +278,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void moveCamera(LatLng latlng, float zoom, String title){
         Log.d(TAG, "moveCamera: starts with latitude: "+ latlng.latitude + " and Longitude: " + latlng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng,zoom));
-        MarkerOptions options = new MarkerOptions()
-                .position(latlng)
-                .title(title);
-        mMap.addMarker(options);
     }
 
     // Check Services are working fine or not
@@ -194,4 +297,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         return false;
     }
+
+
 }
+
+

@@ -14,11 +14,21 @@
     <string name="title_activity_maps">MapsActivity</string>
 
     <string-array name="itemCatArray">
+<<<<<<< HEAD
         <item>Home</item>
         <item>Electronics</item>
         <item>Clothing</item>
         <item>Automobiles</item>
         <item>Food</item>
         <item>Drinks</item>
+=======
+        <item>Furniture</item>
+        <item>Electronics</item>
+        <item>Toys &amp; Games</item>
+        <item>Clothing</item>
+        <item>Cars &amp; Vehicles</item>
+        <item>Food &amp; Drinks</item>
+        <item>Miscellaneous</item>
+>>>>>>> total_refactor
     </string-array>
 </resources>
