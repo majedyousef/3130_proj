@@ -88,6 +88,42 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        // To Alerts
+        Button alert = (Button) findViewById(R.id.notifBtn);
+        alert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), NotificationActivity.class);
+                startActivity(i);
+            }
+        });
+        ImageView notifImage = (ImageView) findViewById(R.id.notifImg);
+        notifImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), NotificationActivity.class);
+                startActivity(i);
+            }
+        });
+
+        // To Chat
+        Button chat = (Button) findViewById(R.id.chatBtn);
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                startActivity(i);
+            }
+        });
+        ImageView chatImage = (ImageView) findViewById(R.id.chatImg);
+        chatImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     // Disable going back to login

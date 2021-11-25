@@ -8,15 +8,15 @@ import com.example.csci3130project.LoginActivity;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class LoginValidationTests {
-
-    static LoginActivity logFragment;
-
-    @BeforeClass
-    public static void setup() {
-        logFragment = new LoginActivity();
-    }
-
+//public class LoginValidationTests {
+//
+//    static LoginActivity logFragment;
+//
+//    @BeforeClass
+//    public static void setup() {
+//        logFragment = new LoginActivity();
+//    }
+//
 //    @Test
 //    public void isEmailEmptyTest() {
 //        assertTrue(logFragment.isEmailEmpty(""));
@@ -28,4 +28,4 @@ public class LoginValidationTests {
 //        assertTrue(logFragment.isPasswordEmpty(""));
 //        assertFalse(logFragment.isPasswordEmpty("5645123"));
 //    }
-}
+//}
