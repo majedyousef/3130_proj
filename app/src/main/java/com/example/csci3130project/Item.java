@@ -14,19 +14,6 @@ public class Item {
     private String name;
     private String description;
     private String category;
-<<<<<<< HEAD
-    private int itemID;
-    private int userID;
-    private static int count = 0;
-    private int itemValue;
-    private double longitude;
-    private double latitude;
-
-
-    public Item() {
-        count++;
-        itemID = count;
-=======
 
     private int itemValue;
     private double longitude;
@@ -43,7 +30,6 @@ public class Item {
         this.longitude = longitude;
         this.latitude = latitude;
 
->>>>>>> total_refactor
     }
 
 
@@ -92,30 +78,6 @@ public class Item {
 
 
     /**
-     * A method for retrieving the value of an item
-     * @return a double containing the value of this item
-     */
-    public double getItemValue(){
-        return this.itemValue;
-    }
-
-    /**
-     * A method for retrieving the longitude of an item
-     * @return a double containing the longitude of this item
-     */
-    public double getLongitude(){
-        return this.longitude;
-    }
-
-    /**
-     * A method for retrieving the latitude of an item
-     * @return a double containing the latitude of this item
-     */
-    public double getLatitude(){
-        return latitude;
-    }
-
-    /**
      * A method for updating the item's name
      *
      * @param name - String containing new item name
@@ -146,29 +108,6 @@ public class Item {
         this.category = category;
     }
 
-<<<<<<< HEAD
-    /**
-     * A method for updating the item's value
-     * @param itemValue - int containing new item value
-     */
-    public void setItemValue(int itemValue){
-        this.itemValue = itemValue;
-    }
-
-    /**
-     * A method for updating the item's longitude
-     * @param longitude - double containing new item longitude
-     */
-    public void setLongitude(double longitude){
-        this.longitude = longitude;
-    }
-
-    /**
-     * A method for updating the item's latitude
-     * @param latitude - double containing new item latitude
-     */
-    public void setLatitude(double latitude){
-=======
     public void setItemValue(int itemValue) {
         this.itemValue = itemValue;
     }
@@ -178,7 +117,6 @@ public class Item {
     }
 
     public void setLatitude(double latitude) {
->>>>>>> total_refactor
         this.latitude = latitude;
     }
 }

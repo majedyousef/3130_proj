@@ -26,12 +26,10 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-<<<<<<< HEAD
-    }
-=======
         list = new ArrayList<>();
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
         DatabaseReference db = firebase.getReference();
@@ -53,57 +51,11 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         });
->>>>>>> total_refactor
 
         // Creating the searchview and listeview object by finding the searchview and listview from the uI.
         searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.lv1);
 
-<<<<<<< HEAD
-        //creating an array to store the name of items that are available
-        list = new ArrayList<>();
-
-        ArrayList<Item> itemList = new ArrayList<Item>();
-
-        // Create test items for search
-        Item testitem1 = new Item();
-        testitem1.setName("Used Chair");
-        testitem1.setDescription("Trading a used chair, sweated in once");
-        testitem1.setDescription("Furniture");
-        itemList.add(testitem1);
-
-        Item testitem2 = new Item();
-        testitem2.setName("Xbox 360 Console");
-        testitem2.setDescription("Looking to Trade my old xbox 360");
-        testitem2.setDescription("Electronics");
-        itemList.add(testitem2);
-
-        Item testitem3 = new Item();
-        testitem3.setName("New Kitchenware");
-        testitem3.setDescription("Trading some new kitchenware I got for christmas that I'm not using.");
-        testitem3.setDescription("Kitchenware");
-        itemList.add(testitem3);
-
-        Item testitem4 = new Item();
-        testitem4.setName("Hockey Sticks");
-        testitem4.setDescription("Got a bunch of hockey sticks I don't need");
-        testitem4.setDescription("Sports");
-        itemList.add(testitem4);
-
-        Item testitem5 = new Item();
-        testitem5.setName("Unwanted food/nonperishables");
-        testitem5.setDescription("Variety of food cans for exchange, not looking for anything specific");
-        testitem5.setDescription("Food");
-        itemList.add(testitem5);
-
-        //This loop goes through the itemList array (contains the items from the database, right now dummy data) and adds the info to a string list (list)
-        for(int i = 0; i < itemList.toArray().length ; i++){
-            String item = "Item Name: " + itemList.get(i).getName() + "\n" + "Item Description: " + itemList.get(i).getDescription() + "\n" + "Item Category: " + itemList.get(i).getCategory();
-            list.add(item);
-        }
-
-=======
->>>>>>> total_refactor
         //Creating a adapter for the listview and a on query text listener that will listen to the changes in the text view
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);
         listView.setAdapter(adapter);
