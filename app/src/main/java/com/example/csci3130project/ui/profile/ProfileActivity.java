@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.csci3130project.R;
-import com.example.csci3130project.databinding.FragmentProfileBinding;
+//import com.example.csci3130project.databinding.FragmentProfileBinding;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -33,7 +33,7 @@ public class ProfileActivity extends AppCompatActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_profile);
+        setContentView(R.layout.activity_profile);
 
         TextView profileEmail = findViewById(R.id.EmailText);
         TextView profileFullName = findViewById(R.id.FullNameText);
