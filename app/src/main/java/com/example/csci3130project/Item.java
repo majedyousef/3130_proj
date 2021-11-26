@@ -66,7 +66,7 @@ public class Item {
         return this.category;
     }
 
-    public double getItemValue() {
+    public int getItemValue() {
         return this.itemValue;
     }
 

@@ -40,10 +40,7 @@ public class TransactionHistory extends AppCompatActivity {
         String userID = db.child("Users").child(user.getUid()).getKey();
 
         TextView accountProfit = findViewById(R.id.accountDetail);
-        accountProfit.setText("Empty");
         TextView itemsSold = findViewById(R.id.itemSoldDetail);
-        itemsSold.setText("No items sold!");
-
 
         if (user != null) {
 
@@ -70,45 +67,44 @@ public class TransactionHistory extends AppCompatActivity {
                 }
             });
         }
+        ArrayList<Integer> prices = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("Items");
-        ArrayList<Item> itemsSoldList = new ArrayList<>();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot adSnapshot: snapshot.getChildren()){
                     String name = adSnapshot.child("name").getValue(String.class);
                     String category = adSnapshot.child("category").getValue(String.class);
-                    String userID = adSnapshot.child("userID").getValue(String.class);
+                    String itemsUserID = adSnapshot.child("userID").getValue(String.class);
                     String description = adSnapshot.child("description").getValue(String.class);
                     Double lat = adSnapshot.child("latitude").getValue(Double.class);
                     Double lon = adSnapshot.child("longitude").getValue(Double.class);
                     Integer itemValue = adSnapshot.child("itemValue").getValue(Integer.class);
                     Boolean status = adSnapshot.child("status").getValue(Boolean.class);
-                    Item item = new Item(userID,name,description,category,itemValue,lon,lat,status);
+                    Item item = new Item(itemsUserID,name,description,category,itemValue,lon,lat,status);
+                    String holder = "";
+                    //Checks if item is sold and it belongs to the intended user
                     if (item.getStatus() && (userID.equals(item.getUserID()))) {
-                        String holder = "Added to sold list";
-                        Log.v("Item was added", holder);
-                        itemsSoldList.add(item);
+                        prices.add(item.getItemValue());
+                        Log.v("Sum added", "" + item.getItemValue());
                     }
                 }
+                //Calculates the total money made on the account
+                Log.v("Array Size", "" + prices.size());
+                int sum = 0;
+                for (int i =0; i < prices.size(); i ++){
+                    sum += prices.get(i);
+                }
+                String finalTotal = "$ "+ sum;
+                accountProfit.setText(finalTotal);
+                prices.clear();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
         });
-    }
-    /**
-     * A method for calculating profit made on account
-     */
-    public static Integer profitMade(ArrayList<Item> holder){
-        int sum = 0;
-        for (int i = 0; i < holder.size(); i++){
-            sum += holder.get(i).getItemValue();
-        }
-        return sum;
     }
 }
