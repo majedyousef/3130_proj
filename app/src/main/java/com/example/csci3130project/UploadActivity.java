@@ -93,7 +93,7 @@ public class UploadActivity extends AppCompatActivity {
                             DatabaseReference db = firebase.getReference();
                             String userID = db.child("Users").child(user.getUid()).getKey();
 
-                            Item item = new Item(userID, itemName, itemDescription, itemCategory, itemValue, longi, lat);
+                            Item item = new Item(userID, itemName, itemDescription, itemCategory, itemValue, longi, lat,false);
 
                             db.child("Items").push().setValue(item).addOnSuccessListener(success -> {
                                 Toast.makeText(getApplicationContext(), "Item uploaded successfully", Toast.LENGTH_SHORT).show();

@@ -18,9 +18,10 @@ public class Item {
     private int itemValue;
     private double longitude;
     private double latitude;
+    private boolean status = false;
 
 
-    public Item(String userID, String name, String description, String category, Integer itemValue, double longitude, double latitude) {
+    public Item(String userID, String name, String description, String category, Integer itemValue, double longitude, double latitude, boolean status) {
 
         this.userID = userID;
         this.name = name;
@@ -29,6 +30,7 @@ public class Item {
         this.itemValue = itemValue;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.status = status;
 
     }
 
@@ -76,6 +78,10 @@ public class Item {
         return this.latitude;
     }
 
+    public boolean getStatus() {
+        return this.status;
+    }
+
 
     /**
      * A method for updating the item's name
@@ -118,5 +124,12 @@ public class Item {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    /**
+     * A method for updating the status of the item to sold
+     */
+    public void isSold(){
+        this.status = true;
     }
 }
