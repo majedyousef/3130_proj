@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.31" />
 
     <TextView
-        android:id="@+id/accountDetail2"
+        android:id="@+id/itemSoldDetail"
         android:layout_width="355dp"
         android:layout_height="289dp"
         android:gravity="center"
@@ -34,7 +34,7 @@
         app:layout_constraintVertical_bias="0.918" />
 
     <TextView
-        android:id="@+id/accountDetailHeader2"
+        android:id="@+id/ItemsSoldHeader"
         android:layout_width="210dp"
         android:layout_height="45dp"
         android:text="Items Sold"

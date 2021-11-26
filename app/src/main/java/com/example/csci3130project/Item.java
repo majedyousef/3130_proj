@@ -132,4 +132,12 @@ public class Item {
     public void isSold(){
         this.status = true;
     }
+
+    /**
+     * A method for printing an items category and name
+     */
+    public String toString(){
+        return category + ": " + name;
+    }
+
 }
