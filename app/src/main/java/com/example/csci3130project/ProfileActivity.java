@@ -76,6 +76,15 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             });
 
+            // Intent to transaction page
+            Button transaction = (Button) findViewById(R.id.transactionHistoryButton);
+            transaction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getApplicationContext(), TransactionHistory.class);
+                    startActivity(i);
+                }
+            });
         }
     }
 }
