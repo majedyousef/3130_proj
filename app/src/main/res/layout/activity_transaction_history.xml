@@ -8,44 +8,50 @@
 
     <TextView
         android:id="@+id/accountDetailHeader"
-        android:layout_width="210dp"
-        android:layout_height="45dp"
+        android:layout_width="218dp"
+        android:layout_height="32dp"
+        android:gravity="center"
         android:text="Account Profit"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="24sp"
+        style="?android:listSeparatorTextViewStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.134"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31" />
+        app:layout_constraintVertical_bias="0.323" />
+
 
     <TextView
         android:id="@+id/itemSoldDetail"
         android:layout_width="355dp"
-        android:layout_height="289dp"
+        android:layout_height="283dp"
         android:gravity="center"
+        android:scrollbars="vertical"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918" />
+        app:layout_constraintVertical_bias="0.941" />
 
     <TextView
         android:id="@+id/ItemsSoldHeader"
-        android:layout_width="210dp"
-        android:layout_height="45dp"
+        android:layout_width="209dp"
+        android:layout_height="32dp"
+        android:gravity="center"
         android:text="Items Sold"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="24sp"
+        style="?android:listSeparatorTextViewStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.526" />
+        app:layout_constraintVertical_bias="0.542" />
 
     <TextView
         android:id="@+id/accountDetail"
@@ -53,13 +59,13 @@
         android:layout_height="76dp"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.393" />
+        app:layout_constraintVertical_bias="0.413" />
 
     <TextView
         android:id="@+id/emailTextTrans"

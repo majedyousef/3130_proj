@@ -2,6 +2,7 @@ package com.example.csci3130project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -68,6 +69,7 @@ public class TransactionHistory extends AppCompatActivity {
             });
         }
         ArrayList<Integer> prices = new ArrayList<>();
+        ArrayList<Item> items = new ArrayList<>();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("Items");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -87,7 +89,9 @@ public class TransactionHistory extends AppCompatActivity {
                     //Checks if item is sold and it belongs to the intended user
                     if (item.getStatus() && (userID.equals(item.getUserID()))) {
                         prices.add(item.getItemValue());
+                        items.add(item);
                         Log.v("Sum added", "" + item.getItemValue());
+                        Log.v("item added", "" + item.toString());
                     }
                 }
                 //Calculates the total money made on the account
@@ -99,6 +103,14 @@ public class TransactionHistory extends AppCompatActivity {
                 String finalTotal = "$ "+ sum;
                 accountProfit.setText(finalTotal);
                 prices.clear();
+
+                //Printing the items sold by user
+                StringBuilder builder = new StringBuilder();
+                for (int y = 0; y < items.size(); y ++){
+                    builder.append(items.get(y).toString()).append("\n");
+                }
+                itemsSold.setMovementMethod(new ScrollingMovementMethod());
+                itemsSold.setText(builder.toString());
             }
 
             @Override
