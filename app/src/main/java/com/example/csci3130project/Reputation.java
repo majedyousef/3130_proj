@@ -13,12 +13,18 @@ public class Reputation {
 
     private double rating;
     private int ratingCount;
-    ArrayList<String> reviews;
-    ArrayList<Double> ratings;
+    private ArrayList<String> reviews;
+    private ArrayList<Double> ratings;
+    private String authorID;
 
-    public Reputation() {
+    public Reputation(String author) {
         reviews = new ArrayList<String>();
         ratings = new ArrayList<Double>();
+        authorID = author;
+    }
+
+    public String getAuthor() {
+        return authorID;
     }
 
     /**

@@ -13,6 +13,11 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class ReviewUser extends AppCompatActivity {
 
     @Override
@@ -66,7 +71,27 @@ public class ReviewUser extends AppCompatActivity {
                 if (rating == 0) {
                     Toast.makeText(getApplicationContext(), "Please select a rating.", Toast.LENGTH_SHORT).show();
                 } else {
-                    // add review to user's reputation
+                    // Retrieve ID of review author
+                    
+                    FirebaseUser author = FirebaseAuth.getInstance().getCurrentUser();
+                    FirebaseDatabase firebase = FirebaseDatabase.getInstance();
+                    DatabaseReference db = firebase.getReference();
+                    String authorID = db.child("Users").child(author.getUid()).getKey();
+
+                    // test data
+                    authorID = "testrep";
+
+                    // Add this review to a user's reputation
+                    Reputation rep = new Reputation(authorID);
+                    rep.addRating(rating);
+                    rep.addReview(commentText);
+
+                    // Add rep to database
+                    db.child("Reputations").push().setValue(rep).addOnSuccessListener(success -> {
+                        Toast.makeText(getApplicationContext(), "Review added successfully", Toast.LENGTH_SHORT).show();
+                    }).addOnFailureListener(fail -> {
+                        Toast.makeText(getApplicationContext(), "Review failed.", Toast.LENGTH_SHORT).show();
+                    });
                 }
             }
         });

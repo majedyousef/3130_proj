@@ -20,6 +20,9 @@
         android:theme="@style/Theme.CSCI3130Project.NoActionBar"
         tools:ignore="ExtraText">
         <activity
+            android:name=".Review"
+            android:exported="true" />
+        <activity
             android:name=".ReviewUser"
             android:exported="true" />
         <activity
