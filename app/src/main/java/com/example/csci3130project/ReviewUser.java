@@ -28,6 +28,7 @@ public class ReviewUser extends AppCompatActivity {
         RatingBar stars = (RatingBar) findViewById(R.id.userStars);
         EditText comment = (EditText) findViewById(R.id.commentText);
         Button submit = (Button) findViewById(R.id.submit);
+        Reputation reputation = new Reputation();
 
         // Used for setting colors for the rating bar
         LayerDrawable starcolor = (LayerDrawable) stars.getProgressDrawable();
@@ -72,20 +73,17 @@ public class ReviewUser extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please select a rating.", Toast.LENGTH_SHORT).show();
                 } else {
                     // Retrieve ID of review author
-
                     FirebaseUser author = FirebaseAuth.getInstance().getCurrentUser();
                     FirebaseDatabase firebase = FirebaseDatabase.getInstance();
                     DatabaseReference db = firebase.getReference();
                     String authorID;
                     if (author != null) {
                         authorID = db.child("Users").child(author.getUid()).getKey();
+                    } else {
+                        authorID = "testrep";
                     }
 
-                    // test data
-                    authorID = "testrep";
-
                     // Add this review to a user's reputation
-                    Reputation reputation = new Reputation();
                     Review review = new Review(authorID);
                     review.addRating(rating);
                     review.addComment(commentText);
