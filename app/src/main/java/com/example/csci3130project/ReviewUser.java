@@ -87,7 +87,7 @@ public class ReviewUser extends AppCompatActivity {
                     // Add this review to a user's reputation
                     Reputation rep = new Reputation(authorID);
                     rep.addRating(rating);
-                    rep.addReview(commentText);
+                    rep.addComment(commentText);
 
                     // Add reputation to database
                     db.child("Reputations").push().setValue(rep).addOnSuccessListener(success -> {

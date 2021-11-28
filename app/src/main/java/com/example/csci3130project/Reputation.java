@@ -13,12 +13,12 @@ public class Reputation {
 
     private double rating;
     private int ratingCount;
-    private ArrayList<String> reviews;
+    private ArrayList<String> comments;
     private ArrayList<Double> ratings;
     private String authorID;
 
     public Reputation(String author) {
-        reviews = new ArrayList<String>();
+        comments = new ArrayList<String>();
         ratings = new ArrayList<Double>();
         authorID = author;
     }
@@ -67,21 +67,22 @@ public class Reputation {
     }
 
     /**
-     * A method for retrieving a single review
-     * @return a String containing a written review
-     * @param reviewNum - the index of the review to get
+     * A method for retrieving a single comment
+     * @return a String containing a written comment
+     * @param commentNum - the index of the comment to get
      */
-    public String getReview(int reviewNum) {
-        return reviews.get(reviewNum);
+    public String getComment(int commentNum) {
+        return comments.get(commentNum);
     }
 
     /**
-     * A method for adding a review
-     * @param review - a String containing the review
+     * A method for adding a comment
+     * @param comment - a String containing the comment
      */
-    public void addReview(String review) {
-        reviews.add(review);
+    public void addComment(String comment) {
+        comments.add(comment);
     }
+
 
     /**
      * A method for retrieving the total number of reviews

@@ -31,25 +31,25 @@ public class ReputationTests {
 
     @Test
     public void getReview() {
-        reputation.addReview("Not too bad");
-        assertEquals("Not too bad", reputation.getReview(0));
+        reputation.addComment("Not too bad");
+        assertEquals("Not too bad", reputation.getComment(0));
     }
 
     @Test
-    public void addReview() {
-        reputation.addReview("Great transaction!");
-        reputation.addReview("Thanks");
-        reputation.addReview("Item as described");
-        assertEquals("Item as described", reputation.getReview(2));
+    public void addComment() {
+        reputation.addComment("Great transaction!");
+        reputation.addComment("Thanks");
+        reputation.addComment("Item as described");
+        assertEquals("Item as described", reputation.getComment(2));
     }
 
     @Test
     public void getReviewCount() {
-        reputation.addReview("Great transaction!");
+        reputation.addComment("Great transaction!");
         reputation.addRating(4.5);
-        reputation.addReview("Thanks");
+        reputation.addComment("Thanks");
         reputation.addRating(5);
-        reputation.addReview("Item as described");
+        reputation.addComment("Item as described");
         reputation.addRating(5);
         assertEquals(3, reputation.getReviewCount());
     }
