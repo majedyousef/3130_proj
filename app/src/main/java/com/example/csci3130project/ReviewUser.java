@@ -85,12 +85,14 @@ public class ReviewUser extends AppCompatActivity {
                     authorID = "testrep";
 
                     // Add this review to a user's reputation
-                    Reputation rep = new Reputation(authorID);
-                    rep.addRating(rating);
-                    rep.addComment(commentText);
+                    Reputation reputation = new Reputation();
+                    Review review = new Review(authorID);
+                    review.addRating(rating);
+                    review.addComment(commentText);
+                    reputation.addReview(review);
 
                     // Add reputation to database
-                    db.child("Reputations").push().setValue(rep).addOnSuccessListener(success -> {
+                    db.child("Reputations").push().setValue(reputation).addOnSuccessListener(success -> {
                         Toast.makeText(getApplicationContext(), "Review added successfully", Toast.LENGTH_SHORT).show();
                     }).addOnFailureListener(fail -> {
                         Toast.makeText(getApplicationContext(), "Review failed.", Toast.LENGTH_SHORT).show();

@@ -1,14 +1,57 @@
 package com.example.csci3130project;
 
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
 
-import android.os.Bundle;
+/**
+ * The Review class is used to create Review objects for the application.
+ * These objects store ratings and comments for a given review.
+ *
+ * @author Group 6, CSCI3130 F21
+ */
 
-public class Review extends AppCompatActivity {
+public class Review {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review);
+    private String authorID;
+    private String comment;
+    private double rating;
+
+    public Review(String authorID) {
+        this.authorID = authorID;
+    }
+
+    public String getAuthor() {
+        return authorID;
+    }
+
+    /**
+     * A method for retrieving this review's numerical rating
+     * @return an double containing the numerical rating
+     */
+    public double getRating(){
+        return rating;
+    }
+
+    /**
+     * A method for adding a numerical rating
+     * @param rating - a double containing the rating
+     */
+    public void addRating(double rating) {
+        this.rating = rating;
+    }
+
+    /**
+     * A method for retrieving this review's comment
+     * @return a String containing a written comment
+     */
+    public String getComment() {
+        return comment;
+    }
+
+    /**
+     * A method for adding a comment
+     * @param comment - a String containing the comment
+     */
+    public void addComment(String comment) {
+        this.comment = comment;
     }
 }
