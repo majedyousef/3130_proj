@@ -41,6 +41,7 @@ public class Reputation {
      * @return a double containing the score
      */
     public double getTotalScore() {
+        calculateRating();
         return rating;
     }
 
