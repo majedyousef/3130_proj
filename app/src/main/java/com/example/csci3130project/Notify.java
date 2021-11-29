@@ -11,6 +11,7 @@ public class Notify extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        makeNotificationChannel();
     }
 
     private void makeNotificationChannel(){

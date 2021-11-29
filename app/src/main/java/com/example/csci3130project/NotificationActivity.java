@@ -53,7 +53,6 @@ public class NotificationActivity extends AppCompatActivity {
         Notification notification = new NotificationCompat.Builder(this,Notify.Channel_1)
                 .setSmallIcon(R.drawable.notify_me).setContentTitle(title)
                 .setContentText(message).setPriority(NotificationCompat.PRIORITY_LOW).build();
-
         notifManager.notify(1,notification);
     }
 }
