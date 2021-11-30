@@ -23,14 +23,6 @@ public class User {
         this. password = pass;
     }
 
-//    /**
-//     * A method for retrieving the user's unique ID
-//     * @return an integer representing the user's ID
-//     */
-//    public int getUserID() {
-//        return userID;
-//    }
-
     /**
      * A method for retrieving the user's first name
      * @return a String containing the user's first name.

@@ -14,9 +14,19 @@ public class Reputation {
     private double rating;
     private int reviewCount;
     private ArrayList<Review> reviews;
+    private String userID;
 
-    public Reputation() {
+    public Reputation(String ID) {
         reviews = new ArrayList<Review>();
+        userID = ID;
+    }
+
+    /**
+     * A method for getting the user ID of this reputation
+     * @return a String containing the userID
+     */
+    public String getUserID() {
+        return userID;
     }
 
     /**

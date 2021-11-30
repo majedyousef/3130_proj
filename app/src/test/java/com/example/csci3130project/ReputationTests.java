@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 public class ReputationTests {
 
-    Reputation reputation = new Reputation();
+    Reputation reputation = new Reputation("123");
     Review rev1 = new Review("1");
     Review rev2 = new Review("2");
     Review rev3 = new Review("3");

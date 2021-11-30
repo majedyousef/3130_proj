@@ -28,7 +28,7 @@ public class ReviewUser extends AppCompatActivity {
         RatingBar stars = (RatingBar) findViewById(R.id.userStars);
         EditText comment = (EditText) findViewById(R.id.commentText);
         Button submit = (Button) findViewById(R.id.submit);
-        Reputation reputation = new Reputation();
+        Reputation reputation = new Reputation("123");
 
         // Used for setting colors for the rating bar
         LayerDrawable starcolor = (LayerDrawable) stars.getProgressDrawable();
