@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSCI3130Project">
         <activity
+            android:name=".TransactionHistory"
+            android:exported="false" />
+        <activity
             android:name=".ChatActivity"
             android:exported="true" />
         <activity
