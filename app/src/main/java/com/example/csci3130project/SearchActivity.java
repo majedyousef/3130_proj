@@ -1,45 +1,18 @@
 package com.example.csci3130project;
 
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Toast;
-
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.SearchView;
-import android.widget.TextView;
-
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import android.app.Activity;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.csci3130project.databinding.ActivityBaseBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -53,73 +26,63 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.searchactivity);
-        createSearchBar();
+        setContentView(R.layout.activity_search);
 
-    }
+        list = new ArrayList<>();
+        FirebaseDatabase firebase = FirebaseDatabase.getInstance();
+        DatabaseReference db = firebase.getReference();
+        db.child("Items").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot data) {
+                if (data.exists()){
+                    // clear the current array
+                    list.clear();
+                    for (DataSnapshot d:data.getChildren()){
+                        String itemName = d.child("name").getValue(String.class);
+                        list.add(itemName);
+                    }
+                }
+            }
 
-    private void createSearchBar() {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         // Creating the searchview and listeview object by finding the searchview and listview from the uI.
         searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.lv1);
 
-        //creating an array to store the name of items that are available
-        list = new ArrayList<>();
-
-        ArrayList<Item> itemList = new ArrayList<Item>();
-
-        // Create test items for search
-        Item testitem1 = new Item();
-        testitem1.setName("Used Chair");
-        testitem1.setDescription("Trading a used chair, sweated in once");
-        testitem1.setDescription("Furniture");
-        itemList.add(testitem1);
-
-        Item testitem2 = new Item();
-        testitem2.setName("Xbox 360 Console");
-        testitem2.setDescription("Looking to Trade my old xbox 360");
-        testitem2.setDescription("Electronics");
-        itemList.add(testitem2);
-
-        Item testitem3 = new Item();
-        testitem3.setName("New Kitchenware");
-        testitem3.setDescription("Trading some new kitchenware I got for christmas that I'm not using.");
-        testitem3.setDescription("Kitchenware");
-        itemList.add(testitem3);
-
-        Item testitem4 = new Item();
-        testitem4.setName("Hockey Sticks");
-        testitem4.setDescription("Got a bunch of hockey sticks I don't need");
-        testitem4.setDescription("Sports");
-        itemList.add(testitem4);
-
-        Item testitem5 = new Item();
-        testitem5.setName("Unwanted food/nonperishables");
-        testitem5.setDescription("Variety of food cans for exchange, not looking for anything specific");
-        testitem5.setDescription("Food");
-        itemList.add(testitem5);
-
-        //This loop goes through the itemList array (contains the items from the database, right now dummy data) and adds the info to a string list (list)
-        for(int i = 0; i < itemList.toArray().length ; i++){
-            String item = "Item Name: " + itemList.get(i).getName() + "\n" + "Item Description: " + itemList.get(i).getDescription() + "\n" + "Item Category: " + itemList.get(i).getCategory();
-            list.add(item);
-        }
-
         //Creating a adapter for the listview and a on query text listener that will listen to the changes in the text view
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);
         listView.setAdapter(adapter);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
+        createSearchBar();
+
+
+    }
+
+    private void createSearchBar() {
+
+
+
+
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             //This method is performed when the user clicks the enter button and "submits" the text. this can be modified to do other things
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                if (list.contains(query)) {
-                    adapter.getFilter().filter(query);
-                } else {
-                    Toast.makeText(SearchActivity.this, "No Match found", Toast.LENGTH_SHORT).show();
-                }
+//                if (list.contains(query)) {
+//                    adapter.getFilter().filter(query);
+//                } else {
+//                    Toast.makeText(SearchActivity.this, "No Match found", Toast.LENGTH_SHORT).show();
+//                }
+
                 return false;
             }
 
