@@ -6,27 +6,30 @@ public class Chat {
     private String msg;
     private String userId;
     private String userName;
-    private  String recipient;
-    public Chat(String msg, String userId, String userName, String recipient){
+    private  String recipientId;
+    private String recipientName;
+    public Chat(String msg, String userId, String userName, String recipientId,String recipientName ){
         this.msg = msg;
         this.userId = userId;
         this.userName = userName;
-        this.recipient = recipient;
+        this.recipientId = recipientId;
+        this.recipientName =recipientName;
     }
 
     public void setMsg(String msg) {
         this.msg = msg;
     }
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
-
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    public  void  setRecipient(String recipient){
-        this.recipient= recipient;
+    public void setRecipientId(String recipient){
+        this.recipientId= recipient;
+    }
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
     }
     public String getMsg() {
         return msg;
@@ -38,9 +41,14 @@ public class Chat {
     public String getUserName() {
         return userName;
     }
-    public  String getRecipient(){
-        return this.recipient;
+    public  String getRecipientId(){
+        return this.recipientId;
     }
+
+    public String getRecipientName() {
+        return recipientName;
+    }
+
 
 }
 

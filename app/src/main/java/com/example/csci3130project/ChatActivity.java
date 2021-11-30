@@ -47,7 +47,8 @@ public class ChatActivity extends AppCompatActivity {
                         String usernameFromDb = snapshot.child("username").getValue(String.class);
                         Intent recipientIdIntent = getIntent();
                         String recipientId = recipientIdIntent.getStringExtra("userId");
-                        Chat chat = new Chat(tempMessage,userId,usernameFromDb,recipientId);
+                        String recipientFName = recipientIdIntent.getStringExtra("userFName");
+                        Chat chat = new Chat(tempMessage,userId,usernameFromDb,recipientId,recipientFName);
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference databaseReference = database.getReference(Chat.class.getSimpleName());
                         databaseReference.push().setValue(chat).addOnCompleteListener(new OnCompleteListener<Void>() {

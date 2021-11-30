@@ -38,6 +38,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
         Button messageBtn = findViewById(R.id.toMessageItemBtn);
 
         String [] userID = new String[1];
+        String [] userFirstName = new String[1];
 
         db.child("Items").child(itemIDIntent).addValueEventListener(new ValueEventListener() {
             @Override
@@ -48,12 +49,14 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 String name =  data.child("name").getValue(String.class);
                 userID[0] = data.child("userID").getValue(String.class);
 
+
                 db.child("Users").child(userID[0]).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String userFName = snapshot.child("firstName").getValue(String.class);
                         String userLName = snapshot.child("lastName").getValue(String.class);
                         String fullName = userFName + " " + userLName;
+                        userFirstName[0] = userFName;
 
                         nameBox.setText(name);
                         typeBox.setText(category);
@@ -77,6 +80,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent msgIntent = new Intent(getApplicationContext(), ChatActivity.class);
                 msgIntent.putExtra("userId",userID[0]);
+                msgIntent.putExtra("userFName",userFirstName[0]);
                 startActivity(msgIntent);
             }
         });
