@@ -3,6 +3,7 @@ package com.example.csci3130project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,8 +45,9 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String usernameFromDb = snapshot.child("username").getValue(String.class);
-
-                        Chat chat = new Chat(tempMessage,userId,usernameFromDb,"cristiano");
+                        Intent recipientIdIntent = getIntent();
+                        String recipientId = recipientIdIntent.getStringExtra("userId");
+                        Chat chat = new Chat(tempMessage,userId,usernameFromDb,recipientId);
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference databaseReference = database.getReference(Chat.class.getSimpleName());
                         databaseReference.push().setValue(chat).addOnCompleteListener(new OnCompleteListener<Void>() {

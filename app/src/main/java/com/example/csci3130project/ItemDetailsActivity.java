@@ -1,6 +1,9 @@
 package com.example.csci3130project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +35,9 @@ public class ItemDetailsActivity extends AppCompatActivity {
         TextView valueBox = findViewById(R.id.itemValue);
         TextView descBox = findViewById(R.id.itemDesc);
         TextView userBox = findViewById(R.id.itemUser);
+        Button messageBtn = findViewById(R.id.toMessageItemBtn);
+
+        String [] userID = new String[1];
 
         db.child("Items").child(itemIDIntent).addValueEventListener(new ValueEventListener() {
             @Override
@@ -40,9 +46,9 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 String description =  data.child("description").getValue(String.class);
                 Integer value = data.child("itemValue").getValue(Integer.class);
                 String name =  data.child("name").getValue(String.class);
-                String userID = data.child("userID").getValue(String.class);
+                userID[0] = data.child("userID").getValue(String.class);
 
-                db.child("Users").child(userID).addValueEventListener(new ValueEventListener() {
+                db.child("Users").child(userID[0]).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String userFName = snapshot.child("firstName").getValue(String.class);
@@ -64,6 +70,14 @@ public class ItemDetailsActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        messageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent msgIntent = new Intent(getApplicationContext(), ChatActivity.class);
+                msgIntent.putExtra("userId",userID[0]);
+                startActivity(msgIntent);
             }
         });
 
