@@ -2,6 +2,8 @@ package com.example.csci3130project;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationChannelCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
@@ -25,6 +30,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UploadActivity extends AppCompatActivity {
 
     EditText mItemName, mItemDescription;
@@ -33,6 +41,7 @@ public class UploadActivity extends AppCompatActivity {
     Button mButton;
     private Double[] location;
     private LocationRequest locationRequest;
+
 
 
     @Override

@@ -1,5 +1,7 @@
 package com.example.csci3130project;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,13 +9,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    private NotificationManagerCompat notifManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        notifManager = NotificationManagerCompat.from(this);
 
         // Intents
 
@@ -122,6 +129,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), ChatActivity.class);
                 startActivity(i);
+            }
+        });
+
+        // Send alert
+        Button refresh = (Button) findViewById(R.id.refreshBtn);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String title = "New Item!";
+                String message = "There are new item in the area!";
+                Intent i = new Intent(getApplicationContext(), NotificationActivity.class);
+                PendingIntent pI = PendingIntent.getActivity(getApplicationContext(), 0, i,0);
+                Notification notification = new NotificationCompat.Builder(getApplicationContext(),Notify.Channel_1)
+                        .setSmallIcon(R.drawable.notify_me).setContentTitle(title)
+                        .setContentText(message).setPriority(NotificationCompat.PRIORITY_HIGH).setContentIntent(pI).build();
+                notifManager.notify(1,notification);
             }
         });
     }
