@@ -12,10 +12,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a7327fa-2ccd-4b91-b155-7bb81dca6d55" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/csci3130project/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/csci3130project/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/csci3130project/SearchActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/csci3130project/SearchActivity.java" afterDir="false" />
-    </list>
+    <list default="true" id="6a7327fa-2ccd-4b91-b155-7bb81dca6d55" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

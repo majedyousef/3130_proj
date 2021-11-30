@@ -27,68 +27,68 @@ import static org.junit.Assert.assertEquals;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-@RunWith(AndroidJUnit4.class)
-public class ProfilePageTest1 {
-    public ActivityScenarioRule<MainActivity> myRule = new ActivityScenarioRule<>(MainActivity.class);
-
-    /*
-    @BeforeClass
-    public static void setup() {
-        Intents.init();
-    }*/
-
-    @Test
-    public void useAppContext() {
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.csci3130project", appContext.getPackageName());
-    }
-
-    @Test
-    public void checkIfProfilePageIsVisible() {
-
-    }
-
-    @Test
-    public void checkPasswordChange(){
-
-    }
-
-    //Checks if users name appears on the top of the screen
-    @Test
-    public void checkIfNameIsVisible() {
-
-    }
-
-    //Checks if bio is visible on page
-    @Test
-    public void checkIfBioIsVisible() {
-
-    }
-
-    //check if password change pop up appears on screen
-    @Test
-    public void checkIfChangePasswordAppears() {
-
-    }
-
-    @Test
-    public void checkIfPasswordisValid() {
-
-    }
-
-    @Test
-    public void checkIfPasswordisInvalid() {
-
-    }
-
-    //Checks if change profile image pops up on the current screen
-    @Test
-    public void checkIfChangeProfileImageAppears() {
-
-    }
-
-    @AfterClass
-    public static void tearDown() {
-        System.gc();
-    }
-}
+//@RunWith(AndroidJUnit4.class)
+//public class ProfilePageTest1 {
+//    public ActivityScenarioRule<MainActivity> myRule = new ActivityScenarioRule<>(MainActivity.class);
+//
+//    /*
+//    @BeforeClass
+//    public static void setup() {
+//        Intents.init();
+//    }*/
+//
+//    @Test
+//    public void useAppContext() {
+//        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+//        assertEquals("com.example.csci3130project", appContext.getPackageName());
+//    }
+//
+//    @Test
+//    public void checkIfProfilePageIsVisible() {
+//
+//    }
+//
+//    @Test
+//    public void checkPasswordChange(){
+//
+//    }
+//
+//    //Checks if users name appears on the top of the screen
+//    @Test
+//    public void checkIfNameIsVisible() {
+//
+//    }
+//
+//    //Checks if bio is visible on page
+//    @Test
+//    public void checkIfBioIsVisible() {
+//
+//    }
+//
+//    //check if password change pop up appears on screen
+//    @Test
+//    public void checkIfChangePasswordAppears() {
+//
+//    }
+//
+//    @Test
+//    public void checkIfPasswordisValid() {
+//
+//    }
+//
+//    @Test
+//    public void checkIfPasswordisInvalid() {
+//
+//    }
+//
+//    //Checks if change profile image pops up on the current screen
+//    @Test
+//    public void checkIfChangeProfileImageAppears() {
+//
+//    }
+//
+//    @AfterClass
+//    public static void tearDown() {
+//        System.gc();
+//    }
+//}

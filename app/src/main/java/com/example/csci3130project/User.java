@@ -14,21 +14,22 @@ public class User {
     private String email;
     private String username;
     private String password;
-    private int userID;
-    private static int count = 0;
 
-    public User() {
-        count++;
-        userID = count;
+    public User(String fName, String lName, String email, String uName, String pass) {
+        this.firstName = fName;
+        this.lastName = lName;
+        this.email = email;
+        this.username = uName;
+        this. password = pass;
     }
 
-    /**
-     * A method for retrieving the user's unique ID
-     * @return an integer representing the user's ID
-     */
-    public int getUserID() {
-        return userID;
-    }
+//    /**
+//     * A method for retrieving the user's unique ID
+//     * @return an integer representing the user's ID
+//     */
+//    public int getUserID() {
+//        return userID;
+//    }
 
     /**
      * A method for retrieving the user's first name

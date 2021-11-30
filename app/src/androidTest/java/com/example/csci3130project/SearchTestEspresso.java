@@ -25,23 +25,23 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 
-public class SearchTestEspresso {
-
-    @Rule
-    public ActivityScenarioRule<MainActivity> myRule = new ActivityScenarioRule<>(MainActivity.class);
-    public IntentsTestRule<MainActivity> myIntentRule = new IntentsTestRule<>(MainActivity.class);
-
-
-    @BeforeClass
-    public static void setup() {
-        Intents.init();
-    }
-
-    @Test
-    public void checkIfSearchBarVisible() {
-        onView(withId(R.id.searchfield)).perform(click());
-    }
-
-
-
-}
+//public class SearchTestEspresso {
+//
+//    @Rule
+//    public ActivityScenarioRule<MainActivity> myRule = new ActivityScenarioRule<>(MainActivity.class);
+//    public IntentsTestRule<MainActivity> myIntentRule = new IntentsTestRule<>(MainActivity.class);
+//
+//
+//    @BeforeClass
+//    public static void setup() {
+//        Intents.init();
+//    }
+//
+//    @Test
+//    public void checkIfSearchBarVisible() {
+//        onView(withId(R.id.searchfield)).perform(click());
+//    }
+//
+//
+//
+//}

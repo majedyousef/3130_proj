@@ -11,4 +11,14 @@
     <string name="menu_reg">Register</string>
     <string name="menu_login">Login</string>
     <string name="menu_profile">Profile</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
+    <string-array name="itemCatArray">
+        <item>Home</item>
+        <item>Electronics</item>
+        <item>Clothing</item>
+        <item>Automobiles</item>
+        <item>Food</item>
+        <item>Drinks</item>
+    </string-array>
 </resources>
