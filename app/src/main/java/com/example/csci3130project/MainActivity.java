@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Send alert
         Button refresh = (Button) findViewById(R.id.refreshBtn);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
