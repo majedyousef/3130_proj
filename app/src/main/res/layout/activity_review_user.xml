@@ -17,7 +17,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/ratingNumber"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_marginTop="44dp"

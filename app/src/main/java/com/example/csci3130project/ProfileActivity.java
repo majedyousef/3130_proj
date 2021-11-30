@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -33,6 +36,10 @@ public class ProfileActivity extends AppCompatActivity {
             TextView nameBox = findViewById(R.id.FullNameText);
             TextView emailBox = findViewById(R.id.EmailText);
             TextView userNameBox = findViewById(R.id.UserNameText);
+
+            RatingBar userStars = findViewById(R.id.ratingBar);
+            userStars.setEnabled(false);
+            TextView userRating = findViewById(R.id.ratingNumber);
 
             db.child("Users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -76,6 +83,15 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             });
 
+            // Intent to the review page
+            Button reviews = (Button) findViewById(R.id.reviewButton);
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getApplicationContext(), UserReviews.class);
+                    startActivity(i);
+                }
+            });
 
         }
     }
