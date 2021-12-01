@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +41,8 @@ import java.util.Map;
 public class NotificationActivity extends AppCompatActivity {
 
     ArrayList<String> favourites = new ArrayList<String>();
+    ListView listView;
+    ArrayAdapter<String > adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +60,7 @@ public class NotificationActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot data) {
                     for(DataSnapshot adSnapshot: data.getChildren()){
-                        String fav = adSnapshot.child("0").getValue(String.class);
-                        Log.v("The favourite is", "" + fav);
-                        // if uploaded == favourite
-                        // if distance < 15km
+                        favourites.add((String) adSnapshot.getValue());
                     }
                 }
 
@@ -68,6 +70,10 @@ public class NotificationActivity extends AppCompatActivity {
                 }
             });
         }
+
+        listView = (ListView) findViewById(R.id.lv2);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, favourites);
+        listView.setAdapter(adapter);
     }
 
 
