@@ -117,7 +117,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             // Intent to the review page
             Button reviews = (Button) findViewById(R.id.reviewButton);
-            logout.setOnClickListener(new View.OnClickListener() {
+            reviews.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(getApplicationContext(), UserReviews.class);
