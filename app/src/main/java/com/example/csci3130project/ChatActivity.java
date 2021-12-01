@@ -96,7 +96,7 @@ public class ChatActivity extends AppCompatActivity {
                 String tempMessage = messageBox.getText().toString().trim();
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 FirebaseDatabase firebase = FirebaseDatabase.getInstance();
-                DatabaseReference uidRef = firebase.getReference().child("Users");
+                DatabaseReference uidRef = firebase.getReference().child("Users").child(userId);
                 System.out.println(uidRef);
                 if(isEmptyMsg(tempMessage)){
                     Toast.makeText(getApplicationContext(),"Message field empty",Toast.LENGTH_LONG).show();
