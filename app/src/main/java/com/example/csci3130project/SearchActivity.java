@@ -27,6 +27,8 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<String> list;
     ArrayAdapter<String > adapter;
 
+    ArrayList<String> locations;
+
     Double latitude;
     Double longitude;
     @Override
@@ -38,6 +40,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
         list = new ArrayList<>();
+        locations = new ArrayList<>();
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
         DatabaseReference db = firebase.getReference();
         db.child("Items").addValueEventListener(new ValueEventListener() {
@@ -49,6 +52,7 @@ public class SearchActivity extends AppCompatActivity {
                     for (DataSnapshot d:data.getChildren()){
                         latitude = d.child("latitude").getValue(Double.class);
                         longitude = d.child("longitude").getValue(Double.class);
+                        locations.add(latitude + " " + longitude);
 
                         String itemName = d.child("name").getValue(String.class);
 
@@ -87,6 +91,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(SearchActivity.this, MapsActivity.class);
+                intent.putExtra("test1", locations.get(i));
                 intent.putExtra("Latitude", latitude);
                 intent.putExtra("Longitude", longitude);
                 intent.putExtra("item", 1);

@@ -69,11 +69,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     //My stuff
-    String productLat;
-    String productLong;
+    double productLat;
+    double productLong;
     Double productLat2;
     Double productLong2;
+    String test2;
     Integer itemclicked = 0;
+    String[] splitLoc;
 
     // code for retrieving items implemented by Hesham Elokdah and refactored by Benjamin Chui
     public boolean pinItems(GoogleMap googleMap) {
@@ -125,11 +127,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //Vinny test stuff
         Intent searchIntent = getIntent();
-        productLat = searchIntent.getStringExtra("Latitude");
-        productLong = searchIntent.getStringExtra("Longitude");
+        productLat = searchIntent.getDoubleExtra("Latitude", 0);
+        productLong = searchIntent.getDoubleExtra("Longitude", 0);
         itemclicked = searchIntent.getIntExtra("item", 0);
-        productLat2 = 44.662645;
-        productLong2 = -63.6035667;
+        test2 = searchIntent.getStringExtra("test1");
+        splitLoc = test2.split(" ");
+        productLat = Double.parseDouble(splitLoc[0]);
+        productLong = Double.parseDouble(splitLoc[1]);
+
         //moveCamera(new LatLng(productLat2, productLong2), currentZoom,"current location");
 
 
@@ -236,7 +241,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         Log.d(TAG, "onMapReady: starts");
         mMap = googleMap;
-        Toast.makeText(this, "Location Services Are Active", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Location Services Are Active" + productLat + productLong, Toast.LENGTH_SHORT).show();
         if (mLocationPermissionGranted) {
             Log.d(TAG, "onMapReady: getting Device current location!!");
             getDeviceLocation(DEFAULT_ZOOM);
@@ -276,7 +281,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             Log.d(TAG, "getDeviceLocation: onComplete: found location");
                             Location currentLocation = (Location) task.getResult();
                             if(itemclicked == 1){
-                                moveCamera(new LatLng(productLat2, productLong2), zoomLevel,"current location");
+                                moveCamera(new LatLng(productLat, productLong), zoomLevel,"current location");
                                 return;
                             }
                             if(currentLocation != null) {
