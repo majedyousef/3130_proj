@@ -82,6 +82,7 @@ public class SetFavourites extends AppCompatActivity {
 
                     db.child("Favorites").child(userID).setValue(favourites).addOnSuccessListener(success -> {
                         Toast.makeText(getApplicationContext(), "Favorites saved.", Toast.LENGTH_SHORT).show();
+                        finish();
                     }).addOnFailureListener(fail -> {
                         Toast.makeText(getApplicationContext(), "Favorites failed to save.", Toast.LENGTH_SHORT).show();
                     });
