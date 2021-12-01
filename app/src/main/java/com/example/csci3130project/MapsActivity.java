@@ -67,6 +67,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static ArrayList<String> itemsList = new ArrayList<String>();
     Marker marker;
 
+
+    //My stuff
+    String productLat;
+    String productLong;
+    Double productLat2;
+    Double productLong2;
+    Integer itemclicked = 0;
+
     // code for retrieving items implemented by Hesham Elokdah and refactored by Benjamin Chui
     public boolean pinItems(GoogleMap googleMap) {
 
@@ -111,8 +119,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         Log.d(TAG, "onCreate: Starts");
         super.onCreate(savedInstanceState);
+
+        //Vinny test stuff
+        Intent searchIntent = getIntent();
+        productLat = searchIntent.getStringExtra("Latitude");
+        productLong = searchIntent.getStringExtra("Longitude");
+        itemclicked = searchIntent.getIntExtra("item", 0);
+        productLat2 = 44.662645;
+        productLong2 = -63.6035667;
+        //moveCamera(new LatLng(productLat2, productLong2), currentZoom,"current location");
+
+
+
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -152,7 +173,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     }
-
 
 
     private void getLocationPermission() {
@@ -255,13 +275,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         if(task.isSuccessful()){
                             Log.d(TAG, "getDeviceLocation: onComplete: found location");
                             Location currentLocation = (Location) task.getResult();
+                            if(itemclicked == 1){
+                                moveCamera(new LatLng(productLat2, productLong2), zoomLevel,"current location");
+                                return;
+                            }
                             if(currentLocation != null) {
                                 Log.d(TAG, "getDeviceLocation: currentLocation Lattitude: " + currentLocation.getLatitude());
                                 Log.d(TAG, "getDeviceLocation: currentLocation Longitude: " + currentLocation.getLongitude());
                                 moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                         zoomLevel,"current location");
-                            }else
+                            }
+                            else
                                 Log.d(TAG, "getDeviceLocation: Current location is null");
+                            //moveCamera(new LatLng(productLat2, productLong2), zoomLevel,"current location");
+
                         }else {
                             Log.d(TAG, "getDeviceLocation: Current location is null");
                             Toast.makeText(MapsActivity.this, "Unable to get curent location", Toast.LENGTH_SHORT).show();
