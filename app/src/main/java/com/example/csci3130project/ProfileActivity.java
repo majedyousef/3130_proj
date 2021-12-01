@@ -85,6 +85,16 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivity(i);
                 }
             });
+
+            // Intent to favourite categories page
+            Button favorites = (Button) findViewById(R.id.favBtn);
+            favorites.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getApplicationContext(), SetFavourites.class);
+                    startActivity(i);
+                }
+            });
         }
     }
 }
