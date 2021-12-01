@@ -24,6 +24,7 @@ public class RegisterInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_info);
 
+        // Get database and intent info
         DatabaseReference repbd = FirebaseDatabase.getInstance().getReference("Reputations");
         Bundle extras = getIntent().getExtras();
         String ID = extras.getString("ID");
@@ -32,18 +33,17 @@ public class RegisterInfoActivity extends AppCompatActivity {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("Rep creation", "starting");
+                // Add a new reputation to the database with the new user's ID
                 repbd.child(ID).setValue(new Reputation(ID)).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Log.e("Rep creation", "success");
+                            // If the reputation is added successfully, inform user and return to login
                             Toast.makeText(getApplicationContext(), "Reputation initialized.", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                             startActivity(i);
                         }
                         else {
-                            Log.e("Rep creation", "failure");
                             Toast.makeText(getApplicationContext(), "Reputation failed to initialize.", Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -54,7 +54,7 @@ public class SearchActivity extends AppCompatActivity {
 
         // Creating the searchview and listeview object by finding the searchview and listview from the uI.
         searchView = (SearchView) findViewById(R.id.searchView);
-        listView = (ListView) findViewById(R.id.lv1);
+        listView = (ListView) findViewById(R.id.list);
 
         //Creating a adapter for the listview and a on query text listener that will listen to the changes in the text view
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);

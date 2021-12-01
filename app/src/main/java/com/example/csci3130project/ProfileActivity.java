@@ -41,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
             userStars.setEnabled(false);
             TextView userRating = findViewById(R.id.ratingNumber);
 
+            // Display the user's personal information
             db.child("Users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot data) {
@@ -58,6 +59,27 @@ public class ProfileActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
+
+            // Display the user's reputation
+            db.child("Reputations").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot data) {
+                    // Get the current user's reputation
+                    if (data.exists()){
+                        Reputation rep = data.getValue(Reputation.class);
+                        // Calculate the user's rating and update their profile
+                        rep.calculateRating();
+                        double score = rep.getTotalScore();
+                        int approxScore = (int) Math.round(rep.getTotalScore());
+                        userRating.setText(Double.toString(score));
+                        userStars.setNumStars(approxScore);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
 

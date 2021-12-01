@@ -15,6 +15,10 @@ public class Review {
     private String comment;
     private double rating;
 
+    public Review() {
+
+    }
+
     public Review(String authorID) {
         this.authorID = authorID;
     }

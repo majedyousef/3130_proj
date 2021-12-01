@@ -1,5 +1,6 @@
 package com.example.csci3130project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
@@ -15,20 +16,28 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ReviewUser extends AppCompatActivity {
+
+    Reputation reputation;
+    String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_user);
 
+        FirebaseUser author = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+
         RatingBar stars = (RatingBar) findViewById(R.id.userStars);
         EditText comment = (EditText) findViewById(R.id.commentText);
         Button submit = (Button) findViewById(R.id.submit);
-        Reputation reputation = new Reputation("123");
 
         // Used for setting colors for the rating bar
         LayerDrawable starcolor = (LayerDrawable) stars.getProgressDrawable();
@@ -60,6 +69,21 @@ public class ReviewUser extends AppCompatActivity {
             }
         });
 
+        // Retrieve user's reputation
+        db.child("Reputations").child("6g9Ruty0B7a072mgWmQkySH8T8C3").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot data) {
+                // Get this user's reputation
+                if (data.exists()){
+                    reputation = data.getValue(Reputation.class);
+                    key = data.getKey();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,9 +97,6 @@ public class ReviewUser extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please select a rating.", Toast.LENGTH_SHORT).show();
                 } else {
                     // Retrieve ID of review author
-                    FirebaseUser author = FirebaseAuth.getInstance().getCurrentUser();
-                    FirebaseDatabase firebase = FirebaseDatabase.getInstance();
-                    DatabaseReference db = firebase.getReference();
                     String authorID;
                     if (author != null) {
                         authorID = db.child("Users").child(author.getUid()).getKey();
@@ -89,8 +110,8 @@ public class ReviewUser extends AppCompatActivity {
                     review.addComment(commentText);
                     reputation.addReview(review);
 
-                    // Add reputation to database
-                    db.child("Reputations").push().setValue(reputation).addOnSuccessListener(success -> {
+                    // Update reputation in database
+                    db.child("Reputations").child("6g9Ruty0B7a072mgWmQkySH8T8C3").setValue(reputation).addOnSuccessListener(success -> {
                         Toast.makeText(getApplicationContext(), "Review added successfully", Toast.LENGTH_SHORT).show();
                     }).addOnFailureListener(fail -> {
                         Toast.makeText(getApplicationContext(), "Review failed.", Toast.LENGTH_SHORT).show();

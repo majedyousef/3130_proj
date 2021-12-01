@@ -1,5 +1,6 @@
 package com.example.csci3130project;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -13,14 +14,15 @@ public class Reputation {
 
     private double rating;
     private int reviewCount;
-    private ArrayList<Review> reviews;
+    private ArrayList<Review> reviews = new ArrayList<Review>(1);
     private String userID;
 
-    public Reputation(String ID) {
-        reviews = new ArrayList<Review>(1);
+    public Reputation() {
+
+    }
+
+    public Reputation(String ID) { ;
         userID = ID;
-        rating = 0;
-        reviewCount = 0;
     }
 
     /**
@@ -36,6 +38,7 @@ public class Reputation {
      * @return a double containing the score
      */
     public double getTotalScore() {
+        calculateRating();
         return rating;
     }
 
@@ -65,5 +68,9 @@ public class Reputation {
     public void addReview(Review rev) {
         reviewCount++;
         reviews.add(rev);
+    }
+
+    public ArrayList<Review> getReviews() {
+        return reviews;
     }
 }
