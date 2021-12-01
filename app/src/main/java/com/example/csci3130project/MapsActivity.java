@@ -73,9 +73,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     double productLong;
     Double productLat2;
     Double productLong2;
-    String test2;
+    String itemlocation;
     Integer itemclicked = 0;
-    String[] splitLoc;
+    String[] splitLocation;
 
     // code for retrieving items implemented by Hesham Elokdah and refactored by Benjamin Chui
     public boolean pinItems(GoogleMap googleMap) {
@@ -125,18 +125,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d(TAG, "onCreate: Starts");
         super.onCreate(savedInstanceState);
 
-        //Vinny test stuff
+        //Search intent variables, when a user has clicked a item from the search activity these variables
+        //Are populated to move the users camera to product location.
         Intent searchIntent = getIntent();
-        productLat = searchIntent.getDoubleExtra("Latitude", 0);
-        productLong = searchIntent.getDoubleExtra("Longitude", 0);
         itemclicked = searchIntent.getIntExtra("item", 0);
-        test2 = searchIntent.getStringExtra("test1");
-        splitLoc = test2.split(" ");
-        productLat = Double.parseDouble(splitLoc[0]);
-        productLong = Double.parseDouble(splitLoc[1]);
-
-        //moveCamera(new LatLng(productLat2, productLong2), currentZoom,"current location");
-
+        itemlocation = searchIntent.getStringExtra("test1");
+        splitLocation = itemlocation.split(" ");
+        productLat = Double.parseDouble(splitLocation[0]);
+        productLong = Double.parseDouble(splitLocation[1]);
 
 
 
@@ -241,7 +237,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         Log.d(TAG, "onMapReady: starts");
         mMap = googleMap;
-        Toast.makeText(this, "Location Services Are Active" + productLat + productLong, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Location Services Are Active", Toast.LENGTH_SHORT).show();
         if (mLocationPermissionGranted) {
             Log.d(TAG, "onMapReady: getting Device current location!!");
             getDeviceLocation(DEFAULT_ZOOM);

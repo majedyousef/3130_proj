@@ -39,6 +39,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
+        //A list to keep track of the items, and another list to keep track of the item locations in the list
         list = new ArrayList<>();
         locations = new ArrayList<>();
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
@@ -52,6 +53,7 @@ public class SearchActivity extends AppCompatActivity {
                     for (DataSnapshot d:data.getChildren()){
                         latitude = d.child("latitude").getValue(Double.class);
                         longitude = d.child("longitude").getValue(Double.class);
+                        //Adds the item location to the list based on the position in search, so it will be tied to the correct item / location
                         locations.add(latitude + " " + longitude);
 
                         String itemName = d.child("name").getValue(String.class);
@@ -59,8 +61,6 @@ public class SearchActivity extends AppCompatActivity {
                                 /* Adds product location lat and long to search display (using to visualize)
                                 + "\n LOCATION: Lat: " + latitude
                                 + " Long: " + longitude;*/
-
-
 
                         list.add(itemName);
                     }
