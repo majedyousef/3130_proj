@@ -33,6 +33,8 @@ public class SetFavourites extends AppCompatActivity {
         CheckBox category3 = findViewById(R.id.category3);
         CheckBox category4 = findViewById(R.id.category4);
         CheckBox category5 = findViewById(R.id.category5);
+        CheckBox category6 = findViewById(R.id.category6);
+        CheckBox category7 = findViewById(R.id.category7);
         //TextView statusLabel = findViewById(R.id.statusLabel);
 
         // Confirm the user's choice of favourite categories
@@ -59,6 +61,12 @@ public class SetFavourites extends AppCompatActivity {
                 }
                 if (category5.isChecked()) {
                     favourites.add(category5.getText().toString());
+                }
+                if (category6.isChecked()) {
+                    favourites.add(category6.getText().toString());
+                }
+                if (category7.isChecked()) {
+                    favourites.add(category7.getText().toString());
                 }
 
                 /*
