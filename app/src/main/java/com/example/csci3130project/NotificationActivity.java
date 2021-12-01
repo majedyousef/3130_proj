@@ -37,12 +37,39 @@ import java.util.Map;
 
 public class NotificationActivity extends AppCompatActivity {
 
+    ArrayList<String> favourites = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase firebase = FirebaseDatabase.getInstance();
+        DatabaseReference db = firebase.getReference();
+        String userID = db.child("Users").child(user.getUid()).getKey();
+
+        if (db.child("Favourites") != null) {
+
+            db.child("Favourites").child(user.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot data) {
+                    String fName = data.child("firstName").getValue(String.class);
+                    String lName = data.child("lastName").getValue(String.class);
+                    String fullName = fName + " " + lName;
+                    String userName = data.child("username").getValue(String.class);
+                    String email = data.child("email").getValue(String.class);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
+
+
 
 
 }
