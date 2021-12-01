@@ -37,22 +37,12 @@ import java.util.Map;
 
 public class NotificationActivity extends AppCompatActivity {
 
-    private NotificationManagerCompat notifManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
-        notifManager = NotificationManagerCompat.from(this);
 
     }
 
-    public void sendOnChannel1(View v){
-        String title = "New Item!";
-        String message = "There is a new item in the area!";
-        Notification notification = new NotificationCompat.Builder(this,Notify.Channel_1)
-                .setSmallIcon(R.drawable.notify_me).setContentTitle(title)
-                .setContentText(message).setPriority(NotificationCompat.PRIORITY_LOW).build();
-        notifManager.notify(1,notification);
-    }
+
 }
