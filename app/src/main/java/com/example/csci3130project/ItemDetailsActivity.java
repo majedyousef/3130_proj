@@ -79,8 +79,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent msgIntent = new Intent(getApplicationContext(), ChatActivity.class);
-                msgIntent.putExtra("userId",userID[0]);
-                msgIntent.putExtra("userFName",userFirstName[0]);
+                msgIntent.putExtra("userId",userID[0].toString());
+                msgIntent.putExtra("userFName",userFirstName[0].toString());
                 startActivity(msgIntent);
             }
         });
