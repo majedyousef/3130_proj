@@ -1,6 +1,9 @@
 package com.example.csci3130project;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,8 +41,14 @@ public class ProfileActivity extends AppCompatActivity {
             TextView userNameBox = findViewById(R.id.UserNameText);
 
             RatingBar userStars = findViewById(R.id.ratingBar);
-            userStars.setEnabled(false);
             TextView userRating = findViewById(R.id.ratingNumber);
+            TextView ratingCount = findViewById(R.id.ratingCount);
+
+            // Used for setting colors for the rating bar
+            LayerDrawable starcolor = (LayerDrawable) userStars.getProgressDrawable();
+            starcolor.getDrawable(1).setColorFilter(Color.parseColor("#e3e6e9"), PorterDuff.Mode.SRC_ATOP);
+            starcolor.getDrawable(0).setColorFilter(Color.parseColor("#e3e6e9"), PorterDuff.Mode.SRC_ATOP);
+            starcolor.getDrawable(2).setColorFilter(Color.parseColor("#900C3F"), PorterDuff.Mode.SRC_ATOP);
 
             // Display the user's personal information
             db.child("Users").child(user.getUid()).addValueEventListener(new ValueEventListener() {
@@ -72,9 +81,11 @@ public class ProfileActivity extends AppCompatActivity {
                         // Calculate the user's rating and update their profile
                         rep.calculateRating();
                         double score = rep.getTotalScore();
-                        int approxScore = (int) Math.round(rep.getTotalScore());
+                        float fscore = (float) score;
                         userRating.setText(Double.toString(score));
-                        userStars.setNumStars(approxScore);
+                        userStars.setRating(fscore);
+                        String count = Integer.toString(rep.getReviewCount());
+                        ratingCount.setText("(" + count + ") ratings");
                     }
                 }
 

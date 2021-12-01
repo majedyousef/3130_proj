@@ -50,7 +50,7 @@ public class UserReviews extends AppCompatActivity {
             });
         }
 
-        adapter = new ArrayAdapter<Review>(this, android.R.layout.simple_list_item_1,reviewList);
-        listView.setAdapter(adapter);
+        //adapter = new ArrayAdapter<Review>(this, android.R.layout.simple_list_item_1,reviewList);
+        //listView.setAdapter(adapter);
     }
 }
