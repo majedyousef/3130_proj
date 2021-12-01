@@ -96,7 +96,7 @@ public class ChatActivity extends AppCompatActivity {
                 String tempMessage = messageBox.getText().toString().trim();
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 FirebaseDatabase firebase = FirebaseDatabase.getInstance();
-                DatabaseReference uidRef = firebase.getReference().child("Chat");
+                DatabaseReference uidRef = firebase.getReference().child("Users");
                 System.out.println(uidRef);
                 if(isEmptyMsg(tempMessage)){
                     Toast.makeText(getApplicationContext(),"Message field empty",Toast.LENGTH_LONG).show();
@@ -106,13 +106,16 @@ public class ChatActivity extends AppCompatActivity {
                 uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //String usernameFromDb = snapshot.child("username").getValue(String.class);
+                        String usernameFromDb = snapshot.child("username").getValue(String.class);
                         Intent recipientIdIntent = getIntent();
-                        //String recipientId = recipientIdIntent.getStringExtra("userId");
-                        //String recipientFName = recipientIdIntent.getStringExtra("userFName");
+                        String recipientId = recipientIdIntent.getStringExtra("userId");
+                        String recipientFName = recipientIdIntent.getStringExtra("userFName");
+                        /*
                         String recipientId="1";
                         String recipientFName="Ben";
                         String usernameFromDb="Sabi";
+                        */
+
 
                         Chat chat = new Chat(tempMessage,userId,usernameFromDb,recipientId,recipientFName);
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
