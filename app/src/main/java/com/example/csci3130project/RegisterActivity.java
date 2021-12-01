@@ -81,7 +81,8 @@ public class RegisterActivity extends AppCompatActivity {
                                           public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
                                                 Toast.makeText(RegisterActivity.this, "User has been added!", Toast.LENGTH_SHORT).show();
-                                                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                                                Intent i = new Intent(getApplicationContext(), RegisterInfoActivity.class);
+                                                i.putExtra("ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
                                                 startActivity(i);
                                             }
                                             else {

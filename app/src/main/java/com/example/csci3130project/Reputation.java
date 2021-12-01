@@ -17,8 +17,10 @@ public class Reputation {
     private String userID;
 
     public Reputation(String ID) {
-        reviews = new ArrayList<Review>();
+        reviews = new ArrayList<Review>(1);
         userID = ID;
+        rating = 0;
+        reviewCount = 0;
     }
 
     /**
@@ -34,7 +36,6 @@ public class Reputation {
      * @return a double containing the score
      */
     public double getTotalScore() {
-        calculateRating();
         return rating;
     }
 
