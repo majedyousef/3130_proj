@@ -54,11 +54,12 @@ public class NotificationActivity extends AppCompatActivity {
             db.child("Favourites").child(user.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot data) {
-                    String fName = data.child("firstName").getValue(String.class);
-                    String lName = data.child("lastName").getValue(String.class);
-                    String fullName = fName + " " + lName;
-                    String userName = data.child("username").getValue(String.class);
-                    String email = data.child("email").getValue(String.class);
+                    for(DataSnapshot adSnapshot: data.getChildren()){
+                        String fav = adSnapshot.child("0").getValue(String.class);
+                        Log.v("The favourite is", "" + fav);
+                        // if uploaded == favourite
+                        // if distance < 15km
+                    }
                 }
 
                 @Override
