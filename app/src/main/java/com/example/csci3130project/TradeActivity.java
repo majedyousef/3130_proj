@@ -10,5 +10,12 @@ public class TradeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trade);
+
+        String userIDIntent = getIntent().getStringExtra("userID");
+        String itemIDIntent = getIntent().getStringExtra("itemID");
+        String itemValueIntent = getIntent().getStringExtra("itemValue");
+
+
+
     }
 }
