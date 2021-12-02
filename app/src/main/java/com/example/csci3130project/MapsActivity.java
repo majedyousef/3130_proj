@@ -68,12 +68,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     Marker marker;
 
 
-    //My stuff
+
     double productLat;
     double productLong;
     Double productLat2;
     Double productLong2;
-    String itemlocation;
+    String itemlocation = "empty ";
     Integer itemclicked = 0;
     String[] splitLocation;
 
@@ -128,12 +128,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //Search intent variables, when a user has clicked a item from the search activity these variables
         //Are populated to move the users camera to product location.
         Intent searchIntent = getIntent();
-        itemclicked = searchIntent.getIntExtra("item", 0);
-        itemlocation = searchIntent.getStringExtra("test1");
-        splitLocation = itemlocation.split(" ");
-        productLat = Double.parseDouble(splitLocation[0]);
-        productLong = Double.parseDouble(splitLocation[1]);
+        itemclicked = searchIntent.getIntExtra("itemClicked", 0);
 
+        if(itemclicked == 1){
+            itemlocation = searchIntent.getStringExtra("itemLocation");
+            splitLocation = itemlocation.split(" ");
+            productLat = Double.parseDouble(splitLocation[0]);
+            productLong = Double.parseDouble(splitLocation[1]);
+        }
 
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());

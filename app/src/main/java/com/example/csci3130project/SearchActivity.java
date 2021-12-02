@@ -91,10 +91,10 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(SearchActivity.this, MapsActivity.class);
-                intent.putExtra("test1", locations.get(i));
+                intent.putExtra("itemLocation", locations.get(i));
                 intent.putExtra("Latitude", latitude);
                 intent.putExtra("Longitude", longitude);
-                intent.putExtra("item", 1);
+                intent.putExtra("itemClicked", 1);
                 startActivity(intent);
 
             }
@@ -121,5 +121,6 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 }
