@@ -20,6 +20,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
     private String userTradeID;
     private String itemTradeID;
     private Integer itemTradeValue;
+    private String userName;
+    private String itemName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 userTradeID = userID;
                 itemTradeID = itemIDIntent;
                 itemTradeValue = value;
+                itemName = name;
 
                 db.child("Users").child(userID).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -59,6 +62,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
                         String userFName = snapshot.child("firstName").getValue(String.class);
                         String userLName = snapshot.child("lastName").getValue(String.class);
                         String fullName = userFName + " " + userLName;
+
+                        userName = fullName;
 
                         nameBox.setText(name);
                         typeBox.setText(category);
@@ -88,6 +93,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 i.putExtra("userID", userTradeID);
                 i.putExtra("itemID", itemTradeID);
                 i.putExtra("itemValue", itemTradeValue);
+                i.putExtra("userName", userName);
+                i.putExtra("itemName", itemName);
 
                 startActivity(i);
             }
