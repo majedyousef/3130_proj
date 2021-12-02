@@ -103,6 +103,8 @@ public class ChatActivity extends AppCompatActivity {
                     return;
                 }
 
+                System.out.println("Calling something "+getUserName());
+                /*
                 uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -110,12 +112,6 @@ public class ChatActivity extends AppCompatActivity {
                         Intent recipientIdIntent = getIntent();
                         String recipientId = recipientIdIntent.getStringExtra("userId");
                         String recipientFName = recipientIdIntent.getStringExtra("userFName");
-                        /*
-                        String recipientId="1";
-                        String recipientFName="Ben";
-                        String usernameFromDb="Sabi";
-                        */
-
 
                         Chat chat = new Chat(tempMessage,userId,usernameFromDb,recipientId,recipientFName);
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -164,6 +160,7 @@ public class ChatActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),error.getMessage()+" "+ error.getDetails(),Toast.LENGTH_LONG).show();
                     }
                 });
+                */
             }
         });
     }
@@ -172,6 +169,27 @@ public class ChatActivity extends AppCompatActivity {
     }
     public boolean noRecipient(String recipient){
         return recipient.isEmpty();
+    }
+    public String getUserName(){
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase firebase = FirebaseDatabase.getInstance();
+        DatabaseReference uidRef = firebase.getReference().child("Users").child(userId);
+        String [] userNameArr = new String[1];
+
+        uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String usernameFromDb = snapshot.child("username").getValue(String.class);
+                userNameArr[0] = usernameFromDb;
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return userNameArr[0];
     }
 
 
