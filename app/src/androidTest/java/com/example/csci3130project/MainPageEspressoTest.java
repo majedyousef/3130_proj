@@ -83,6 +83,7 @@ public class MainPageEspressoTest {
     @Test
     public void checkIfScanForItemButton() {
         onView(withId(R.id.refreshBtn)).perform(click());
+        onView(withId(R.id.successView)).check(matches(withText("New Item!")));
     }
 
     @After
