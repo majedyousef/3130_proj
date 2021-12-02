@@ -1,6 +1,9 @@
 package com.example.csci3130project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +16,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ItemDetailsActivity extends AppCompatActivity {
+
+    private String userTradeID;
+    private String itemTradeID;
+    private Integer itemTradeValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,10 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 String name =  data.child("name").getValue(String.class);
                 String userID = data.child("userID").getValue(String.class);
 
+                userTradeID = userID;
+                itemTradeID = itemIDIntent;
+                itemTradeValue = value;
+
                 db.child("Users").child(userID).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -64,6 +75,21 @@ public class ItemDetailsActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+
+
+        Button trade = (Button) findViewById(R.id.tradeWithBtn);
+        trade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), TradeActivity.class);
+                i.putExtra("userID", userTradeID);
+                i.putExtra("itemID", itemTradeID);
+                i.putExtra("itemValue", itemTradeValue);
+
+                startActivity(i);
             }
         });
 
