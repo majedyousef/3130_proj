@@ -94,10 +94,6 @@ public class NotificationActivity extends AppCompatActivity {
             });
         }
 
-        Log.d(TAG, "current locale: " + currentLocale);
-
-
-
         if (db.child("Users") != null){
             DatabaseReference dbItems = firebase.getReference("Items");
             dbItems.addValueEventListener(new ValueEventListener() {
@@ -117,8 +113,6 @@ public class NotificationActivity extends AppCompatActivity {
 
                         Log.d(TAG, "Lat and Long: " + lat + " " + lon);
                         Log.d(TAG, "Name and Category: " + name + " " + category);
-
-
 
                         Location itemLocale = new Location("Item Location");
 
@@ -153,8 +147,6 @@ public class NotificationActivity extends AppCompatActivity {
                 }
             });
         }
-
-
     }
 
     private void getLocationPermission() {
@@ -208,31 +200,5 @@ public class NotificationActivity extends AppCompatActivity {
             Log.d(TAG, "getDeviceLocation: SecurityException: =" + se.getMessage());
         }
     }
-
-
-
-
 }
-//
-//    Task location = mFusedLocationProviderClient.getLastLocation();
-//                location.addOnCompleteListener(new OnCompleteListener() {
-//@Override
-//public void onComplete(@NonNull Task task) {
-//        if (task.isSuccessful()) {
-//        Log.d(TAG, "getDeviceLocation: onComplete: found location");
-//        Location currentLocale = (Location) task.getResult();
-//        if (currentLocale != null) {
-//        Log.d(TAG, "getDeviceLocation: currentLocation Lattitude: " + currentLocation.getLatitude());
-//        Log.d(TAG, "getDeviceLocation: currentLocation Longitude: " + currentLocation.getLongitude());
-//
-//        currentLocation.setLatitude(currentLocale.getLatitude());
-//        currentLocation.setLongitude(currentLocale.getLongitude());
-//        Log.d(TAG, "getDeviceLocation: (In getDeviceLocation): " + currentLocation);
-//
-//        } else
-//        Log.d(TAG, "getDeviceLocation: Current location is null");
-//        } else {
-//        Log.d(TAG, "getDeviceLocation: Current location is null");
-//        }
-//        }
-//        });
+
