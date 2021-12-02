@@ -61,20 +61,20 @@ public class NotificationActivity extends AppCompatActivity {
     ArrayAdapter<String > adapter;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private Boolean mLocationPermissionGranted = false;
-    public Location currentLocale;
+    private static final Location currentLocale = new Location("Current Location");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
-//        getLocationPermission();
+        getLocationPermission();
+        getDeviceLocation();
 
         listView = (ListView) findViewById(R.id.lv2);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
         DatabaseReference db = firebase.getReference();
-        String userID = db.child("Users").child(user.getUid()).getKey();
 
         if (db.child("Favourites") != null) {
 
@@ -94,7 +94,7 @@ public class NotificationActivity extends AppCompatActivity {
             });
         }
 
-
+        Log.d(TAG, "current locale: " + currentLocale);
 
 
 
@@ -120,25 +120,28 @@ public class NotificationActivity extends AppCompatActivity {
 
 
 
-//                        Location itemLocale = new Location("Item Location");
-//
-//                        itemLocale.setLatitude(lat);
-//                        itemLocale.setLongitude(lon);
+                        Location itemLocale = new Location("Item Location");
+
+                        itemLocale.setLatitude(lat);
+                        itemLocale.setLongitude(lon);
 
                         //getDeviceLocation();
-//                        Log.d(TAG, "current locale: " + currentLocale);
+                        Log.d(TAG, "current locale: " + currentLocale);
 
-                        //float distance = currentLocation.distanceTo(itemLocale);
+                        float distance = currentLocale.distanceTo(itemLocale);
+                        Log.d(TAG, "DISTANCE BETWEEN: " + distance);
 
-
-
+                        // ONLY WORKS FIRST TRY FOR MAJED AND SABI
+                        // IF YOU ARE NOT NAMED ABU OR SABI IT WILL WAIT FOR A DATA CHANGE
+                        // I DO NOT KNOW WHY
                         if (!userID.equals(user.getUid())) {
                             if (favourites.contains(category)) {
-                               // if ((distance / 1000) >= 15) {
+                                // if we are within 15km then
+                                if ((distance / 1000) <= 15) {
                                 allFavourites.add(name);
                                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, allFavourites);
                                 listView.setAdapter(adapter);
-                               // }
+                                }
                             }
                         }
                     }
@@ -154,57 +157,57 @@ public class NotificationActivity extends AppCompatActivity {
 
     }
 
-//    private void getLocationPermission() {
-//        Log.d(TAG, "getLocationPermission : starts");
-//        String[] permissions = {FINE_LOCATION, COURSE_LOCATION};
-//
-//        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-//                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-//            if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-//                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-//                mLocationPermissionGranted = true;
-//                Log.d(TAG, "getLocationPermission : Permissions already granted");
-//            } else {
-//                ActivityCompat.requestPermissions(this,
-//                        permissions, LOCATION_PERMISSION_REQUEST_CODE);
-//                Log.d(TAG, "getLocationPermission : Request for permissions");
-//            }
-//        } else {
-//            ActivityCompat.requestPermissions(this,
-//                    permissions, LOCATION_PERMISSION_REQUEST_CODE);
-//            Log.d(TAG, "getLocationPermission : Request for permissions");
-//        }
-//        Log.d(TAG, "getLocationPermission :  ends");
-//    }
-//
-//    public void getDeviceLocation(){
-//        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-//        try {
-//            if (mLocationPermissionGranted) {
-//                Task location = mFusedLocationProviderClient.getLastLocation();
-//                location.addOnCompleteListener(new OnCompleteListener() {
-//                    @Override
-//                    public void onComplete(@NonNull Task task) {
-//                        if(task.isSuccessful()){
-//                            Log.d(TAG, "getDeviceLocation: onComplete: found location");
-//                            Location currentLocation = (Location) task.getResult();
-//                            if(currentLocation != null) {
-//                                Log.d(TAG, "getDeviceLocation: currentLocation Lattitude: " + currentLocation.getLatitude());
-//                                Log.d(TAG, "getDeviceLocation: currentLocation Longitude: " + currentLocation.getLongitude());
-//                                currentLocale.setLatitude(currentLocation.getLatitude());
-//                                currentLocale.setLongitude(currentLocation.getLongitude());
-//                            }else
-//                                Log.d(TAG, "getDeviceLocation: Current location is null");
-//                        }else {
-//                            Log.d(TAG, "getDeviceLocation: Current location is null");
-//                        }
-//                    }
-//                });
-//            }
-//        } catch (SecurityException se) {
-//            Log.d(TAG, "getDeviceLocation: SecurityException: =" + se.getMessage());
-//        }
-//    }
+    private void getLocationPermission() {
+        Log.d(TAG, "getLocationPermission : starts");
+        String[] permissions = {FINE_LOCATION, COURSE_LOCATION};
+
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                mLocationPermissionGranted = true;
+                Log.d(TAG, "getLocationPermission : Permissions already granted");
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        permissions, LOCATION_PERMISSION_REQUEST_CODE);
+                Log.d(TAG, "getLocationPermission : Request for permissions");
+            }
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    permissions, LOCATION_PERMISSION_REQUEST_CODE);
+            Log.d(TAG, "getLocationPermission : Request for permissions");
+        }
+        Log.d(TAG, "getLocationPermission :  ends");
+    }
+
+    public void getDeviceLocation(){
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        try {
+            if (mLocationPermissionGranted) {
+                Task location = mFusedLocationProviderClient.getLastLocation();
+                location.addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if(task.isSuccessful()){
+                            Log.d(TAG, "getDeviceLocation: onComplete: found location");
+                            Location currentLocation = (Location) task.getResult();
+                            if(currentLocation != null) {
+                                Log.d(TAG, "getDeviceLocation: currentLocation Lattitude: " + currentLocation.getLatitude());
+                                Log.d(TAG, "getDeviceLocation: currentLocation Longitude: " + currentLocation.getLongitude());
+                                currentLocale.setLatitude(currentLocation.getLatitude());
+                                currentLocale.setLongitude(currentLocation.getLongitude());
+                            }else
+                                Log.d(TAG, "getDeviceLocation: Current location is null");
+                        }else {
+                            Log.d(TAG, "getDeviceLocation: Current location is null");
+                        }
+                    }
+                });
+            }
+        } catch (SecurityException se) {
+            Log.d(TAG, "getDeviceLocation: SecurityException: =" + se.getMessage());
+        }
+    }
 
 
 
