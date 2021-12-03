@@ -17,6 +17,7 @@ public class TradeRequest {
         this.partnerItemID = partnerItemID;
         this.itemValue = itemValue;
         this.partnerItemValue = partnerItemValue;
+        this.tradeAccepted = tradeAccepted;
     }
 
     public String getUserID() {
