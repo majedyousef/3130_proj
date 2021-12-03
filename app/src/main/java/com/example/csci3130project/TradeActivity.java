@@ -73,11 +73,13 @@ public class TradeActivity extends AppCompatActivity {
 
                     Log.d(TAG, "other user: " + userID);
 
+                    // if this item belongs to us, add it to the list
                     if (userID.equals(user.getUid())){
                         myItems.add(thisItem);
 
                     }
                 }
+                // create a selection dropdown using a spinner and the arraylist we created
                 Spinner spinner = (Spinner) findViewById(R.id.tradeItemChoice);
                 ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(getApplicationContext(), android.R.layout.simple_spinner_item, myItems);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -87,16 +89,14 @@ public class TradeActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
 
+        // when the user clicks send
         Button send = (Button) findViewById(R.id.tradeBtn);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TradeActivity.this, "You have sent a trade request with: " + myItemChoice.getSelectedItem().toString().trim(), Toast.LENGTH_SHORT).show();
                 String me = user.getUid();
                 DatabaseReference dbMain = firebase.getReference();
                 DatabaseReference db = firebase.getReference("Items");
@@ -115,15 +115,21 @@ public class TradeActivity extends AppCompatActivity {
                             Double lat = data.child("latitude").getValue(Double.class);
                             Double lon = data.child("longitude").getValue(Double.class);
 
+                            // if the item belongs to us
                             if (userID.equals(user.getUid())){
                                 Item thisItem = new Item(userID, name, desc, type, itemValue, lon, lat, status);
                                 Log.d(TAG, "Item to trade " + thisItem);
                                 Log.d(TAG, "Item I want: " + myItemChoice.getSelectedItem());
+                                // if this item belongs to us, and is the selected dropdown item
                                 if (thisItem.equals(myItemChoice.getSelectedItem())){
                                     Log.d(TAG, "SUCCESS");
                                     Integer myValue = itemValue;
                                     String myItem = data.getKey();
+
+                                    // create the trade request
                                     TradeRequest newTrade = new TradeRequest(user.getUid(), userIDIntent, name, itemNameIntent, myItem, itemIDIntent, myValue, itemValueIntent, 0);
+
+                                    // send the trade request
                                     dbMain.child("Trades").push().setValue(newTrade).addOnSuccessListener(success -> {
                                         Toast.makeText(getApplicationContext(), "Trade offer sent succesfully", Toast.LENGTH_SHORT).show();
                                     }).addOnFailureListener(fail -> {
@@ -134,16 +140,14 @@ public class TradeActivity extends AppCompatActivity {
                         }
                     }
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
+                    public void onCancelled(@NonNull DatabaseError error) { }
                 });
             }
         });
         Log.d(TAG, "current user: " + myItems);
 
+        // displays the trade info on the page
         tradePartner.setText(userNameIntent + "'s Item:");
         tradeItem.setText(itemNameIntent);
-
     }
 }

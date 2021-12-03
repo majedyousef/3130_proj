@@ -78,7 +78,6 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                         String myItemID = data.child("partnerItemID").getValue(String.class);
                         Float theirValue = data.child("itemValue").getValue(Float.class);
                         Float myValue = data.child("partnerItemValue").getValue(Float.class);
-                        Integer tradeAccepted = data.child("partnerItemValue").getValue(Integer.class);
 
                         // if we find a trade that pertains to us
                         if (myID.equals(user.getUid())){
@@ -94,6 +93,7 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                             theirItem.setText(theirItemName);
                             myItem.setText(myItemName);
 
+                            // find the difference in value
                             int totalDiff = (int) (theirValue - myValue);
                             String totalDiffStr = Integer.toString(Math.abs(totalDiff));
                             diffNum.setText(totalDiffStr + " $");
@@ -106,8 +106,10 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                             Log.d(TAG, "Their num " + theirValue );
                             Log.d(TAG, "The current difference" + (theirValue-myValue) );
 
-
+                            // some elseIf statements to determine how good the trade is for the user based on value
                             if (totalDiff < 0){
+                                // if the difference is in the negative, we are losing value
+                                // there are different levels of loss that we define, as poor and very poor
                                 profitLoss.setText("Your Loss Is");
                                 Log.d(TAG, "The difference if neg" + (myValue-theirValue)/myValue );
                                 if((myValue-theirValue)/myValue >= 0.5){
@@ -124,6 +126,9 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                                 }
                             }
                             else if (totalDiff > 0) {
+                                // if they are in the positive, we are gaining value
+                                // the two levels are good and very good
+                                // additionally there is an even value for both positive and negative if we are close in value
                                 profitLoss.setText("Your Profit Is");
                                 Log.d(TAG, "The difference if pos" + (theirValue-myValue)/theirValue );
                                 if((theirValue-myValue)/theirValue >= 0.5){
@@ -140,32 +145,19 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                                 }
                             }
                             else {
+                                // have a specific dialogue if the values are exactly equal in value
                                 profitLoss.setText("The Values Are Equal");
                                 differential.setText(valuation.get(2));
                                 differential.setTextColor(Color.parseColor("#5F9EA0"));
                             }
                         }
-                        else {
-                            theirItem.setText("");
-                            Log.d(TAG, "WE MADE IT?");
-                            myItem.setText("");
-                            differential.setText("");
-                            diffNum.setText("");
-                            profitLoss.setText("");
-                            tradeOptions.setText("No Incoming Trade Requests");
-                        }
-
-
                     }
                 }
-
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
+                public void onCancelled(@NonNull DatabaseError error) { }
             });
 
-
+            // if the user hits accept
             accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -176,12 +168,13 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                     // delete the trade item
                     db.child("Trades").child(tradeRequest).setValue(null);
 
+                    // let the user know the trade was accepted
                     Toast.makeText(getApplicationContext(), "Trade accepted!", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });
 
-
+            // if the user hits reject
             reject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
