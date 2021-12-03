@@ -52,6 +52,8 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                     for (DataSnapshot data : snapshot.getChildren()){
                         String otherPersonID = data.child("userID").getValue(String.class);
                         String myID = data.child("partnerID").getValue(String.class);
+                        String theirItemName = data.child("itemName").getValue(String.class);
+                        String myItemName = data.child("partnerItemName").getValue(String.class);
                         String theirItemID = data.child("itemID").getValue(String.class);
                         String myItemID = data.child("partnerItemID").getValue(String.class);
                         Float theirValue = data.child("itemValue").getValue(Float.class);
@@ -59,8 +61,8 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                         Integer tradeAccepted = data.child("partnerItemValue").getValue(Integer.class);
 
                         if (myID.equals(user.getUid())){
-                            theirItem.setText(theirItemID);
-                            myItem.setText(myItemID);
+                            theirItem.setText(theirItemName);
+                            myItem.setText(myItemName);
 
                             int totalDiff = (int) (theirValue - myValue);
                             String totalDiffStr = Integer.toString(Math.abs(totalDiff));

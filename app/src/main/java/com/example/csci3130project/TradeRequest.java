@@ -4,15 +4,19 @@ public class TradeRequest {
 
     private String userID;
     private String partnerID;
+    private String itemName;
+    private String partnerItemName;
     private String itemID;
     private String partnerItemID;
     private Integer itemValue;
     private Integer partnerItemValue;
     private Integer tradeAccepted;
 
-    public TradeRequest(String userID, String partnerID, String itemID, String partnerItemID, Integer itemValue, Integer partnerItemValue, Integer tradeAccepted) {
+    public TradeRequest(String userID, String partnerID, String itemName, String partnerItemName, String itemID, String partnerItemID, Integer itemValue, Integer partnerItemValue, Integer tradeAccepted) {
         this.userID = userID;
         this.partnerID = partnerID;
+        this.itemName = itemName;
+        this.partnerItemName = partnerItemName;
         this.itemID = itemID;
         this.partnerItemID = partnerItemID;
         this.itemValue = itemValue;
@@ -34,6 +38,22 @@ public class TradeRequest {
 
     public void setPartnerID(String partnerID) {
         this.partnerID = partnerID;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getPartnerItemName() {
+        return partnerItemName;
+    }
+
+    public void setPartnerItemName(String partnerItemName) {
+        this.partnerItemName = partnerItemName;
     }
 
     public String getItemID() {

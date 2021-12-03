@@ -125,7 +125,7 @@ public class TradeActivity extends AppCompatActivity {
                                     Log.d(TAG, "SUCCESS");
                                     Integer myValue = itemValue;
                                     String myItem = data.getKey();
-                                    TradeRequest newTrade = new TradeRequest(user.getUid(), userIDIntent, myItem, itemIDIntent, myValue, itemValueIntent, 0);
+                                    TradeRequest newTrade = new TradeRequest(user.getUid(), userIDIntent, name, itemNameIntent, myItem, itemIDIntent, myValue, itemValueIntent, 0);
                                     dbMain.child("Trades").push().setValue(newTrade).addOnSuccessListener(success -> {
                                         Toast.makeText(getApplicationContext(), "Trade offer sent succesfully", Toast.LENGTH_SHORT).show();
                                     }).addOnFailureListener(fail -> {
