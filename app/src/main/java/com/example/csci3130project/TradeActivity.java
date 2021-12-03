@@ -7,9 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,11 +22,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TradeActivity extends AppCompatActivity {
 
-    ArrayList<Item> myItems = new ArrayList<Item>();
+    protected ArrayList<Item> myItems = new ArrayList<Item>();
+    protected String[] itemCategory = new String[1000];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,9 @@ public class TradeActivity extends AppCompatActivity {
         TextView tradePartner = findViewById(R.id.viewTradePartner);
         TextView tradeItem = findViewById(R.id.viewTradeItem);
         TextView tradeValue = findViewById(R.id.viewTradeValue);
-        Spinner myItemChoice = findViewById(R.id.tradeItemChoice);
+        TextView thisItem = findViewById(R.id.myItem);
+        Spinner myItemChoice = (Spinner) findViewById(R.id.tradeItemChoice);
+        myItems.clear();
 
         // get user items
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -70,8 +77,15 @@ public class TradeActivity extends AppCompatActivity {
 
                     if (userID.equals(user.getUid())){
                         myItems.add(thisItem);
+
                     }
                 }
+                Spinner spinner = (Spinner) findViewById(R.id.tradeItemChoice);
+                ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(getApplicationContext(), android.R.layout.simple_spinner_item, myItems);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter);
+                Log.d(TAG, "selected item (Inside): " + myItemChoice.getSelectedItem().toString());
+                itemCategory[0] = (myItemChoice.getSelectedItem().toString().trim());
             }
 
             @Override
@@ -80,20 +94,19 @@ public class TradeActivity extends AppCompatActivity {
             }
         });
 
+        Button send = (Button) findViewById(R.id.tradeBtn);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(TradeActivity.this, "Here we go: " + myItemChoice.getSelectedItem().toString().trim(), Toast.LENGTH_SHORT).show();
+            }
+        });
         Log.d(TAG, "current user: " + myItems);
-
-        // create dropdown
-        ArrayAdapter<Item> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, myItems);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        myItemChoice.setAdapter(adapter);
 
         tradePartner.setText(userNameIntent);
         tradeItem.setText(itemNameIntent);
         tradeValue.setText(itemValue);
-
-
-
-
+        thisItem.setText(itemCategory[0]);
 
     }
 }
