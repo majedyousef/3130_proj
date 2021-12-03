@@ -36,7 +36,7 @@ public class ChatActivity extends AppCompatActivity {
         ScrollView scroll = findViewById(R.id.scroll);
 
 
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
         DatabaseReference ref = firebase.getReference().child("Chat");
 
@@ -47,8 +47,11 @@ public class ChatActivity extends AppCompatActivity {
 
                 int i = 0;
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    String tempUserId = snap.child("userId").getValue(String.class);
+                    String tempRecipientId = snap.child("recipientId").getValue(String.class);
 
-                    if (snap.child("userId").getValue().equals(userId) || snap.child("recipientID").getValue().equals(userId)) {
+                    if ( tempUserId.equals(userId) || tempRecipientId.equals(userId)) {
                         String msg = (String) snap.child("msg").getValue();
                         String sender= (String) snap.child("userName").getValue();
 
@@ -104,16 +107,17 @@ public class ChatActivity extends AppCompatActivity {
                 }
 
                 System.out.println("Calling something "+getUserName());
-                /*
+
                 uidRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String usernameFromDb = snapshot.child("username").getValue(String.class);
+                        String firstNameFromDb = snapshot.child("firstName").getValue(String.class);
                         Intent recipientIdIntent = getIntent();
                         String recipientId = recipientIdIntent.getStringExtra("userId");
+
                         String recipientFName = recipientIdIntent.getStringExtra("userFName");
 
-                        Chat chat = new Chat(tempMessage,userId,usernameFromDb,recipientId,recipientFName);
+                        Chat chat = new Chat(tempMessage,userId,firstNameFromDb,recipientId,recipientFName);
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference databaseReference = database.getReference().child("Chat");
                         databaseReference.push().setValue(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -126,7 +130,7 @@ public class ChatActivity extends AppCompatActivity {
                                     }
 
                                     TextView tv = new TextView(ChatActivity.this);
-                                    tv.setText(usernameFromDb);
+                                    tv.setText(firstNameFromDb);
                                     tv.setId(i);
                                     tv.setPadding(40, 30, 200, 0);
                                     tv.setTextSize(17);
@@ -160,7 +164,7 @@ public class ChatActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),error.getMessage()+" "+ error.getDetails(),Toast.LENGTH_LONG).show();
                     }
                 });
-                */
+
             }
         });
     }
