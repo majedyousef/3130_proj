@@ -7,6 +7,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,22 +28,36 @@ public class SearchActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> list;
     ArrayAdapter<String > adapter;
+    Spinner filter;
 
     ArrayList<String> locations;
+    ArrayList<String> categories;
 
     Double latitude;
     Double longitude;
+    String category;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-
-
         //A list to keep track of the items, and another list to keep track of the item locations in the list
         list = new ArrayList<>();
         locations = new ArrayList<>();
+        categories = new ArrayList<>();
+
+        // Create a filter for searching with
+        filter = findViewById(R.id.categoryChoose);
+        ArrayAdapter<CharSequence> filterAdapter = ArrayAdapter.createFromResource(this, R.array.itemCatArray, android.R.layout.simple_spinner_item);
+        filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filter.setAdapter(filterAdapter);
+
+        // Creating the searchview and listeview object by finding the searchview and listview from the uI.
+        searchView = (SearchView) findViewById(R.id.searchView);
+        listView = (ListView) findViewById(R.id.lv1);
+        TextView status = findViewById(R.id.textView5);
+
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
         DatabaseReference db = firebase.getReference();
         db.child("Items").addValueEventListener(new ValueEventListener() {
@@ -55,6 +71,10 @@ public class SearchActivity extends AppCompatActivity {
                         longitude = d.child("longitude").getValue(Double.class);
                         //Adds the item location to the list based on the position in search, so it will be tied to the correct item / location
                         locations.add(latitude + " " + longitude);
+
+                        // Keep track of item categories
+                        category = d.child("category").getValue(String.class);
+                        categories.add(category);
 
                         String itemName = d.child("name").getValue(String.class);
 
@@ -73,13 +93,30 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        // Creating the searchview and listeview object by finding the searchview and listview from the uI.
-        searchView = (SearchView) findViewById(R.id.searchView);
-        listView = (ListView) findViewById(R.id.lv1);
-
-        //Creating a adapter for the listview and a on query text listener that will listen to the changes in the text view
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);
+        // If no category is selected, use the generic list
+        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,list);
         listView.setAdapter(adapter);
+
+        // Change the item list used when a different filter is selected
+        filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String itemCategory = filter.getSelectedItem().toString().trim();
+                adapter.clear();
+                // Get all the items with of this category in a new list
+                for (int x = 0; x < list.size(); x++) {
+                    if (categories.get(x).equals(itemCategory)) {
+                        adapter.add(list.get(x));
+                    }
+                }
+                status.setText("Filter active");
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         createSearchBar();
     }
