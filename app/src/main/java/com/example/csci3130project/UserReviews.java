@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -15,12 +16,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class UserReviews extends AppCompatActivity {
 
-    ArrayList<Review> reviewList;
-    ArrayAdapter<Review> adapter;
+    ArrayList<String> reviewList;
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +31,37 @@ public class UserReviews extends AppCompatActivity {
         setContentView(R.layout.activity_user_reviews);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("Reputations");
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
         ListView listView = (ListView) findViewById(R.id.list);
+        TextView status = findViewById(R.id.status);
+        reviewList = new ArrayList<String>();
 
         if (user != null) {
-
-            db.child(user.getUid()).addValueEventListener(new ValueEventListener() {
+            // Retrieve reviews for this user's reputation
+            db.child("Reputations").child(user.getUid()).child("reviews").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot data) {
-                    // Get the current user's reputation and reviews
+                    // Get the current user's reviews
                     if (data.exists()){
-                        Reputation rep = data.getValue(Reputation.class);
-                        reviewList = rep.getReviews();
+                        for (DataSnapshot d:data.getChildren()){
+                            // Get each review for this reputation
+                            Review review = d.getValue(Review.class);
+                            if (review == null) {
+                                status.setText("Reviews unavailable.");
+                            } else {
+                                status.setText("User reviews");
+                                // Get data for each review
+                                String count = Double.toString(review.getRating());
+                                String authorID = review.getAuthor();
+                                String comment = review.getComment();
+
+                                // Build review string and add to review list
+                                String ratingText = "RATING: " + count;
+                                String reviewText = ratingText + System.lineSeparator() + comment + System.lineSeparator() + "By: " + authorID;
+                                reviewList.add(reviewText);
+                            }
+                        }
                     }
                 }
 
@@ -50,7 +71,8 @@ public class UserReviews extends AppCompatActivity {
             });
         }
 
-        //adapter = new ArrayAdapter<Review>(this, android.R.layout.simple_list_item_1,reviewList);
-        //listView.setAdapter(adapter);
+        // Display list of reviews for this user
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, reviewList);
+        listView.setAdapter(adapter);
     }
 }
