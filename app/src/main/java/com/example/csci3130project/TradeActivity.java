@@ -46,8 +46,6 @@ public class TradeActivity extends AppCompatActivity {
         // create text views
         TextView tradePartner = findViewById(R.id.viewTradePartner);
         TextView tradeItem = findViewById(R.id.viewTradeItem);
-        TextView tradeValue = findViewById(R.id.viewTradeValue);
-        TextView thisItem = findViewById(R.id.myItem);
         Spinner myItemChoice = (Spinner) findViewById(R.id.tradeItemChoice);
         myItems.clear();
 
@@ -144,9 +142,8 @@ public class TradeActivity extends AppCompatActivity {
         });
         Log.d(TAG, "current user: " + myItems);
 
-        tradePartner.setText(userNameIntent);
+        tradePartner.setText(userNameIntent + "'s Item:");
         tradeItem.setText(itemNameIntent);
-        tradeValue.setText(itemValue);
 
     }
 }
