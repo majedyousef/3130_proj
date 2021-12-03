@@ -132,8 +132,10 @@ public class TradeActivity extends AppCompatActivity {
                                     // send the trade request
                                     dbMain.child("Trades").push().setValue(newTrade).addOnSuccessListener(success -> {
                                         Toast.makeText(getApplicationContext(), "Trade offer sent succesfully", Toast.LENGTH_SHORT).show();
+                                        finish();
                                     }).addOnFailureListener(fail -> {
                                         Toast.makeText(getApplicationContext(), "Item upload unsuccessful", Toast.LENGTH_SHORT).show();
+                                        finish();
                                     });
                                 }
                             }
