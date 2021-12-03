@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                Intent i = new Intent(getApplicationContext(), ChatHistory.class);
                 startActivity(i);
             }
         });
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         chatImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                Intent i = new Intent(getApplicationContext(), ChatHistory.class);
                 startActivity(i);
             }
         });

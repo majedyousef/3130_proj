@@ -3,6 +3,7 @@ package com.example.csci3130project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,23 +33,45 @@ public class ChatHistory extends AppCompatActivity {
         chatRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<String> previousRecipients = new ArrayList<String>();
+                ArrayList<String> previousContacts = new ArrayList<String>();
+                ArrayList<String> previousContactsId = new ArrayList<>();
                 for(DataSnapshot adSnapShot: snapshot.getChildren()){
                     String tempRecipientName = adSnapShot.child("recipientName").getValue(String.class);
+                    String tempRecipientId = adSnapShot.child("recipientId").getValue(String.class);
+                    String tempMessageSender = adSnapShot.child("userName").getValue(String.class);
+                    String tempMessageSenderId = adSnapShot.child("userId").getValue(String.class);
+
 
                     System.out.println(tempRecipientName);
 
-                    if(!previousRecipients.contains(tempRecipientName)){
-                        previousRecipients.add(tempRecipientName);
+                    if(tempMessageSenderId.equals(userId)){
+                        if(!previousContactsId.contains(tempRecipientId)){
+                            previousContacts.add(tempRecipientName);
+                            previousContactsId.add(tempRecipientId);
+                        }
+                    }
+                    else if(tempRecipientId.equals(userId)){
+                        if(!previousContactsId.contains(tempMessageSenderId)){
+                            previousContacts.add(tempMessageSender);
+                            previousContactsId.add(tempMessageSenderId);
+                        }
+
                     }
 
                 }
-                ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,previousRecipients);
-                System.out.println("trying "+previousRecipients.get(0));
+                ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,previousContacts);
+
                 listView.setAdapter(arrayAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        System.out.println("i: "+i);
+                        Intent msgIntent = new Intent(getApplicationContext(), ChatActivity.class);
+                        msgIntent.putExtra("userId",previousContacts.get(i));
+                        System.out.println(previousContacts.get(i));
+                        msgIntent.putExtra("userFName",previousContactsId.get(i));
+                        startActivity(msgIntent);
+
 
                     }
                 });
