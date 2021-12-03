@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,6 +24,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ReceivedTradeActivity extends AppCompatActivity {
+
+    protected static String tradeRequest;
+    protected static String partnerItem;
+    protected static String myOwnItem;
+    protected static String partnerTradeID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +69,11 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                         Integer tradeAccepted = data.child("partnerItemValue").getValue(Integer.class);
 
                         if (myID.equals(user.getUid())){
+                            tradeRequest = data.getKey();
+                            partnerItem = theirItemID;
+                            myOwnItem = myItemID;
+                            partnerTradeID = otherPersonID;
+
                             theirItem.setText(theirItemName);
                             myItem.setText(myItemName);
 
@@ -122,6 +135,20 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                 }
             });
 
+            Button accept = (Button) findViewById(R.id.acceptBtn);
+            accept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // switch ownership of the two items
+                    db.child("Items").child(partnerItem).child("userID").setValue(user.getUid());
+                    db.child("Items").child(myOwnItem).child("userID").setValue(partnerTradeID);
+
+                    // delete the trade item
+                    db.child("Trades").child(tradeRequest).setValue(null);
+
+                    Toast.makeText(getApplicationContext(), "Trade accepted!", Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
     }
