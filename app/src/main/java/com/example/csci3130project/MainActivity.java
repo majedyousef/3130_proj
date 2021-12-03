@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -15,12 +16,15 @@ import androidx.core.app.NotificationManagerCompat;
 public class MainActivity extends AppCompatActivity {
 
     private NotificationManagerCompat notifManager;
+    TextView notifHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         notifManager = NotificationManagerCompat.from(this);
+        notifHolder = findViewById(R.id.successView);
+        notifHolder.setText("");
 
         // Intents
 
@@ -145,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
                         .setSmallIcon(R.drawable.notify_me).setContentTitle(title)
                         .setContentText(message).setPriority(NotificationCompat.PRIORITY_HIGH).setContentIntent(pI).build();
                 notifManager.notify(1,notification);
+                notifHolder.setText(title);
             }
         });
     }
