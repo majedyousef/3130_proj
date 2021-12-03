@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Review {
 
-    private String authorID;
+    private String submitter;
     private String comment;
     private double rating;
 
@@ -19,12 +19,12 @@ public class Review {
 
     }
 
-    public Review(String authorID) {
-        this.authorID = authorID;
+    public Review(String submitter) {
+        this.submitter = submitter;
     }
 
-    public String getAuthor() {
-        return authorID;
+    public String getSubmitter() {
+        return submitter;
     }
 
     /**

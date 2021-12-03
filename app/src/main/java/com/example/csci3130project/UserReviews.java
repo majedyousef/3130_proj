@@ -53,12 +53,12 @@ public class UserReviews extends AppCompatActivity {
                                 status.setText("User reviews");
                                 // Get data for each review
                                 String count = Double.toString(review.getRating());
-                                String authorID = review.getAuthor();
+                                String submitter = review.getSubmitter();
                                 String comment = review.getComment();
 
                                 // Build review string and add to review list
                                 String ratingText = "RATING: " + count;
-                                String reviewText = ratingText + System.lineSeparator() + comment + System.lineSeparator() + "By: " + authorID;
+                                String reviewText = ratingText + System.lineSeparator() + comment + System.lineSeparator() + "By: " + submitter;
                                 reviewList.add(reviewText);
                             }
                         }

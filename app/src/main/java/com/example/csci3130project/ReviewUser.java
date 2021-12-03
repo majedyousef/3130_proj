@@ -32,7 +32,7 @@ public class ReviewUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_user);
 
-        FirebaseUser author = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
         RatingBar stars = (RatingBar) findViewById(R.id.userStars);
@@ -97,15 +97,15 @@ public class ReviewUser extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please select a rating.", Toast.LENGTH_SHORT).show();
                 } else {
                     // Retrieve ID of review author
-                    String authorID;
-                    if (author != null) {
-                        authorID = db.child("Users").child(author.getUid()).getKey();
+                    String submitter;
+                    if (user != null) {
+                        submitter = db.child("Users").child(user.getUid()).getKey();
                     } else {
-                        authorID = "testrep";
+                        submitter = "anonymous";
                     }
 
                     // Add this review to a user's reputation
-                    Review review = new Review(authorID);
+                    Review review = new Review(submitter);
                     review.addRating(rating);
                     review.addComment(commentText);
                     reputation.addReview(review);
