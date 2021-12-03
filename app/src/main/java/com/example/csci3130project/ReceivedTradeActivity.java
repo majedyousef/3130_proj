@@ -151,6 +151,17 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                 }
             });
 
+            Button reject = (Button) findViewById(R.id.rejectBtn);
+            reject.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // delete the trade item
+                    db.child("Trades").child(tradeRequest).setValue(null);
+
+                    Toast.makeText(getApplicationContext(), "Trade Declined.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
         }
     }
 }
