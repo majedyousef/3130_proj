@@ -135,14 +135,11 @@ public class TradeActivity extends AppCompatActivity {
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
                 });
-                //String myValue =
-
             }
         });
         Log.d(TAG, "current user: " + myItems);
