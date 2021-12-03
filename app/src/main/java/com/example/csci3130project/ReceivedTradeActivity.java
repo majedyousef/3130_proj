@@ -25,10 +25,10 @@ import java.util.ArrayList;
 
 public class ReceivedTradeActivity extends AppCompatActivity {
 
-    protected static String tradeRequest;
-    protected static String partnerItem;
-    protected static String myOwnItem;
-    protected static String partnerTradeID;
+    protected  String tradeRequest;
+    protected  String partnerItem;
+    protected  String myOwnItem;
+    protected  String partnerTradeID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +147,7 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                     db.child("Trades").child(tradeRequest).setValue(null);
 
                     Toast.makeText(getApplicationContext(), "Trade accepted!", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             });
 
