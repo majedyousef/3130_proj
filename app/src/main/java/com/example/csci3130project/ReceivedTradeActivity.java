@@ -38,14 +38,26 @@ public class ReceivedTradeActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
         DatabaseReference db = firebase.getReference();
+        Button accept = (Button) findViewById(R.id.acceptBtn);
+        Button reject = (Button) findViewById(R.id.rejectBtn);
 
+        // disable the buttons by default
+        accept.setEnabled(false);
+        reject.setEnabled(false);
+
+        // if user is not null check for trades
         if (user != null){
             TextView theirItem = findViewById(R.id.receivedItemText);
             TextView myItem = findViewById(R.id.sendingItemText);
+            TextView theySend = findViewById(R.id.receivedTitle1);
+            TextView youSend = findViewById(R.id.receivedTitle);
+            TextView relVal = findViewById(R.id.receivedTitle2);
             TextView differential = findViewById(R.id.receivedTitle3);
             TextView diffNum = findViewById(R.id.receivedTitle4);
             TextView profitLoss = findViewById(R.id.receivedTitle5);
+            TextView tradeOptions = findViewById(R.id.receivedTitle6);
 
+            // create a list of valuation categories
             ArrayList<String> valuation = new ArrayList<String>();
             valuation.add("Very Poor");
             valuation.add("Poor");
@@ -53,7 +65,7 @@ public class ReceivedTradeActivity extends AppCompatActivity {
             valuation.add("Good");
             valuation.add("Very Good");
 
-
+            // loop through the trades node
             db.child("Trades").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -68,7 +80,12 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                         Float myValue = data.child("partnerItemValue").getValue(Float.class);
                         Integer tradeAccepted = data.child("partnerItemValue").getValue(Integer.class);
 
+                        // if we find a trade that pertains to us
                         if (myID.equals(user.getUid())){
+                            // set the buttons back to enabled
+                            accept.setEnabled(true);
+                            reject.setEnabled(true);
+
                             tradeRequest = data.getKey();
                             partnerItem = theirItemID;
                             myOwnItem = myItemID;
@@ -80,6 +97,10 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                             int totalDiff = (int) (theirValue - myValue);
                             String totalDiffStr = Integer.toString(Math.abs(totalDiff));
                             diffNum.setText(totalDiffStr + " $");
+                            tradeOptions.setText("");
+                            theySend.setText("They Want To Trade Their:");
+                            youSend.setText("For Your:");
+                            relVal.setText("The Relative Value For You Is");
 
                             Log.d(TAG, "My Num " + myValue );
                             Log.d(TAG, "Their num " + theirValue );
@@ -124,6 +145,15 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                                 differential.setTextColor(Color.parseColor("#5F9EA0"));
                             }
                         }
+                        else {
+                            theirItem.setText("");
+                            Log.d(TAG, "WE MADE IT?");
+                            myItem.setText("");
+                            differential.setText("");
+                            diffNum.setText("");
+                            profitLoss.setText("");
+                            tradeOptions.setText("No Incoming Trade Requests");
+                        }
 
 
                     }
@@ -135,7 +165,7 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                 }
             });
 
-            Button accept = (Button) findViewById(R.id.acceptBtn);
+
             accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -151,7 +181,7 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                 }
             });
 
-            Button reject = (Button) findViewById(R.id.rejectBtn);
+
             reject.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
