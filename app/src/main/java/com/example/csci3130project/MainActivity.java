@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         alert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), NotificationActivity.class);
+                Intent i = new Intent(getApplicationContext(), ReceivedTradeActivity.class);
                 startActivity(i);
             }
         });
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         notifImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), NotificationActivity.class);
+                Intent i = new Intent(getApplicationContext(), ReceivedTradeActivity.class);
                 startActivity(i);
             }
         });
