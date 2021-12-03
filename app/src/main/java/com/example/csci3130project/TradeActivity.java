@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class TradeActivity extends AppCompatActivity {
 
     protected ArrayList<Item> myItems = new ArrayList<Item>();
-    protected String[] itemCategory = new String[1000];
+    protected String[] itemSelection = new String[1000];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class TradeActivity extends AppCompatActivity {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);
                 Log.d(TAG, "selected item (Inside): " + myItemChoice.getSelectedItem().toString());
-                itemCategory[0] = (myItemChoice.getSelectedItem().toString().trim());
+                itemSelection[0] = (myItemChoice.getSelectedItem().toString().trim());
             }
 
             @Override
@@ -98,7 +98,51 @@ public class TradeActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TradeActivity.this, "Here we go: " + myItemChoice.getSelectedItem().toString().trim(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TradeActivity.this, "You have sent a trade request with: " + myItemChoice.getSelectedItem().toString().trim(), Toast.LENGTH_SHORT).show();
+                String me = user.getUid();
+                DatabaseReference dbMain = firebase.getReference();
+                DatabaseReference db = firebase.getReference("Items");
+                db.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot data : snapshot.getChildren()){
+                            String name = data.child("name").getValue(String.class);
+                            String type = data.child("category").getValue(String.class);
+                            String desc = data.child("description").getValue(String.class);
+                            String id = data.getKey();
+                            String userID = data.child("userID").getValue(String.class);
+                            Boolean status = data.child("status").getValue(Boolean.class);
+                            Integer itemValue = data.child("itemValue").getValue(Integer.class);
+
+                            Double lat = data.child("latitude").getValue(Double.class);
+                            Double lon = data.child("longitude").getValue(Double.class);
+
+                            if (userID.equals(user.getUid())){
+                                Item thisItem = new Item(userID, name, desc, type, itemValue, lon, lat, status);
+                                Log.d(TAG, "Item to trade " + thisItem);
+                                Log.d(TAG, "Item I want: " + myItemChoice.getSelectedItem());
+                                if (thisItem.equals(myItemChoice.getSelectedItem())){
+                                    Log.d(TAG, "SUCCESS");
+                                    Integer myValue = itemValue;
+                                    String myItem = data.getKey();
+                                    TradeRequest newTrade = new TradeRequest(user.getUid(), userIDIntent, myItem, itemIDIntent, myValue, itemValueIntent, 0);
+                                    dbMain.child("Trades").push().setValue(newTrade).addOnSuccessListener(success -> {
+                                        Toast.makeText(getApplicationContext(), "Trade offer sent succesfully", Toast.LENGTH_SHORT).show();
+                                    }).addOnFailureListener(fail -> {
+                                        Toast.makeText(getApplicationContext(), "Item upload unsuccessful", Toast.LENGTH_SHORT).show();
+                                    });
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                //String myValue =
+
             }
         });
         Log.d(TAG, "current user: " + myItems);
@@ -106,7 +150,6 @@ public class TradeActivity extends AppCompatActivity {
         tradePartner.setText(userNameIntent);
         tradeItem.setText(itemNameIntent);
         tradeValue.setText(itemValue);
-        thisItem.setText(itemCategory[0]);
 
     }
 }

@@ -3,21 +3,20 @@ package com.example.csci3130project;
 public class TradeRequest {
 
     private String userID;
-    private String tradeID;
+    private String partnerID;
     private String itemID;
-    private String tradeItemID;
-    private String itemValue;
-    private String tradeItemValue;
+    private String partnerItemID;
+    private Integer itemValue;
+    private Integer partnerItemValue;
+    private Integer tradeAccepted;
 
-    private boolean tradeAccepted;
-
-    public TradeRequest(String userID, String tradeID, String itemID, String tradeItemID, String itemValue, String tradeItemValue, boolean tradeAccepted) {
+    public TradeRequest(String userID, String partnerID, String itemID, String partnerItemID, Integer itemValue, Integer partnerItemValue, Integer tradeAccepted) {
         this.userID = userID;
-        this.tradeID = tradeID;
+        this.partnerID = partnerID;
         this.itemID = itemID;
-        this.tradeItemID = tradeItemID;
+        this.partnerItemID = partnerItemID;
         this.itemValue = itemValue;
-        this.tradeItemValue = tradeItemValue;
+        this.partnerItemValue = partnerItemValue;
     }
 
     public String getUserID() {
@@ -28,12 +27,12 @@ public class TradeRequest {
         this.userID = userID;
     }
 
-    public String getTradeID() {
-        return tradeID;
+    public String getPartnerID() {
+        return partnerID;
     }
 
-    public void setTradeID(String tradeID) {
-        this.tradeID = tradeID;
+    public void setPartnerID(String partnerID) {
+        this.partnerID = partnerID;
     }
 
     public String getItemID() {
@@ -44,35 +43,35 @@ public class TradeRequest {
         this.itemID = itemID;
     }
 
-    public String getTradeItemID() {
-        return tradeItemID;
+    public String getPartnerItemID() {
+        return partnerItemID;
     }
 
-    public void setTradeItemID(String tradeItemID) {
-        this.tradeItemID = tradeItemID;
+    public void setPartnerItemID(String partnerItemID) {
+        this.partnerItemID = partnerItemID;
     }
 
-    public String getItemValue() {
+    public Integer getItemValue() {
         return itemValue;
     }
 
-    public void setItemValue(String itemValue) {
+    public void setItemValue(Integer itemValue) {
         this.itemValue = itemValue;
     }
 
-    public String getTradeItemValue() {
-        return tradeItemValue;
+    public Integer getPartnerItemValue() {
+        return partnerItemValue;
     }
 
-    public void setTradeItemValue(String tradeItemValue) {
-        this.tradeItemValue = tradeItemValue;
+    public void setPartnerItemValue(Integer partnerItemValue) {
+        this.partnerItemValue = partnerItemValue;
     }
 
-    public boolean isTradeAccepted() {
+    public Integer isTradeAccepted() {
         return tradeAccepted;
     }
 
-    public void setTradeAccepted(boolean tradeAccepted) {
+    public void setTradeAccepted(Integer tradeAccepted) {
         this.tradeAccepted = tradeAccepted;
     }
 }
