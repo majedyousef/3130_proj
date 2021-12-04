@@ -67,9 +67,9 @@ public class ChatHistory extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         System.out.println("i: "+i);
                         Intent msgIntent = new Intent(getApplicationContext(), ChatActivity.class);
-                        msgIntent.putExtra("userId",previousContacts.get(i));
-                        System.out.println(previousContacts.get(i));
-                        msgIntent.putExtra("userFName",previousContactsId.get(i));
+                        msgIntent.putExtra("userId",previousContactsId.get(i));
+                        System.out.println("hello"+ previousContacts.get(i)+" "+previousContactsId.get(i));
+                        msgIntent.putExtra("userFName",previousContacts.get(i));
                         startActivity(msgIntent);
 
 
