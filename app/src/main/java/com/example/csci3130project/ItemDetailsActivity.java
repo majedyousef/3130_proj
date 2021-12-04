@@ -41,6 +41,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
         TextView valueBox = findViewById(R.id.itemValue);
         TextView descBox = findViewById(R.id.itemDesc);
         TextView userBox = findViewById(R.id.itemUser);
+        String [] recipientName = new String[1];
+        String [] recipientID = new String[1];
 
         db.child("Items").child(itemIDIntent).addValueEventListener(new ValueEventListener() {
             @Override
@@ -55,13 +57,18 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 itemTradeID = itemIDIntent;
                 itemTradeValue = value;
                 itemName = name;
+                recipientID[0]= userID;
+
 
                 db.child("Users").child(userID).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String userFName = snapshot.child("firstName").getValue(String.class);
                         String userLName = snapshot.child("lastName").getValue(String.class);
+
+                        recipientName[0] =userFName ;
                         String fullName = userFName + " " + userLName;
+
 
                         userName = fullName;
 
@@ -95,6 +102,19 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 i.putExtra("itemValue", itemTradeValue);
                 i.putExtra("userName", userName);
                 i.putExtra("itemName", itemName);
+
+                startActivity(i);
+            }
+        });
+
+        Button chat = (Button) findViewById(R.id.toMessageItemBtn);
+        chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), ChatActivity.class);
+                i.putExtra("userFName",recipientName[0]);
+                i.putExtra("userId",recipientID[0]);
+
 
                 startActivity(i);
             }
