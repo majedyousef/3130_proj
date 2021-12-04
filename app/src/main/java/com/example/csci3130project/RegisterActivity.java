@@ -76,7 +76,6 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 User user = new User(firstName, lastName, email, userName, pass);
-<<<<<<< HEAD
 
                                 // Get database references
                                 DatabaseReference repdb = FirebaseDatabase.getInstance().getReference("Reputations");
@@ -103,18 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                         }
                                                     }
                                                 });
-=======
-                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().
-                                        getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                          @Override
-                                          public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                Toast.makeText(RegisterActivity.this, "User has been added!", Toast.LENGTH_SHORT).show();
-                                                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                                                startActivity(i);
->>>>>>> main
-                                            }
-                                            else {
+                                            } else {
                                                 Toast.makeText(RegisterActivity.this, "User has not been added. Try again.", Toast.LENGTH_SHORT).show();
                                             }
                                           }
@@ -127,25 +115,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-//
-//        /**
-//         * A method for creating a new User to register
-//         * @param fname The first name of the user
-//         * @param lname The last name of the user
-//         * @param email The email of the user
-//         * @param uname The username of the user
-//         * @param pass The password of the user
-//         * @return the new User to be added to the database
-//         */
-//        public User createNewUser(String fname, String lname, String email, String uname, String pass) {
-//            User user = new User();
-//            user.setFirstName(fname);
-//            user.setLastName(lname);
-//            user.setEmail(email);
-//            user.setUsername(uname);
-//            user.setPassword(pass);
-//            return user;
-//        }
 
         /**
          * Checks if the current input string is empty
