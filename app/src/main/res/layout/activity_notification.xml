@@ -6,4 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".NotificationActivity">
 
+
+    <TextView
+        android:id="@+id/ItemsNearMeDetail"
+        android:layout_width="352dp"
+        android:layout_height="558dp"
+        android:gravity="center"
+        android:scrollbars="vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.843" />
+
+    <TextView
+        android:id="@+id/ItemsNearMeHeader"
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="205dp"
+        android:layout_height="42dp"
+        android:text="Items Near You"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.121" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

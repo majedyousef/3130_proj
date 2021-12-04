@@ -48,6 +48,13 @@ public class ProfileEspressoTest {
         intended(hasComponent(ChangePasswordActivity.class.getName()));
     }
 
+    //Checks if we moved to transaction history
+    @Test
+    public void checkIfMovedToTransactionHistoryPage() {
+        onView(withId(R.id.transactionHistoryButton)).perform(click());
+        intended(hasComponent(TransactionHistory.class.getName()));
+    }
+
     //Checks if the old password is invalid
     @Test
     public void checkIfOldPasswordIsInvalid() {

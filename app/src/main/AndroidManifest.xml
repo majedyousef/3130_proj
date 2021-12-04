@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".Notify"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,6 +21,9 @@
         <activity
             android:name=".ChatHistory"
             android:exported="true" />
+        <activity
+            android:name=".TransactionHistory"
+            android:exported="false" />
         <activity
             android:name=".ChatActivity"
             android:exported="true" />
@@ -54,6 +58,9 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SetFavourites"
             android:exported="true" />
         <activity
             android:name=".LoginActivity"

@@ -1,9 +1,13 @@
 package com.example.csci3130project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,14 +27,21 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<String> list;
     ArrayAdapter<String > adapter;
 
+    ArrayList<String> locations;
 
+    Double latitude;
+    Double longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+
+
+        //A list to keep track of the items, and another list to keep track of the item locations in the list
         list = new ArrayList<>();
+        locations = new ArrayList<>();
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
         DatabaseReference db = firebase.getReference();
         db.child("Items").addValueEventListener(new ValueEventListener() {
@@ -40,7 +51,17 @@ public class SearchActivity extends AppCompatActivity {
                     // clear the current array
                     list.clear();
                     for (DataSnapshot d:data.getChildren()){
+                        latitude = d.child("latitude").getValue(Double.class);
+                        longitude = d.child("longitude").getValue(Double.class);
+                        //Adds the item location to the list based on the position in search, so it will be tied to the correct item / location
+                        locations.add(latitude + " " + longitude);
+
                         String itemName = d.child("name").getValue(String.class);
+
+                                /* Adds product location lat and long to search display (using to visualize)
+                                + "\n LOCATION: Lat: " + latitude
+                                + " Long: " + longitude;*/
+
                         list.add(itemName);
                     }
                 }
@@ -61,16 +82,23 @@ public class SearchActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         createSearchBar();
-
-
     }
 
     private void createSearchBar() {
 
+        //Creating on click listener for items in search list, user clicks item and gets sent to map location.
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(SearchActivity.this, MapsActivity.class);
+                intent.putExtra("itemLocation", locations.get(i));
+                intent.putExtra("Latitude", latitude);
+                intent.putExtra("Longitude", longitude);
+                intent.putExtra("itemClicked", 1);
+                startActivity(intent);
 
-
-
-
+            }
+        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             //This method is performed when the user clicks the enter button and "submits" the text. this can be modified to do other things
@@ -93,5 +121,6 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 }
