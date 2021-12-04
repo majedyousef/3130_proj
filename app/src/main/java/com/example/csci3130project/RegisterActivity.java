@@ -1,7 +1,11 @@
 package com.example.csci3130project;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Matcher;
@@ -70,16 +76,33 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 User user = new User(firstName, lastName, email, userName, pass);
-                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().
-                                        getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                // Get database references
+                                DatabaseReference repdb = FirebaseDatabase.getInstance().getReference("Reputations");
+                                DatabaseReference userdb = FirebaseDatabase.getInstance().getReference("Users");
+                                String ID = auth.getCurrentUser().getUid();
+
+                                // Add this user object to the database
+                                userdb.child(ID).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                           @Override
                                           public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
-                                                Toast.makeText(RegisterActivity.this, "User has been added!", Toast.LENGTH_SHORT).show();
-                                                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                                                startActivity(i);
-                                            }
-                                            else {
+                                                //Generate a reputation object for the new user
+                                                repdb.child(ID).setValue(new Reputation(ID)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if(task.isSuccessful()){
+                                                            // If the reputation is added successfully, inform user and return to login
+                                                            Toast.makeText(getApplicationContext(), "User has been added!", Toast.LENGTH_SHORT).show();
+                                                            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                                                            startActivity(i);
+                                                        }
+                                                        else {
+                                                            Toast.makeText(getApplicationContext(), "Reputation failed to initialize.", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
+                                            } else {
                                                 Toast.makeText(RegisterActivity.this, "User has not been added. Try again.", Toast.LENGTH_SHORT).show();
                                             }
                                           }
@@ -92,25 +115,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-//
-//        /**
-//         * A method for creating a new User to register
-//         * @param fname The first name of the user
-//         * @param lname The last name of the user
-//         * @param email The email of the user
-//         * @param uname The username of the user
-//         * @param pass The password of the user
-//         * @return the new User to be added to the database
-//         */
-//        public User createNewUser(String fname, String lname, String email, String uname, String pass) {
-//            User user = new User();
-//            user.setFirstName(fname);
-//            user.setLastName(lname);
-//            user.setEmail(email);
-//            user.setUsername(uname);
-//            user.setPassword(pass);
-//            return user;
-//        }
 
         /**
          * Checks if the current input string is empty

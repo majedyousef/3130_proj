@@ -28,6 +28,12 @@
             android:name=".ReceivedTradeActivity"
             android:exported="true" />
         <activity
+            android:name=".UserReviews"
+            android:exported="true" />
+        <activity
+            android:name=".ReviewUser"
+            android:exported="true" />
+        <activity
             android:name=".TradeActivity"
             android:exported="true" />
         <activity
