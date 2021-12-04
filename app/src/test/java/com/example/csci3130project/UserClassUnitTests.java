@@ -19,6 +19,7 @@ public class UserClassUnitTests {
     @Before
     public void initialize() {
         testUser = new User("firstName", "lastName", "user@gmail.com", "user123456", "password1234");
+
         testUser2 = new User("John", "Doe", "user_124@outlook.ca", "special_user500", "878456_pass_!");
     }
 

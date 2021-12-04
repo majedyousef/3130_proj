@@ -3,6 +3,7 @@ package com.example.csci3130project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -34,6 +35,9 @@ public class ReviewUser extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+
+        Intent i = getIntent();
+        String userToReview = i.getStringExtra("TradeID");
 
         RatingBar stars = (RatingBar) findViewById(R.id.userStars);
         EditText comment = (EditText) findViewById(R.id.commentText);
@@ -70,7 +74,7 @@ public class ReviewUser extends AppCompatActivity {
         });
 
         // Retrieve user's reputation
-        db.child("Reputations").child("3iRdcigRCzeReHfbZbiX3Kyv6S13").addValueEventListener(new ValueEventListener() {
+        db.child("Reputations").child(userToReview).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot data) {
                 // Get this user's reputation
@@ -110,11 +114,13 @@ public class ReviewUser extends AppCompatActivity {
                     review.addComment(commentText);
                     reputation.addReview(review);
 
-                    // Update reputation in database
-                    db.child("Reputations").child("3iRdcigRCzeReHfbZbiX3Kyv6S13").setValue(reputation).addOnSuccessListener(success -> {
+                    // Update reputation in database and return to home
+                    db.child("Reputations").child(userToReview).setValue(reputation).addOnSuccessListener(success -> {
                         Toast.makeText(getApplicationContext(), "Review added successfully", Toast.LENGTH_SHORT).show();
+                        Intent x = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(x);
                     }).addOnFailureListener(fail -> {
-                        Toast.makeText(getApplicationContext(), "Review failed.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Review failed. Try again.", Toast.LENGTH_SHORT).show();
                     });
                 }
             }
