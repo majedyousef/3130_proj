@@ -19,10 +19,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSCI3130Project">
         <activity
+            android:name=".ChatHistory"
+            android:exported = "true"/>
+        <activity
+            android:name=".OtherPersonsTransactionHistory"
+            android:exported="false" />
+        <activity
+            android:name=".OtherPersonsProfile"
+            android:exported="false" />
+
+        <activity
             android:name=".ReceivedTradeActivity"
             android:exported="true" />
         <activity
+            android:name=".UserReviews"
+            android:exported="true" />
+        <activity
+            android:name=".ReviewUser"
+            android:exported="true" />
+        <activity
             android:name=".TradeActivity"
+
             android:exported="true" />
         <activity
             android:name=".TransactionHistory"
