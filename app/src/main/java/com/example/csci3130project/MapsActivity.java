@@ -98,6 +98,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     String type = adSnapshot.child("category").getValue(String.class);
                     String id = adSnapshot.getKey();
                     String userID = adSnapshot.child("userID").getValue(String.class);
+                    Boolean status = adSnapshot.child("status").getValue(Boolean.class);
 
                     Double lat = adSnapshot.child("latitude").getValue(Double.class);
                     Double lon = adSnapshot.child("longitude").getValue(Double.class);
@@ -105,15 +106,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     LatLng loc = new LatLng(lat, lon);
 
                     if (!userID.equals(user.getUid())){
-                        marker = googleMap.addMarker(new MarkerOptions().position(loc).title(name).snippet(id));
+                        if(!status){
+                            marker = googleMap.addMarker(new MarkerOptions().position(loc).title(name).snippet(id));
+                        }
                     }
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
 
         });
         return true;

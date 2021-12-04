@@ -90,7 +90,15 @@ public class ItemDetailsActivity extends AppCompatActivity {
             }
         });
 
-
+        Button toProfile = (Button) findViewById(R.id.toProfileItemBtn);
+        toProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), OtherPersonsProfile.class);
+                i.putExtra("userID", userTradeID);
+                startActivity(i);
+            }
+        });
 
         Button trade = (Button) findViewById(R.id.tradeWithBtn);
         trade.setOnClickListener(new View.OnClickListener() {

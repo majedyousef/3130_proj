@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -170,7 +171,9 @@ public class ReceivedTradeActivity extends AppCompatActivity {
 
                     // let the user know the trade was accepted
                     Toast.makeText(getApplicationContext(), "Trade accepted!", Toast.LENGTH_SHORT).show();
-                    finish();
+                    Intent i = new Intent(getApplicationContext(), ReviewUser.class);
+                    i.putExtra("TradeID", partnerTradeID);
+                    startActivity(i);
                 }
             });
 
