@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 import org.w3c.dom.Text;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -121,10 +122,29 @@ public class ProfileActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(getApplicationContext(), UserReviews.class);
+					startActivity(i);
+				}
+			});
+
+            // Intent to transaction page
+            Button transaction = (Button) findViewById(R.id.transactionHistoryButton);
+            transaction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getApplicationContext(), TransactionHistory.class);
                     startActivity(i);
                 }
             });
 
+            // Intent to favourite categories page
+            Button favorites = (Button) findViewById(R.id.favBtn);
+            favorites.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getApplicationContext(), SetFavourites.class);
+                    startActivity(i);
+                }
+            });
         }
     }
 }

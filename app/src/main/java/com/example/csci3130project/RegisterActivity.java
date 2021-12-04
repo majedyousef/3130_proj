@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,6 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 User user = new User(firstName, lastName, email, userName, pass);
+<<<<<<< HEAD
 
                                 // Get database references
                                 DatabaseReference repdb = FirebaseDatabase.getInstance().getReference("Reputations");
@@ -101,6 +103,16 @@ public class RegisterActivity extends AppCompatActivity {
                                                         }
                                                     }
                                                 });
+=======
+                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().
+                                        getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                          @Override
+                                          public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(RegisterActivity.this, "User has been added!", Toast.LENGTH_SHORT).show();
+                                                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                                                startActivity(i);
+>>>>>>> main
                                             }
                                             else {
                                                 Toast.makeText(RegisterActivity.this, "User has not been added. Try again.", Toast.LENGTH_SHORT).show();
