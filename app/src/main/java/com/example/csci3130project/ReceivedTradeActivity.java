@@ -165,6 +165,8 @@ public class ReceivedTradeActivity extends AppCompatActivity {
                     // switch ownership of the two items
                     db.child("Items").child(partnerItem).child("userID").setValue(user.getUid());
                     db.child("Items").child(myOwnItem).child("userID").setValue(partnerTradeID);
+                    db.child("Items").child(partnerItem).child("status").setValue(true);
+                    db.child("Items").child(myOwnItem).child("status").setValue(true);
 
                     // delete the trade item
                     db.child("Trades").child(tradeRequest).setValue(null);
