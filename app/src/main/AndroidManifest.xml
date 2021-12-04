@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSCI3130Project">
         <activity
+            android:name=".OtherPersonsTransactionHistory"
+            android:exported="false" />
+        <activity
             android:name=".OtherPersonsProfile"
             android:exported="false" />
         <activity

@@ -42,8 +42,6 @@ public class ProfileActivity extends AppCompatActivity {
                     String fullName = fName + " " + lName;
                     String userName = data.child("username").getValue(String.class);
                     String email = data.child("email").getValue(String.class);
-
-
                     nameBox.setText(fullName);
                     emailBox.setText(email);
                     userNameBox.setText(userName);

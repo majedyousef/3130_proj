@@ -89,10 +89,6 @@ public class ItemDetailsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), OtherPersonsProfile.class);
                 i.putExtra("userID", userTradeID);
-                i.putExtra("itemID", itemTradeID);
-                i.putExtra("itemValue", itemTradeValue);
-                i.putExtra("userName", userName);
-                i.putExtra("itemName", itemName);
                 startActivity(i);
             }
         });
