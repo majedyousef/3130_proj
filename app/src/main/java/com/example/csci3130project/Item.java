@@ -18,9 +18,10 @@ public class Item {
     private int itemValue;
     private double longitude;
     private double latitude;
+    private boolean status = false;
 
 
-    public Item(String userID, String name, String description, String category, Integer itemValue, double longitude, double latitude) {
+    public Item(String userID, String name, String description, String category, Integer itemValue, double longitude, double latitude, boolean status) {
 
         this.userID = userID;
         this.name = name;
@@ -29,6 +30,7 @@ public class Item {
         this.itemValue = itemValue;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.status = status;
 
     }
 
@@ -64,7 +66,7 @@ public class Item {
         return this.category;
     }
 
-    public double getItemValue() {
+    public int getItemValue() {
         return this.itemValue;
     }
 
@@ -74,6 +76,10 @@ public class Item {
 
     public double getLatitude() {
         return this.latitude;
+    }
+
+    public boolean getStatus() {
+        return this.status;
     }
 
 
@@ -119,4 +125,28 @@ public class Item {
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
+
+    /**
+     * A method for updating the status of the item to sold
+     */
+    public void isSold(){
+        this.status = true;
+    }
+
+    /**
+     * A method for printing an items category and name
+     */
+    public String toString(){
+        return category + ": " + name;
+    }
+
+    @Override
+    public boolean equals(Object i) {
+        if (this == i) return true;
+        if (i == null || getClass() != i.getClass()) return false;
+        Item that = (Item) i;
+        return name.equals(that.name) &&
+                userID.equals(that.userID);
+    }
+
 }

@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ItemDetailsActivity">
 
+    <Button
+        android:id="@+id/tradeWithBtn"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="Trade"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.937" />
+
     <TextView
         android:id="@+id/itemUser"
         android:layout_width="150dp"
@@ -113,9 +125,9 @@
 
     <Button
         android:id="@+id/toMessageItemBtn"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="60dp"
-        android:text="Message User"
+        android:text="Chat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.881"
@@ -125,9 +137,9 @@
 
     <Button
         android:id="@+id/toProfileItemBtn"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="60dp"
-        android:text="View Profile"
+        android:text="View USer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.118"

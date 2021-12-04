@@ -79,6 +79,13 @@ public class MainPageEspressoTest {
         intended(hasComponent(ChatActivity.class.getName()));
     }
 
+    // This test checks if scan for items button works
+    @Test
+    public void checkIfScanForItemButton() {
+        onView(withId(R.id.refreshBtn)).perform(click());
+        onView(withId(R.id.successView)).check(matches(withText("New Item!")));
+    }
+
     @After
     public void tearDown() throws Exception {
     }
