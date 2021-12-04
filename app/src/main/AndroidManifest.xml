@@ -18,9 +18,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSCI3130Project">
         <activity
-            android:name=".RegisterInfoActivity"
-            android:exported="true" />
-        <activity
             android:name=".UserReviews"
             android:exported="true" />
         <activity

@@ -14,7 +14,7 @@ public class Reputation {
 
     private double rating;
     private int reviewCount;
-    private ArrayList<Review> reviews = new ArrayList<Review>(1);
+    private ArrayList<Review> reviews = new ArrayList<>(0);
     private String userID;
 
     public Reputation() {
@@ -23,6 +23,8 @@ public class Reputation {
 
     public Reputation(String ID) { ;
         userID = ID;
+        rating = 0;
+        reviewCount = 0;
     }
 
     /**
@@ -47,10 +49,12 @@ public class Reputation {
      */
     public void calculateRating() {
         double sum = 0;
-        for (int i = 0; i < reviews.size(); i++) {
-            sum = sum + reviews.get(i).getRating();
+        if (reviews.size() > 0 && reviewCount > 0) {
+            for (int i = 0; i < reviews.size(); i++) {
+                sum = sum + reviews.get(i).getRating();
+            }
+            this.rating = sum / reviewCount;
         }
-        this.rating = sum / reviewCount;
     }
 
     /**

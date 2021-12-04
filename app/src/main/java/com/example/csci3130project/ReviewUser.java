@@ -70,7 +70,7 @@ public class ReviewUser extends AppCompatActivity {
         });
 
         // Retrieve user's reputation
-        db.child("Reputations").child("6g9Ruty0B7a072mgWmQkySH8T8C3").addValueEventListener(new ValueEventListener() {
+        db.child("Reputations").child("3iRdcigRCzeReHfbZbiX3Kyv6S13").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot data) {
                 // Get this user's reputation
@@ -111,7 +111,7 @@ public class ReviewUser extends AppCompatActivity {
                     reputation.addReview(review);
 
                     // Update reputation in database
-                    db.child("Reputations").child("6g9Ruty0B7a072mgWmQkySH8T8C3").setValue(reputation).addOnSuccessListener(success -> {
+                    db.child("Reputations").child("3iRdcigRCzeReHfbZbiX3Kyv6S13").setValue(reputation).addOnSuccessListener(success -> {
                         Toast.makeText(getApplicationContext(), "Review added successfully", Toast.LENGTH_SHORT).show();
                     }).addOnFailureListener(fail -> {
                         Toast.makeText(getApplicationContext(), "Review failed.", Toast.LENGTH_SHORT).show();

@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Matcher;
@@ -75,15 +76,31 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 User user = new User(firstName, lastName, email, userName, pass);
 
-                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().
-                                        getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                // Get database references
+                                DatabaseReference repdb = FirebaseDatabase.getInstance().getReference("Reputations");
+                                DatabaseReference userdb = FirebaseDatabase.getInstance().getReference("Users");
+                                String ID = auth.getCurrentUser().getUid();
+
+                                // Add this user object to the database
+                                userdb.child(ID).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                           @Override
                                           public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
-                                                Toast.makeText(RegisterActivity.this, "User has been added!", Toast.LENGTH_SHORT).show();
-                                                Intent i = new Intent(getApplicationContext(), RegisterInfoActivity.class);
-                                                i.putExtra("ID", FirebaseAuth.getInstance().getCurrentUser().getUid());
-                                                startActivity(i);
+                                                //Generate a reputation object for the new user
+                                                repdb.child(ID).setValue(new Reputation(ID)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if(task.isSuccessful()){
+                                                            // If the reputation is added successfully, inform user and return to login
+                                                            Toast.makeText(getApplicationContext(), "User has been added!", Toast.LENGTH_SHORT).show();
+                                                            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                                                            startActivity(i);
+                                                        }
+                                                        else {
+                                                            Toast.makeText(getApplicationContext(), "Reputation failed to initialize.", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
                                             }
                                             else {
                                                 Toast.makeText(RegisterActivity.this, "User has not been added. Try again.", Toast.LENGTH_SHORT).show();
