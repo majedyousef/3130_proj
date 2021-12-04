@@ -140,4 +140,13 @@ public class Item {
         return category + ": " + name;
     }
 
+    @Override
+    public boolean equals(Object i) {
+        if (this == i) return true;
+        if (i == null || getClass() != i.getClass()) return false;
+        Item that = (Item) i;
+        return name.equals(that.name) &&
+                userID.equals(that.userID);
+    }
+
 }

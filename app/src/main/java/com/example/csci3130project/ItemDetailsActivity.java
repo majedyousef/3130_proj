@@ -17,6 +17,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ItemDetailsActivity extends AppCompatActivity {
 
+    private String userTradeID;
+    private String itemTradeID;
+    private Integer itemTradeValue;
+    private String userName;
+    private String itemName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +41,6 @@ public class ItemDetailsActivity extends AppCompatActivity {
         TextView valueBox = findViewById(R.id.itemValue);
         TextView descBox = findViewById(R.id.itemDesc);
         TextView userBox = findViewById(R.id.itemUser);
-        Button messageBtn = findViewById(R.id.toMessageItemBtn);
-
-        String [] userID = new String[1];
-        String [] userFirstName = new String[1];
 
         db.child("Items").child(itemIDIntent).addValueEventListener(new ValueEventListener() {
             @Override
@@ -47,16 +49,21 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 String description =  data.child("description").getValue(String.class);
                 Integer value = data.child("itemValue").getValue(Integer.class);
                 String name =  data.child("name").getValue(String.class);
-                userID[0] = data.child("userID").getValue(String.class);
+                String userID = data.child("userID").getValue(String.class);
 
+                userTradeID = userID;
+                itemTradeID = itemIDIntent;
+                itemTradeValue = value;
+                itemName = name;
 
-                db.child("Users").child(userID[0]).addValueEventListener(new ValueEventListener() {
+                db.child("Users").child(userID).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String userFName = snapshot.child("firstName").getValue(String.class);
                         String userLName = snapshot.child("lastName").getValue(String.class);
                         String fullName = userFName + " " + userLName;
-                        userFirstName[0] = userFName;
+
+                        userName = fullName;
 
                         nameBox.setText(name);
                         typeBox.setText(category);
@@ -75,13 +82,21 @@ public class ItemDetailsActivity extends AppCompatActivity {
 
             }
         });
-        messageBtn.setOnClickListener(new View.OnClickListener() {
+
+
+
+        Button trade = (Button) findViewById(R.id.tradeWithBtn);
+        trade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent msgIntent = new Intent(getApplicationContext(), ChatActivity.class);
-                msgIntent.putExtra("userId",userID[0].toString());
-                msgIntent.putExtra("userFName",userFirstName[0].toString());
-                startActivity(msgIntent);
+                Intent i = new Intent(getApplicationContext(), TradeActivity.class);
+                i.putExtra("userID", userTradeID);
+                i.putExtra("itemID", itemTradeID);
+                i.putExtra("itemValue", itemTradeValue);
+                i.putExtra("userName", userName);
+                i.putExtra("itemName", itemName);
+
+                startActivity(i);
             }
         });
 
