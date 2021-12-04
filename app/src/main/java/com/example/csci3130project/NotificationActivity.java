@@ -129,7 +129,7 @@ public class NotificationActivity extends AppCompatActivity {
                         // IF YOU ARE NOT NAMED ABU OR SABI IT WILL WAIT FOR A DATA CHANGE
                         // I DO NOT KNOW WHY
                         if (!userID.equals(user.getUid())) {
-                            if (favourites.contains(category)) {
+                            if (favourites.contains(category) && !status) {
                                 // if we are within 15km then
                                 if ((distance / 1000) <= 15) {
                                 allFavourites.add(name);
