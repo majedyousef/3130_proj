@@ -36,7 +36,8 @@ public class SearchActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
+        searchView = (SearchView) findViewById(R.id.searchView);
+        listView = (ListView) findViewById(R.id.lv1);
 
 
         //A list to keep track of the items, and another list to keep track of the item locations in the list
@@ -63,6 +64,9 @@ public class SearchActivity extends AppCompatActivity {
                                 + " Long: " + longitude;*/
 
                         list.add(itemName);
+                        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,list);
+                        listView.setAdapter(adapter);
+
                     }
                 }
             }
@@ -72,14 +76,6 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         });
-
-        // Creating the searchview and listeview object by finding the searchview and listview from the uI.
-        searchView = (SearchView) findViewById(R.id.searchView);
-        listView = (ListView) findViewById(R.id.lv1);
-
-        //Creating a adapter for the listview and a on query text listener that will listen to the changes in the text view
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);
-        listView.setAdapter(adapter);
 
         createSearchBar();
     }
