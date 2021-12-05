@@ -143,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String title = "New Item!";
-                String message = "There are new item in the area!";
+                String title = "Scan Complete!";
+                String message = "See local items.";
                 Intent i = new Intent(getApplicationContext(), NotificationActivity.class);
                 PendingIntent pI = PendingIntent.getActivity(getApplicationContext(), 0, i,0);
                 Notification notification = new NotificationCompat.Builder(getApplicationContext(),Notify.Channel_1)

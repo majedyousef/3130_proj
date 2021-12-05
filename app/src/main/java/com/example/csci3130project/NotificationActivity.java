@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,6 +64,10 @@ public class NotificationActivity extends AppCompatActivity {
     private Boolean mLocationPermissionGranted = false;
     private static final Location currentLocale = new Location("Current Location");
 
+    Double latitude;
+    Double longitude;
+    ArrayList<String> locations;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +76,7 @@ public class NotificationActivity extends AppCompatActivity {
         getDeviceLocation();
 
         listView = (ListView) findViewById(R.id.lv2);
+        locations = new ArrayList<>();
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
@@ -111,6 +117,8 @@ public class NotificationActivity extends AppCompatActivity {
                         Double lat = snapshot.child("latitude").getValue(Double.class);
                         Double lon = snapshot.child("longitude").getValue(Double.class);
 
+
+
                         Log.d(TAG, "Lat and Long: " + lat + " " + lon);
                         Log.d(TAG, "Name and Category: " + name + " " + category);
 
@@ -125,11 +133,9 @@ public class NotificationActivity extends AppCompatActivity {
                         float distance = currentLocale.distanceTo(itemLocale);
                         Log.d(TAG, "DISTANCE BETWEEN: " + distance);
 
-                        // ONLY WORKS FIRST TRY FOR MAJED AND SABI
-                        // IF YOU ARE NOT NAMED ABU OR SABI IT WILL WAIT FOR A DATA CHANGE
-                        // I DO NOT KNOW WHY
                         if (!userID.equals(user.getUid())) {
                             if (favourites.contains(category) && !status) {
+                                locations.add(lat + " " + lon);
                                 // if we are within 15km then
                                 if ((distance / 1000) <= 15) {
                                 allFavourites.add(name);
@@ -142,11 +148,21 @@ public class NotificationActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
+                public void onCancelled(@NonNull DatabaseError error) { }
             });
         }
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(NotificationActivity.this, MapsActivity.class);
+                intent.putExtra("itemLocation", locations.get(i));
+                intent.putExtra("Latitude", latitude);
+                intent.putExtra("Longitude", longitude);
+                intent.putExtra("itemClicked", 1);
+                startActivity(intent);
+
+            }
+        });
     }
 
     private void getLocationPermission() {

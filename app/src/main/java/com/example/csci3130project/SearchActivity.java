@@ -73,6 +73,7 @@ public class SearchActivity extends AppCompatActivity {
                         longitude = d.child("longitude").getValue(Double.class);
                         //Adds the item location to the list based on the position in search, so it will be tied to the correct item / location
                         locations.add(latitude + " " + longitude);
+                        Boolean status2 = d.child("status").getValue(Boolean.class);
 
                         // Keep track of item categories
                         category = d.child("category").getValue(String.class);
@@ -83,10 +84,12 @@ public class SearchActivity extends AppCompatActivity {
                                 /* Adds product location lat and long to search display (using to visualize)
                                 + "\n LOCATION: Lat: " + latitude
                                 + " Long: " + longitude;*/
+                        if (!status2) {
+                            list.add(itemName);
+                            adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,list);
+                            listView.setAdapter(adapter);
+                        }
 
-                        list.add(itemName);
-                        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,list);
-                        listView.setAdapter(adapter);
                     }
                 }
             }
