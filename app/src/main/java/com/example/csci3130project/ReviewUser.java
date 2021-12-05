@@ -114,6 +114,11 @@ public class ReviewUser extends AppCompatActivity {
                     review.addComment(commentText);
                     reputation.addReview(review);
 
+                    // Calculate new total score
+                    ReputationCalculator calc = new ReputationCalculator();
+                    calc.takeReputation(reputation);
+                    calc.calculateReputation();
+
                     // Update reputation in database and return to home
                     db.child("Reputations").child(userToReview).setValue(reputation).addOnSuccessListener(success -> {
                         Toast.makeText(getApplicationContext(), "Review added successfully", Toast.LENGTH_SHORT).show();
