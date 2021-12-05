@@ -17,6 +17,7 @@
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_profile.xml" value="0.3183876811594203" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_register.xml" value="0.3183876811594203" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_search.xml" value="0.3183876811594203" />
+        <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_search_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_set_favourites.xml" value="0.28351449275362317" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_upload.xml" value="0.3183876811594203" />
         <entry key="..\:/Users/Benjamin/Desktop/Coding/CSCI3130/3130Project/csci-3130-project/app/src/main/res/layout/activity_upload_items.xml" value="0.28351449275362317" />
@@ -61,13 +62,9 @@
         <entry key="..\:/Users/cedar/AndroidStudioProjects/Group Project/csci-3130-project/CSCI3130Project/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/cedar/AndroidStudioProjects/Group1/csci-3130-project/app/src/main/res/layout/activity_set_favourites.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/cedar/AndroidStudioProjects/Group1/csci-3130-project/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/cedar/AndroidStudioProjects/New Group/csci-3130-project/app/src/main/res/layout/activity_other_persons_profile.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/cedar/AndroidStudioProjects/New Group/csci-3130-project/app/src/main/res/layout/activity_other_persons_transaction_history.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/cedar/AndroidStudioProjects/New Group/csci-3130-project/app/src/main/res/layout/activity_other_user_reviews.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/cedar/AndroidStudioProjects/New Group/csci-3130-project/app/src/main/res/layout/activity_search.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/cedar/AndroidStudioProjects/New Group/csci-3130-project/app/src/main/res/layout/activity_upload.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/cedar/AndroidStudioProjects/New Group/csci-3130-project/app/src/main/res/layout/activity_upload_items.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/cedar/AndroidStudioProjects/New Group/csci-3130-project/app/src/main/res/layout/activity_user_reviews.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/vinny/git/csci3130/project/csci-3130-project/app/src/main/res/layout/activity_maps.xml" value="0.1" />
         <entry key="..\:/Users/vinny/git/csci3130/project/csci-3130-project/app/src/main/res/layout/app_bar_base.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/vinny/git/test/csci-3130-project/app/src/main/res/drawable/ic_login_foreground.xml" value="0.2046875" />
@@ -99,5 +96,5 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android API 30 Platform" project-jdk-type="Android SDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

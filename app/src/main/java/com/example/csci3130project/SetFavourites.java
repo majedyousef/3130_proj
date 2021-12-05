@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +24,7 @@ public class SetFavourites extends AppCompatActivity {
 
         ArrayList<String> favourites = new ArrayList<String>();
 
-        Button confirmButton = findViewById(R.id.confirmButton);
+        Button confirmButton = findViewById(R.id.confirmBtn);
 
         // Retrieve category checkboxes
         CheckBox category1 = findViewById(R.id.category1);

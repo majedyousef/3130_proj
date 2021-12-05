@@ -19,9 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSCI3130Project">
         <activity
+            android:name=".searchHomeActivity"
+            android:exported="true" />
+        <activity
             android:name=".ChatHistory"
-            android:exported = "true"/>
-        <activity android:name=".OtherPersonsReviews"
+            android:exported="true" />
+        <activity
+            android:name=".OtherPersonsReviews"
             android:exported="true" />
         <activity
             android:name=".OtherPersonsTransactionHistory"
@@ -29,7 +33,6 @@
         <activity
             android:name=".OtherPersonsProfile"
             android:exported="false" />
-
         <activity
             android:name=".ReceivedTradeActivity"
             android:exported="true" />
@@ -41,7 +44,6 @@
             android:exported="true" />
         <activity
             android:name=".TradeActivity"
-
             android:exported="true" />
         <activity
             android:name=".TransactionHistory"
