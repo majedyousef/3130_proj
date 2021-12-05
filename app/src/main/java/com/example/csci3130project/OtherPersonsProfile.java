@@ -23,8 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class OtherPersonsProfile extends AppCompatActivity {
 
-    private String userIDtoOtherTransaction;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +30,6 @@ public class OtherPersonsProfile extends AppCompatActivity {
 
         String userIDIntent = getIntent().getStringExtra("userID");
         String otherPersonsID = userIDIntent.toString();
-        //userIDtoOtherTransaction = otherPersonsID;
 
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
         DatabaseReference db = firebase.getReference();

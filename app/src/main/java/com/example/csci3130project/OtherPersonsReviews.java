@@ -28,7 +28,7 @@ public class OtherPersonsReviews extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_reviews);
+        setContentView(R.layout.activity_other_user_reviews);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
