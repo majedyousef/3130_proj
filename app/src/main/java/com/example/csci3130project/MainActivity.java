@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), SearchActivity.class);
+                Intent i = new Intent(getApplicationContext(), searchHomeActivity.class);
                 startActivity(i);
             }
         });
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         searchImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), SearchActivity.class);
+                Intent i = new Intent(getApplicationContext(), searchHomeActivity.class);
                 startActivity(i);
             }
         });

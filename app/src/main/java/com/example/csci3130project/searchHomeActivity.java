@@ -17,22 +17,21 @@ public class searchHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_home);
 
-        Button confirmButton = findViewById(R.id.searchConfBtn);
-
         // Retrieve category checkboxes
-        CheckBox category1 = findViewById(R.id.searchCategory1);
-        CheckBox category2 = findViewById(R.id.searchCategory2);
-        CheckBox category3 = findViewById(R.id.searchCategory3);
-        CheckBox category4 = findViewById(R.id.searchCategory4);
-        CheckBox category5 = findViewById(R.id.searchCategory5);
-        CheckBox category6 = findViewById(R.id.searchCategory6);
-        CheckBox category7 = findViewById(R.id.searchCategory7);
+        Button category1 = findViewById(R.id.searchCategory1);
+        Button category2 = findViewById(R.id.searchCategory2);
+        Button category3 = findViewById(R.id.searchCategory3);
+        Button category4 = findViewById(R.id.searchCategory4);
+        Button category5 = findViewById(R.id.searchCategory5);
+        Button category6 = findViewById(R.id.searchCategory6);
+        Button category7 = findViewById(R.id.searchCategory7);
 
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), SearchActivity.class);
                 i.putExtra("category", category1.getText().toString());
+                startActivity(i);
             }
         });
 
@@ -41,6 +40,7 @@ public class searchHomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), SearchActivity.class);
                 i.putExtra("category", category2.getText().toString());
+                startActivity(i);
             }
         });
 
@@ -49,6 +49,7 @@ public class searchHomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), SearchActivity.class);
                 i.putExtra("category", category3.getText().toString());
+                startActivity(i);
             }
         });
 
@@ -57,6 +58,7 @@ public class searchHomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), SearchActivity.class);
                 i.putExtra("category", category4.getText().toString());
+                startActivity(i);
             }
         });
 
@@ -65,6 +67,7 @@ public class searchHomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), SearchActivity.class);
                 i.putExtra("category", category5.getText().toString());
+                startActivity(i);
             }
         });
 
@@ -73,6 +76,7 @@ public class searchHomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), SearchActivity.class);
                 i.putExtra("category", category6.getText().toString());
+                startActivity(i);
             }
         });
 
@@ -81,6 +85,7 @@ public class searchHomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), SearchActivity.class);
                 i.putExtra("category", category7.getText().toString());
+                startActivity(i);
             }
         });
     }
