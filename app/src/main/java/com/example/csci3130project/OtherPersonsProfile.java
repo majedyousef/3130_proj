@@ -32,7 +32,7 @@ public class OtherPersonsProfile extends AppCompatActivity {
 
         String userIDIntent = getIntent().getStringExtra("userID");
         String otherPersonsID = userIDIntent.toString();
-        userIDtoOtherTransaction = otherPersonsID;
+        //userIDtoOtherTransaction = otherPersonsID;
 
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
         DatabaseReference db = firebase.getReference();
@@ -105,7 +105,18 @@ public class OtherPersonsProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), OtherPersonsTransactionHistory.class);
-                i.putExtra("userID",userIDtoOtherTransaction);
+                i.putExtra("userID",otherPersonsID);
+                startActivity(i);
+            }
+        });
+
+        // Intent to review page
+        Button reviews = (Button) findViewById(R.id.otherReviews);
+        reviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), OtherPersonsReviews.class);
+                i.putExtra("userID",otherPersonsID);
                 startActivity(i);
             }
         });
