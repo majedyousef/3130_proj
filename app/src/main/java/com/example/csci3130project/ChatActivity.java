@@ -121,6 +121,7 @@ public class ChatActivity extends AppCompatActivity {
 
                         String recipientFName = recipientIdIntent.getStringExtra("userFName");
 
+                        //Proxy
                         Chat chat = new Chat(tempMessage,userId,firstNameFromDb, recipientID,recipientFName);
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference databaseReference = database.getReference().child("Chat");

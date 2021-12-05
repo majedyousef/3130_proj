@@ -75,7 +75,16 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                User user = new User(firstName, lastName, email, userName, pass);
+                                // Create regular-type user with factory
+                                UserFactory factory = new UserFactory();
+                                User user = factory.getUser("Regular");
+
+                                // Add user data
+                                user.setFirstName(firstName);
+                                user.setLastName(lastName);
+                                user.setUsername(userName);
+                                user.setEmail(email);
+                                user.setPassword(pass);
 
                                 // Get database references
                                 DatabaseReference repdb = FirebaseDatabase.getInstance().getReference("Reputations");
