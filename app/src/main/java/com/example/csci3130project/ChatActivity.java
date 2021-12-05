@@ -118,13 +118,12 @@ public class ChatActivity extends AppCompatActivity {
                         String firstNameFromDb = snapshot.child("firstName").getValue(String.class);
                         Intent recipientIdIntent = getIntent();
                         String recipientID = recipientIdIntent.getStringExtra("userId");
-
                         String recipientFName = recipientIdIntent.getStringExtra("userFName");
+                        ProxyChat chat = new ProxyChat(tempMessage,userId,firstNameFromDb, recipientID,recipientFName);
 
-                        Chat chat = new Chat(tempMessage,userId,firstNameFromDb, recipientID,recipientFName);
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference databaseReference = database.getReference().child("Chat");
-                        databaseReference.push().setValue(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        databaseReference.push().setValue(chat.getReal()).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){

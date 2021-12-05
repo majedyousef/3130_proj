@@ -23,8 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class OtherPersonsProfile extends AppCompatActivity {
 
-    private String userIDtoOtherTransaction;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +30,6 @@ public class OtherPersonsProfile extends AppCompatActivity {
 
         String userIDIntent = getIntent().getStringExtra("userID");
         String otherPersonsID = userIDIntent.toString();
-        userIDtoOtherTransaction = otherPersonsID;
 
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
         DatabaseReference db = firebase.getReference();
@@ -80,7 +77,11 @@ public class OtherPersonsProfile extends AppCompatActivity {
                 if (data.exists()){
                     Reputation rep = data.getValue(Reputation.class);
                     // Calculate the user's rating and update their profile
-                    rep.calculateRating();
+                    ReputationCalculator calc = new ReputationCalculator();
+                    calc.takeReputation(rep);
+                    calc.calculateReputation();
+
+                    //rep.calculateRating();
                     double score = rep.getTotalScore();
                     float fscore = (float) score;
                     userRating.setText(Double.toString(score));
@@ -101,7 +102,18 @@ public class OtherPersonsProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), OtherPersonsTransactionHistory.class);
-                i.putExtra("userID",userIDtoOtherTransaction);
+                i.putExtra("userID",otherPersonsID);
+                startActivity(i);
+            }
+        });
+
+        // Intent to review page
+        Button reviews = (Button) findViewById(R.id.otherReviews);
+        reviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), OtherPersonsReviews.class);
+                i.putExtra("userID",otherPersonsID);
                 startActivity(i);
             }
         });

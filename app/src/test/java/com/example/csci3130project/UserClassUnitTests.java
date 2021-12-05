@@ -18,9 +18,19 @@ public class UserClassUnitTests {
 
     @Before
     public void initialize() {
-        testUser = new User("firstName", "lastName", "user@gmail.com", "user123456", "password1234");
+        testUser = new User();
+        testUser.setFirstName("firstName");
+        testUser.setLastName("lastName");
+        testUser.setUsername("user123456");
+        testUser.setEmail("user@gmail.com");
+        testUser.setPassword("password1234");
 
-        testUser2 = new User("John", "Doe", "user_124@outlook.ca", "special_user500", "878456_pass_!");
+        testUser2 = new User();
+        testUser2.setFirstName("John");
+        testUser2.setLastName("Doe");
+        testUser2.setUsername("special_user500");
+        testUser2.setEmail("user_124@outlook.ca");
+        testUser2.setPassword("878456_pass_!");
     }
 
     @Test

@@ -21,6 +21,8 @@
         <activity
             android:name=".ChatHistory"
             android:exported = "true"/>
+        <activity android:name=".OtherPersonsReviews"
+            android:exported="true" />
         <activity
             android:name=".OtherPersonsTransactionHistory"
             android:exported="false" />
