@@ -1,7 +1,10 @@
 package com.example.csci3130project;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,6 +63,7 @@ public class SearchActivity extends AppCompatActivity {
         searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.lv1);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase firebase = FirebaseDatabase.getInstance();
         DatabaseReference db = firebase.getReference();
         db.child("Items").addValueEventListener(new ValueEventListener() {
@@ -69,8 +75,9 @@ public class SearchActivity extends AppCompatActivity {
                     for (DataSnapshot d:data.getChildren()){
                         latitude = d.child("latitude").getValue(Double.class);
                         longitude = d.child("longitude").getValue(Double.class);
+                        String userID = data.child("userID").getValue(String.class);
                         //Adds the item location to the list based on the position in search, so it will be tied to the correct item / location
-                        locations.add(latitude + " " + longitude);
+
                         Boolean status2 = d.child("status").getValue(Boolean.class);
 
                         // Keep track of item categories
@@ -82,8 +89,9 @@ public class SearchActivity extends AppCompatActivity {
                                 /* Adds product location lat and long to search display (using to visualize)
                                 + "\n LOCATION: Lat: " + latitude
                                 + " Long: " + longitude;*/
-                        if (!status2 && catChoice.equals(category)) {
+                        if (!status2 && catChoice.equals(category) && !user.getUid().equals(userID)) {
                             list.add(itemName);
+                            locations.add(latitude + " " + longitude);
                             // If no category is selected, use the generic list
                             adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,list);
                             listView.setAdapter(adapter);
@@ -108,6 +116,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(SearchActivity.this, MapsActivity.class);
+                Log.d(TAG, "Item location: " + latitude + " " + longitude);
                 intent.putExtra("itemLocation", locations.get(i));
                 intent.putExtra("Latitude", latitude);
                 intent.putExtra("Longitude", longitude);
