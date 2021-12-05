@@ -80,7 +80,11 @@ public class OtherPersonsProfile extends AppCompatActivity {
                 if (data.exists()){
                     Reputation rep = data.getValue(Reputation.class);
                     // Calculate the user's rating and update their profile
-                    rep.calculateRating();
+                    ReputationCalculator calc = new ReputationCalculator();
+                    calc.takeReputation(rep);
+                    calc.calculateReputation();
+
+                    //rep.calculateRating();
                     double score = rep.getTotalScore();
                     float fscore = (float) score;
                     userRating.setText(Double.toString(score));
