@@ -12,14 +12,9 @@ public class Chat {
     private String msg;
     private String userId;
     private String userName;
-    private  String recipientId;
+    private String recipientId;
     private String recipientName;
-    public Chat(String msg, String userId, String userName, String recipientId,String recipientName ){
-        this.msg = msg;
-        this.userId = userId;
-        this.userName = userName;
-        this.recipientId = recipientId;
-        this.recipientName =recipientName;
+    public Chat(){
     }
 
     /**
@@ -51,7 +46,7 @@ public class Chat {
      * @param recipient - String containing recipient's ID
      */
     public void setRecipientId(String recipient){
-        this.recipientId= recipient;
+        this.recipientId = recipient;
     }
 
     /**
