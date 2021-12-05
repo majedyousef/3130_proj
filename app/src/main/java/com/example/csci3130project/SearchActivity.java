@@ -42,6 +42,10 @@ public class SearchActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        String catChoice = getIntent().getStringExtra("category");
+
+
         searchView = (SearchView) findViewById(R.id.searchView);
         listView = (ListView) findViewById(R.id.lv1);
 
@@ -49,12 +53,6 @@ public class SearchActivity extends AppCompatActivity {
         list = new ArrayList<>();
         locations = new ArrayList<>();
         categories = new ArrayList<>();
-
-        // Create a filter for searching with
-        filter = findViewById(R.id.categoryChoose);
-        ArrayAdapter<CharSequence> filterAdapter = ArrayAdapter.createFromResource(this, R.array.itemCatArray, android.R.layout.simple_spinner_item);
-        filterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        filter.setAdapter(filterAdapter);
 
         // Creating the searchview and listeview object by finding the searchview and listview from the uI.
         searchView = (SearchView) findViewById(R.id.searchView);
@@ -84,7 +82,7 @@ public class SearchActivity extends AppCompatActivity {
                                 /* Adds product location lat and long to search display (using to visualize)
                                 + "\n LOCATION: Lat: " + latitude
                                 + " Long: " + longitude;*/
-                        if (!status2) {
+                        if (!status2 && catChoice.equals(category)) {
                             list.add(itemName);
                             // If no category is selected, use the generic list
                             adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,list);
@@ -99,59 +97,6 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         });
-
-        Button filterRefresh = (Button) findViewById(R.id.filterRefresh);
-        filterRefresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Change the item list used when a different filter is selected
-                filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        db.child("Items").addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot data) {
-                                if (data.exists()){
-                                    // clear the current array
-                                    list.clear();
-                                    for (DataSnapshot d:data.getChildren()){
-                                        latitude = d.child("latitude").getValue(Double.class);
-                                        longitude = d.child("longitude").getValue(Double.class);
-                                        //Adds the item location to the list based on the position in search, so it will be tied to the correct item / location
-                                        locations.add(latitude + " " + longitude);
-                                        Boolean status2 = d.child("status").getValue(Boolean.class);
-
-                                        // Keep track of item categories
-                                        category = d.child("category").getValue(String.class);
-                                        categories.add(category);
-
-                                        String itemName = d.child("name").getValue(String.class);
-
-                                        if (!status2 && category.equals(filter.getSelectedItem().toString().trim())) {
-                                            list.add(itemName);
-                                            // If no category is selected, use the generic list
-                                            adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1,list);
-                                            listView.setAdapter(adapter);
-                                        }
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                    }
-                });
-            }
-        });
-
-
 
         createSearchBar();
     }
